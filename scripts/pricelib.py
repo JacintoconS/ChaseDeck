@@ -66,7 +66,7 @@ def results(payload):
 
 def norm_num(n):
     n = str(n or "").split("/")[0].strip().lower()
-    return re.sub(r"^0+(?=[a-z0-9])", "", n)
+    return re.sub(r"^([a-z]*)0+(?=\d)", r"\1", n)
 
 
 def norm_name(n):
@@ -125,6 +125,11 @@ def tracked_cards(sets):
 
 
 # ---------- tcgcsv mapping ----------
+def names_agree(ours, group_name):
+    t, g = norm_name(ours), group_core(group_name)
+    return bool(t) and (t == g or t in g or g in t or g in (t + "set", t + "baseset"))
+
+
 def match_groups(sets, groups):
     """Map our set ids to TCGplayer group ids. Returns ({set_id: group_id}, report)."""
     out, report = {}, {"matched": {}, "unmatched": []}
@@ -133,26 +138,37 @@ def match_groups(sets, groups):
         by_code.setdefault(str(g.get("abbreviation") or "").upper(), []).append(g)
     for sid, s in sets.items():
         name, code, sub = s.get("name", ""), str(s.get("ptcgoCode") or "").upper(), subset_of(s.get("name"))
-        cands = [g for g in by_code.get(code, []) if code] if code else []
-        cands = [g for g in cands if subset_of(g.get("name")) == sub] or ([] if sub else cands)
+        target = norm_name(name)
+        same_sub = lambda g: subset_of(g.get("name")) == sub
+        # 1) same set code, same subset, and the names agree
+        coded = [g for g in by_code.get(code, []) if code and same_sub(g)]
+        cands = [g for g in coded if names_agree(name, g.get("name"))]
+        if not cands:  # first set of an era, e.g. "Sun & Moon" is "SM Base Set" on TCGplayer
+            cands = [g for g in coded if "baseset" in norm_name(g.get("name"))]
         how = "code"
+        if len(cands) > 1:
+            exact = [g for g in cands if group_core(g.get("name")) in (target, target + "set", target + "baseset")]
+            cands = exact if len(exact) == 1 else cands[:0]
+        # 2) exact name (or "<name> Base Set")
         if len(cands) != 1:
-            target = norm_name(name)
-            byname = [g for g in groups if group_core(g.get("name")) in (target, target + "set", norm_name("base set") if target == "base" else target)]
-            if len(byname) == 1:
-                cands, how = byname, "name"
-            elif len(cands) > 1:
-                exact = [g for g in cands if group_core(g.get("name")) == target]
-                cands, how = (exact, "code+name") if len(exact) == 1 else ([], "")
-            else:
-                loose = [g for g in groups if target and len(target) > 3 and target in group_core(g.get("name")) and subset_of(g.get("name")) == sub]
-                cands, how = (loose, "contains") if len(loose) == 1 else ([], "")
+            how = "name"
+            cands = [g for g in groups if same_sub(g) and group_core(g.get("name")) in (target, target + "set", target + "baseset")]
+        # 3) name contained in the group name
+        if len(cands) != 1:
+            how = "contains"
+            cands = [g for g in groups if same_sub(g) and len(target) > 3 and target in group_core(g.get("name"))]
         if len(cands) == 1:
             out[sid] = int(cands[0]["groupId"])
             report["matched"][sid] = {"group": cands[0].get("name"), "how": how}
         else:
             report["unmatched"].append({"set": sid, "name": name, "code": code})
     return out, report
+
+
+def sibling_groups(group, groups):
+    """Other TCGplayer groups for the same set, e.g. 'Generations: Radiant Collection'."""
+    core = group_core(group.get("name"))
+    return [g for g in groups if g is not group and len(core) > 3 and group_core(g.get("name")).startswith(core)]
 
 
 def product_number(p):
@@ -186,17 +202,34 @@ def match_products(cards, products):
 def build_map(sets, tracked):
     groups = results(get(TCGCSV + f"tcgplayer/{POKEMON}/groups"))
     gmap, report = match_groups({sid: sets[sid] for sid in tracked}, groups)
-    mapping = {}  # group_id -> {product_id: card_id}
-    total = matched = 0
+    by_id = {int(g["groupId"]): g for g in groups}
+    mapping, products_cache = {}, {}
+
+    def products(gid):
+        if gid not in products_cache:
+            products_cache[gid] = results(get(TCGCSV + f"tcgplayer/{POKEMON}/{gid}/products"))
+        return products_cache[gid]
+
+    matched = 0
     for sid, gid in gmap.items():
-        products = results(get(TCGCSV + f"tcgplayer/{POKEMON}/{gid}/products"))
-        pm = match_products(tracked[sid], products)
-        mapping[str(gid)] = {str(k): v for k, v in pm.items()}
-        total += len(tracked[sid]); matched += len(pm)
-        report["matched"][sid]["cards"] = f"{len(pm)}/{len(tracked[sid])}"
-    for sid in tracked:
-        if sid not in gmap:
-            total += len(tracked[sid])
+        cards = tracked[sid]
+        pm = match_products(cards, products(gid))
+        mapping.setdefault(str(gid), {}).update({str(k): v for k, v in pm.items()})
+        found = set(pm.values())
+        missing = [c for c in cards if c[0] not in found]
+        if missing:
+            for sib in sibling_groups(by_id[gid], groups):
+                extra = match_products(missing, products(int(sib["groupId"])))
+                if extra:
+                    mapping.setdefault(str(sib["groupId"]), {}).update({str(k): v for k, v in extra.items()})
+                    found |= set(extra.values())
+                    missing = [c for c in missing if c[0] not in found]
+                if not missing:
+                    break
+        matched += len(found)
+        report["matched"][sid]["cards"] = f"{len(found)}/{len(cards)}"
+        if missing:
+            report["matched"][sid]["missing"] = [f"{c[2]} #{c[1]}" for c in missing[:15]]
     report["summary"] = {"tracked_cards": sum(len(v) for v in tracked.values()), "mapped_cards": matched,
                          "sets": len(tracked), "sets_matched": len(gmap)}
     return mapping, report
