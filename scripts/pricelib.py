@@ -166,7 +166,9 @@ def match_groups(sets, groups):
             out[sid] = int(cands[0]["groupId"])
             report["matched"][sid] = {"group": cands[0].get("name"), "how": how}
         else:
-            report["unmatched"].append({"set": sid, "name": name, "code": code})
+            report["unmatched"].append({"set": sid, "name": name, "code": code,
+                "candidates": [f'{g.get("name")} [{g.get("abbreviation")}]' for g in groups
+                               if (code and str(g.get("abbreviation") or "").upper() == code) or (len(target) > 3 and target in norm_name(g.get("name")))][:12]})
     return out, report
 
 
