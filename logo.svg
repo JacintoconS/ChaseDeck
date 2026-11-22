@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <radialGradient id="bgA" cx="22%" cy="18%" r="70%"><stop offset="0" stop-color="#5b2bd6" stop-opacity=".9"/><stop offset="1" stop-color="#5b2bd6" stop-opacity="0"/></radialGradient>
+    <radialGradient id="bgB" cx="92%" cy="70%" r="65%"><stop offset="0" stop-color="#0e7fa6" stop-opacity=".85"/><stop offset="1" stop-color="#0e7fa6" stop-opacity="0"/></radialGradient>
+    <radialGradient id="bgC" cx="15%" cy="100%" r="60%"><stop offset="0" stop-color="#b0186a" stop-opacity=".8"/><stop offset="1" stop-color="#b0186a" stop-opacity="0"/></radialGradient>
+    <linearGradient id="holo" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ff8fd8"/><stop offset=".25" stop-color="#ffd36b"/><stop offset=".5" stop-color="#7dffcf"/><stop offset=".75" stop-color="#6bc8ff"/><stop offset="1" stop-color="#b993ff"/>
+    </linearGradient>
+    <linearGradient id="back" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2a2152"/><stop offset="1" stop-color="#16122e"/></linearGradient>
+    <linearGradient id="shine" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".55"/><stop offset=".45" stop-color="#fff" stop-opacity="0"/></linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="28" stdDeviation="30" flood-color="#05030c" flood-opacity=".7"/></filter>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="40"/></filter>
+  </defs>
+  <rect width="1024" height="1024" fill="#0c0a1a"/>
+  <rect width="1024" height="1024" fill="url(#bgA)"/>
+  <rect width="1024" height="1024" fill="url(#bgB)"/>
+  <rect width="1024" height="1024" fill="url(#bgC)"/>
+  <!-- glow behind cards -->
+  <ellipse cx="540" cy="540" rx="260" ry="300" fill="#b993ff" opacity=".35" filter="url(#glow)"/>
+  <!-- back card -->
+  <g transform="rotate(-14 512 540)" filter="url(#shadow)">
+    <rect x="300" y="230" width="380" height="530" rx="34" fill="url(#back)" stroke="url(#holo)" stroke-width="10"/>
+    <rect x="330" y="260" width="320" height="470" rx="20" fill="none" stroke="#ffffff" stroke-opacity=".12" stroke-width="4"/>
+  </g>
+  <!-- front card -->
+  <g transform="rotate(9 512 540)" filter="url(#shadow)">
+    <rect x="352" y="250" width="380" height="530" rx="34" fill="url(#holo)"/>
+    <rect x="352" y="250" width="380" height="530" rx="34" fill="url(#shine)"/>
+    <rect x="382" y="280" width="320" height="470" rx="20" fill="none" stroke="#ffffff" stroke-opacity=".55" stroke-width="6"/>
+    <!-- sparkle -->
+    <path d="M542 365 C556 470 572 486 662 515 C572 544 556 560 542 665 C528 560 512 544 422 515 C512 486 528 470 542 365 Z" fill="#1a1030"/>
+    <path d="M650 340 C654 372 660 378 690 386 C660 394 654 400 650 432 C646 400 640 394 610 386 C640 378 646 372 650 340 Z" fill="#1a1030" opacity=".85"/>
+  </g>
+  <!-- ambient sparkles -->
+  <path d="M232 250 C236 276 240 280 266 286 C240 292 236 296 232 322 C228 296 224 292 198 286 C224 280 228 276 232 250 Z" fill="#fff" opacity=".85"/>
+  <path d="M818 770 C821 790 824 793 844 797 C824 801 821 804 818 824 C815 804 812 801 792 797 C812 793 815 790 818 770 Z" fill="#fff" opacity=".7"/>
+  <circle cx="800" cy="230" r="9" fill="#ffd36b" opacity=".9"/>
+  <circle cx="210" cy="760" r="7" fill="#7dffcf" opacity=".8"/>
+</svg>

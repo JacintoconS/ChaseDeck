@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-woW/cLrMoXbb3LGXNE5Y57KW90PQaNPujmYK3lPBlTE='; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src https://images.pokemontcg.io https://images.scrydex.com data: blob:; connect-src 'self' https://raw.githubusercontent.com https://api.tcgdex.net https://api.pokemontcg.io; base-uri 'none'; form-action 'none'; object-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-96ItASLUKp/Gnt1k1YD+eNjmXGedeOmtuQamvzf+tvM='; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' https://images.pokemontcg.io https://images.scrydex.com data: blob:; connect-src 'self' https://raw.githubusercontent.com https://api.tcgdex.net https://api.pokemontcg.io; manifest-src 'self'; base-uri 'none'; form-action 'none'; object-src 'none'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1">
 <meta name="theme-color" content="#0a0913">
@@ -10,6 +10,9 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="ChaseDeck">
 <title>ChaseDeck</title>
+<link rel="icon" type="image/png" href="favicon-64.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="manifest.json">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -57,6 +60,7 @@ img{user-select:none;-webkit-user-drag:none}
 .brand-mark{width:34px;height:34px;border-radius:11px;background:var(--holo);background-size:200% 200%;animation:holoShift 6s linear infinite;display:grid;place-items:center;box-shadow:0 6px 24px -6px rgba(185,147,255,.7),inset 0 0 0 1px rgba(255,255,255,.35)}
 .brand-mark svg{width:20px;height:20px;color:#1a1030}
 @keyframes holoShift{to{background-position:200% 0}}
+.brand-logo{width:38px;height:38px;border-radius:11px;box-shadow:0 6px 22px -6px rgba(185,147,255,.65),0 0 0 1px rgba(255,255,255,.12)}
 .brand-name{font-family:var(--display);font-weight:800;font-size:23px;letter-spacing:-.02em;line-height:1}
 .brand-name span{background:var(--holo);background-size:200% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:holoShift 8s linear infinite}
 .brand-sub{font-size:11px;color:var(--ink-3);font-weight:600;letter-spacing:.08em;text-transform:uppercase;margin-top:3px}
@@ -247,7 +251,7 @@ img{user-select:none;-webkit-user-drag:none}
 .sheet .grab{width:42px;height:5px;border-radius:5px;background:rgba(255,255,255,.2);margin:10px auto 4px;flex-shrink:0}
 .sheet-head{display:flex;align-items:center;justify-content:space-between;padding:6px 20px 8px;flex-shrink:0}
 .sheet-head h2{font-family:var(--display);font-weight:800;font-size:24px;letter-spacing:-.02em;margin:0}
-.sheet-body{overflow-y:auto;padding:4px 20px calc(20px + var(--safe-b));-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.sheet-body{overflow-y:auto;overflow-x:hidden;touch-action:pan-y;padding:4px 20px calc(20px + var(--safe-b));-webkit-overflow-scrolling:touch;scrollbar-width:none}
 .sheet-body::-webkit-scrollbar{display:none}
 .sheet-foot{padding:12px 20px calc(14px + var(--safe-b));border-top:1px solid var(--line);flex-shrink:0;display:flex;gap:10px;background:rgba(17,15,32,.9)}
 .sec{margin:18px 0 0}
@@ -361,7 +365,9 @@ img{user-select:none;-webkit-user-drag:none}
 .pnums b{color:var(--ink)}
 .pos{color:#8cf5c7}.neg{color:#ff9fb1}
 .pickpill{background:linear-gradient(135deg,rgba(139,108,255,.3),rgba(255,111,181,.25));color:#fff}
-.field.mini{flex:1;height:44px;padding:0 12px}
+.pricebox{display:flex;flex-direction:column;gap:8px;margin-top:10px}
+.field.mini{height:44px;padding:0 14px}
+.field input{min-width:0;width:100%}
 .field.mini .lbl{font-size:12px;font-weight:800;color:var(--ink-3);white-space:nowrap}
 .hint{font-size:11.5px;color:var(--ink-3);font-weight:700}
 
@@ -408,7 +414,7 @@ kbd{font-family:inherit;font-size:10.5px;padding:1px 6px;border-radius:5px;borde
 <div class="app">
   <header class="topbar">
     <div class="brand">
-      <div class="brand-mark"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.6 6.1 6.6.6-5 4.4 1.5 6.5L12 16.7 6.3 20.1l1.5-6.5-5-4.4 6.6-.6z"/></svg></div>
+      <img class="brand-logo" src="icon-192.png" alt="" width="38" height="38">
       <div><div class="brand-name">Chase<span>Deck</span></div><div class="brand-sub" id="brandSub">Swipe your grails</div></div>
     </div>
     <div style="display:flex;gap:8px">
@@ -1255,7 +1261,7 @@ function renderFilterBody(){
     <div class="sec">
       <div class="sec-t"><h3>Price</h3><span class="hint">TCGplayer market</span></div>
       <div class="chips" style="flex-wrap:wrap">${[0,5,10,25,50,100].map(v => `<button class="chip ${draft.minPrice===v?"on gold":""}" data-min="${v}">${v?"$"+v+"+":"Any price"}</button>`).join("")}</div>
-      <div class="row" style="margin-top:10px">
+      <div class="pricebox">
         <div class="field mini"><span class="lbl">Min $</span><input id="fMin" inputmode="decimal" maxlength="7" value="${draft.minPrice||""}" placeholder="0"></div>
         <div class="field mini"><span class="lbl">Max $</span><input id="fMax" inputmode="decimal" maxlength="7" value="${draft.maxPrice||""}" placeholder="No max"></div>
       </div>
