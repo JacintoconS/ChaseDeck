@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-1OwHBcjKJg+z1bQkFSK/uTY6oVfEelVstNEP+6X5c3M='; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src https://images.pokemontcg.io https://images.scrydex.com data: blob:; connect-src https://raw.githubusercontent.com https://api.pokemontcg.io; base-uri 'none'; form-action 'none'; object-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-QqgsnvzkwV+4RFRzsdN9qP2Zfb94icYL5srG46GAZEM='; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src https://images.pokemontcg.io https://images.scrydex.com data: blob:; connect-src https://raw.githubusercontent.com https://api.tcgdex.net https://api.pokemontcg.io; base-uri 'none'; form-action 'none'; object-src 'none'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1">
 <meta name="theme-color" content="#0a0913">
@@ -321,6 +321,23 @@ img{user-select:none;-webkit-user-drag:none}
 .export-box{width:100%;height:160px;border-radius:15px;padding:12px;background:rgba(0,0,0,.3);border:1px solid var(--line);font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11.5px;line-height:1.5;color:var(--ink-2);resize:vertical;outline:0}
 .ex-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 
+/* Help */
+.help-hero{text-align:center;padding:4px 0 6px}
+.help-hero p{margin:8px auto 0;color:var(--ink-2);font-size:14px;line-height:1.5;max-width:330px;font-weight:500}
+.gestures{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:16px}
+.gest{border-radius:16px;padding:12px 8px;text-align:center;background:var(--glass);border:1px solid var(--line)}
+.gest .gi{width:44px;height:44px;border-radius:50%;margin:0 auto 8px;display:grid;place-items:center}
+.gest .gi svg{width:20px;height:20px}
+.gest b{display:block;font-size:13.5px;font-weight:800}
+.gest span{display:block;font-size:11.5px;color:var(--ink-3);font-weight:600;margin-top:2px}
+.steps{display:flex;flex-direction:column;gap:10px;margin-top:6px}
+.step{display:flex;gap:13px;align-items:flex-start;padding:13px 14px;border-radius:16px;background:var(--glass);border:1px solid var(--line)}
+.step .num{width:30px;height:30px;border-radius:10px;flex-shrink:0;display:grid;place-items:center;font-family:var(--display);font-weight:800;font-size:15px;background:var(--holo);background-size:200% 200%;color:#1a1030}
+.step h4{margin:2px 0 3px;font-size:14.5px;font-weight:800}
+.step p{margin:0;font-size:13px;line-height:1.5;color:var(--ink-2);font-weight:500}
+.step p b{color:var(--ink)}
+.tipbox{margin-top:14px;padding:12px 14px;border-radius:15px;background:rgba(79,216,255,.08);border:1px solid rgba(79,216,255,.22);font-size:12.5px;line-height:1.5;color:#bfeeff;font-weight:600}
+
 /* Toast + particles */
 .toast{position:fixed;left:50%;top:calc(var(--safe-t) + 12px);z-index:40;transform:translate(-50%,-20px);opacity:0;pointer-events:none;display:flex;align-items:center;gap:10px;height:44px;padding:0 16px 0 8px;border-radius:99px;background:rgba(30,26,52,.92);border:1px solid rgba(255,255,255,.12);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);font-weight:700;font-size:13.5px;box-shadow:0 14px 40px -10px rgba(0,0,0,.8);transition:all .35s cubic-bezier(.2,.9,.3,1.3);white-space:nowrap;max-width:calc(100vw - 30px)}
 .toast.on{opacity:1;transform:translate(-50%,0)}
@@ -350,10 +367,13 @@ kbd{font-family:inherit;font-size:10.5px;padding:1px 6px;border-radius:5px;borde
       <div class="brand-mark"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.6 6.1 6.6.6-5 4.4 1.5 6.5L12 16.7 6.3 20.1l1.5-6.5-5-4.4 6.6-.6z"/></svg></div>
       <div><div class="brand-name">Chase<span>Deck</span></div><div class="brand-sub" id="brandSub">Swipe your grails</div></div>
     </div>
+    <div style="display:flex;gap:8px">
+    <button class="icon-btn" id="openHelp" aria-label="How it works"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9.6 9.3a2.5 2.5 0 014.8.9c0 1.7-2.4 2.2-2.4 3.6M12 17.2v.01"/></svg></button>
     <button class="icon-btn" id="openFilters" aria-label="Deck filters">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0"/><circle cx="16" cy="6" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="18" cy="18" r="2"/></svg>
       <span class="dot" id="filterDot" hidden></span>
     </button>
+    </div>
   </header>
 
   <main class="views">
@@ -559,28 +579,85 @@ function pickPrice(tp){
   for(const [v,p] of Object.entries(tp.prices).slice(0,8)){ if(!/^[A-Za-z0-9]{1,30}$/.test(v) || !p) continue; const m = num(p.market) ?? num(p.mid) ?? num(p.low); if(m==null) continue; all[v]=m; if(!best || m>best.p) best={p:m, v}; }
   return { p:best?.p ?? null, v:best?.v ?? null, all, url:safeLink(tp.url), upd:/^[\d\/: ]{1,20}$/.test(tp.updatedAt||"")?tp.updatedAt:null, t:Date.now() };
 }
-async function fetchPrices(ids){
-  const need = ids.filter(id => !S.pricingIds.has(id) && (!S.prices[id] || Date.now()-S.prices[id].t > PRICE_TTL));
-  if(!need.length || S.apiState==="down") return;
-  need.forEach(id => S.pricingIds.add(id));
-  for(let i=0;i<need.length;i+=40){
-    const chunk = need.slice(i,i+40);
-    const q = "(" + chunk.map(id => `id:"${id}"`).join(" OR ") + ")";
-    const u = API + "?" + new URLSearchParams({q, select:"id,tcgplayer", pageSize:"250"});
-    try{
-      const ctl = new AbortController(); const to = setTimeout(()=>ctl.abort(), 15000);
-      const r = await fetch(u, {headers: S.apiKey ? {"X-Api-Key":S.apiKey} : {}, signal:ctl.signal});
-      clearTimeout(to);
-      if(!r.ok) throw new Error(r.status);
-      const j = await r.json();
-      const got = new Set();
-      for(const c of (Array.isArray(j.data)?j.data:[])){ if(!c || !chunk.includes(c.id)) continue; S.prices[c.id] = pickPrice(c.tcgplayer) || {p:null,all:{},t:Date.now()}; got.add(c.id); }
-      chunk.forEach(id => { if(!got.has(id)) S.prices[id] = {p:null, all:{}, t:Date.now()}; });
-      setApi("ok");
-    }catch(e){ chunk.forEach(id => S.pricingIds.delete(id)); setApi("down"); return; }
-    finally{ chunk.forEach(id => S.pricingIds.delete(id)); }
-    savePrices(); refreshPrices();
+/* Prices: TCGdex first (free, no key), pokemontcg.io as backup */
+const TCGDEX = "https://api.tcgdex.net/v2/en/";
+let dexSetPromise = null; const dexCards = {}; let priceBackoff = 0;
+async function fetchJSON(u, opts={}){
+  const ctl = new AbortController(); const to = setTimeout(() => ctl.abort(), 15000);
+  try{ const r = await fetch(u, {...opts, signal:ctl.signal}); if(!r.ok) throw new Error("HTTP "+r.status); return await r.json(); }
+  finally{ clearTimeout(to); }
+}
+const normName = n => String(n||"").toLowerCase().replace(/&/g,"and").replace(/[^a-z0-9]/g,"");
+const normNum = n => String(n??"").toLowerCase().replace(/^0+(?=[a-z0-9])/,"");
+function guessDexId(id){ return id.replace(/^(sv|me)(\d)(?=\D|$)/, (m,a,b) => a+"0"+b).replace(/pt5$/, ".5"); }
+function dexSetList(){
+  if(!dexSetPromise) dexSetPromise = fetchJSON(TCGDEX+"sets").then(a => Array.isArray(a) ? a.filter(x => x && typeof x.id==="string") : []).catch(e => { dexSetPromise = null; throw e; });
+  return dexSetPromise;
+}
+async function dexSetFor(setId){
+  const list = await dexSetList(); const s = S.setMap[setId]; if(!s) return null;
+  const ids = new Set(list.map(x => x.id)); const byName = list.filter(x => normName(x.name) === normName(s.name));
+  if(byName.length === 1) return byName[0].id;
+  const g = guessDexId(setId); if(ids.has(g)) return g; if(ids.has(setId)) return setId;
+  return byName[0]?.id || null;
+}
+function dexCardIndex(setId){
+  if(!dexCards[setId]) dexCards[setId] = (async () => {
+    const sid = await dexSetFor(setId); if(!sid) return null;
+    const d = await fetchJSON(TCGDEX+"sets/"+encodeURIComponent(sid));
+    const m = new Map(); for(const c of (Array.isArray(d?.cards) ? d.cards : [])) if(c && typeof c.id==="string") m.set(normNum(c.localId), c.id);
+    return m;
+  })().catch(e => { delete dexCards[setId]; throw e; });
+  return dexCards[setId];
+}
+function pickDexPrice(pr){
+  const tp = pr && pr.tcgplayer; if(!tp || typeof tp!=="object") return null;
+  let best = null; const all = {};
+  for(const [k,v] of Object.entries(tp).slice(0,12)){
+    if(!v || typeof v!=="object") continue;
+    const m = num(v.marketPrice) ?? num(v.midPrice) ?? num(v.lowPrice); if(m==null) continue;
+    const key = k.replace(/[^A-Za-z0-9]/g,"").slice(0,30); if(!key) continue;
+    all[key] = m; if(!best || m > best.p) best = {p:m, v:key};
   }
+  if(!best) return null;
+  const upd = typeof tp.updated==="string" && /^\d{4}-\d{2}-\d{2}/.test(tp.updated) ? tp.updated.slice(0,10).replace(/-/g,"/") : null;
+  return { p:best.p, v:best.v, all, url:null, upd, t:Date.now() };
+}
+async function pool(items, n, fn){ const q = items.slice(); await Promise.all(Array.from({length:Math.min(n,q.length)}, async () => { while(q.length) await fn(q.shift()); })); }
+async function fetchPrices(ids){
+  if(Date.now() < priceBackoff) return;
+  const need = ids.filter(id => !S.pricingIds.has(id) && (!S.prices[id] || Date.now()-S.prices[id].t > PRICE_TTL));
+  if(!need.length) return;
+  need.forEach(id => S.pricingIds.add(id));
+  const backup = []; let ok = 0, failed = 0;
+  await pool(need, 6, async id => {
+    try{
+      const card = findCard(id); if(!card) return;
+      const idx = await dexCardIndex(card.setId);
+      const dexId = idx && idx.get(normNum(card.number));
+      if(!dexId){ backup.push(id); return; }
+      const d = await fetchJSON(TCGDEX+"cards/"+encodeURIComponent(dexId)); ok++;
+      const p = pickDexPrice(d && d.pricing);
+      if(p){ S.prices[id] = p; refreshPrices(); } else backup.push(id);
+    }catch(e){ failed++; backup.push(id); }
+  });
+  let backupOk = false;
+  for(let i=0;i<backup.length;i+=40){
+    const chunk = backup.slice(i,i+40);
+    const q = "(" + chunk.map(id => `id:"${id}"`).join(" OR ") + ")";
+    try{
+      const j = await fetchJSON(API + "?" + new URLSearchParams({q, select:"id,tcgplayer", pageSize:"250"}), {headers: S.apiKey ? {"X-Api-Key":S.apiKey} : {}});
+      backupOk = true;
+      for(const c of (Array.isArray(j.data)?j.data:[])){ if(!c || !chunk.includes(c.id)) continue; const p = pickPrice(c.tcgplayer); if(p && p.p!=null) S.prices[c.id] = p; }
+    }catch(e){ break; }
+  }
+  // cards both sources answered for but have no price: remember that so we don't keep asking
+  if(ok || backupOk) backup.forEach(id => { if(!S.prices[id]) S.prices[id] = {p:null, all:{}, t:Date.now()}; });
+  need.forEach(id => S.pricingIds.delete(id));
+  if(ok || backupOk) setApi("ok");
+  else if(failed){ setApi("down"); priceBackoff = Date.now() + 60000; }
+  savePrices(); refreshPrices();
+  if(sheetKind==="detail" && need.includes(detailId)) rerenderDetail();
 }
 function setApi(s){ if(S.apiState===s) return; S.apiState=s; renderMeta(); renderBanner(); }
 function ensurePrices(){
@@ -984,6 +1061,7 @@ sheet.addEventListener("click", e => {
   }
   if(sheetKind==="detail") return detailClick(t);
   if(sheetKind==="export") return exportClick(t);
+  if(sheetKind==="help" && t.dataset.act==="close") return closeSheet();
 });
 function refreshSeriesLabels(){
   const sel = new Set(draft.sets);
@@ -1015,7 +1093,8 @@ function detailHTML(c){
   const e = S.chase[c.id], t = tier(c.rarity), p = S.prices[c.id];
   const want = e?.want || "Raw"; const L = buyLinks(c, want);
   const variants = p?.all ? Object.entries(p.all).sort((a,b)=>b[1]-a[1]) : [];
-  const vName = v => v.replace(/([A-Z])/g," $1").replace(/^./, m=>m.toUpperCase()).replace("1st Edition","1st Ed.");
+  const VN = {normal:"Normal", holo:"Holofoil", holofoil:"Holofoil", reverse:"Reverse Holo", reverseholo:"Reverse Holo", reverseholofoil:"Reverse Holo", "1stedition":"1st Edition", "1steditionholofoil":"1st Ed. Holo", "1steditionnormal":"1st Ed.", unlimited:"Unlimited", unlimitedholofoil:"Unlimited Holo"};
+  const vName = v => VN[v.toLowerCase()] || v.replace(/([A-Z])/g," $1").replace(/^./, m=>m.toUpperCase());
   return `
     <div class="sheet-head"><span></span><button class="icon-btn" data-act="close" aria-label="Close">${ICON.x}</button></div>
     <div class="sheet-body">
@@ -1093,6 +1172,31 @@ function wireTilt(tcg){
   tcg.addEventListener("pointermove", move); tcg.addEventListener("pointerdown", move); tcg.addEventListener("pointerleave", leave); tcg.addEventListener("pointerup", e => { if(e.pointerType!=="mouse") leave(); }); tcg.addEventListener("pointercancel", leave);
 }
 
+/* ---- help ---- */
+function openHelp(first){
+  const st = (n,t,body) => `<div class="step"><span class="num">${n}</span><div><h4>${t}</h4><p>${body}</p></div></div>`;
+  openSheet("help", `
+    <div class="sheet-head"><h2>${first?"Welcome to ChaseDeck":"How it works"}</h2><button class="icon-btn" data-act="close" aria-label="Close">${ICON.x}</button></div>
+    <div class="sheet-body">
+      <div class="help-hero"><p>Swipe through Pokémon cards and build the list of cards you want to hunt down.</p></div>
+      <div class="gestures">
+        <div class="gest"><div class="gi" style="background:rgba(255,77,109,.14);color:var(--rose)">${ICON.x}</div><b>← Pass</b><span>Not for me</span></div>
+        <div class="gest"><div class="gi" style="background:var(--chase-grad);color:#3a1800">${ICON.heart}</div><b>Chase →</b><span>Add to my list</span></div>
+        <div class="gest"><div class="gi" style="background:rgba(139,108,255,.2);color:#c4b2ff">${ICON.star}</div><b>↑ Grail</b><span>Top priority</span></div>
+      </div>
+      <div class="sec"><div class="sec-t"><h3>Getting started</h3></div>
+      <div class="steps">
+        ${st(1,"Build your deck",`Tap the <b>sliders</b> button (top right) to pick sets, eras and rarity, or search a Pokémon or artist. Tap <b>Deal cards</b> to shuffle them in.`)}
+        ${st(2,"Swipe",`Drag a card or use the buttons. Made a mistake? The <b>undo arrow</b> brings back the last card.`)}
+        ${st(3,"Tap a card for details",`See prices by print, the artist, and links to buy it on <b>TCGplayer</b>, <b>eBay</b>, sold comps and <b>PriceCharting</b>.`)}
+        ${st(4,"Work your chase list",`The <b>Chase list</b> tab shows what's left to buy. Tap a card to set its priority, choose <b>Raw or a grade</b> (PSA 10, BGS 9.5…), and flip <b>Got it</b> when it lands in your binder.`)}
+        ${st(5,"Share and back up",`Use the <b>share button</b> on your list to copy it as text or CSV. Your list is saved on this device only, so copy a <b>backup code</b> now and then.`)}
+      </div></div>
+      <div class="tipbox">Tip: add ChaseDeck to your home screen (Share → Add to Home Screen) so it opens like an app.</div>
+    </div>
+    <div class="sheet-foot"><button class="btn primary block" data-act="close">${first?"Let's go":"Got it"}</button></div>`);
+}
+
 /* ---- export ---- */
 function exportText(){
   const items = Object.values(S.chase).sort((a,b) => (a.got-b.got) || b.prio-a.prio || (priceOf(b.card.id)||0)-(priceOf(a.card.id)||0));
@@ -1168,6 +1272,7 @@ document.addEventListener("click", e => {
 });
 document.addEventListener("click", e => { if(e.target.closest("#openExport")) openExport(); });
 $("#openFilters").onclick = openFilters;
+$("#openHelp").onclick = () => openHelp(false);
 $("#btnPass").onclick = () => act("pass");
 $("#btnChase").onclick = () => act("chase");
 $("#btnSuper").onclick = () => act("super");
@@ -1208,7 +1313,7 @@ async function boot(){
   }
   const first = !LS.get("seen", false);
   await buildPool();
-  if(first){ LS.set("seen", true); setTimeout(() => toast(ICON.heart, "Swipe right to chase, left to pass, up for grails"), 700); }
+  if(first){ LS.set("seen", true); setTimeout(() => openHelp(true), 500); }
 }
 boot();
 })();
