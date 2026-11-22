@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-CM7L5Et/Y/Xe9YnleyP5zCFR9CXzr9QCa4LDGwC/koc='; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' https://images.pokemontcg.io https://images.scrydex.com data: blob:; connect-src 'self' https://raw.githubusercontent.com https://api.tcgdex.net https://api.pokemontcg.io; manifest-src 'self'; base-uri 'none'; form-action 'none'; object-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-wjmx2SOB2pPbNw6Ecsf7Tim1bdat61mYK8mRUesv/0g='; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' https://images.pokemontcg.io https://images.scrydex.com data: blob:; connect-src 'self' https://raw.githubusercontent.com https://api.tcgdex.net https://api.pokemontcg.io; manifest-src 'self'; base-uri 'none'; form-action 'none'; object-src 'none'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1">
 <meta name="theme-color" content="#0a0913">
@@ -683,6 +683,7 @@ async function buildPool(){
   S.loading = true; S.loadP = 0; S.loadMsg = "Shuffling your deck…"; S.pricing = {on:false, done:0, total:0}; renderDeck();
   const {out, errors} = await loadSetsFor(ids, true);
   if(myBuild !== S.buildId) return;
+  ids.forEach(id => loadShared(id).then(refreshSignals));
   const q = f.q.trim().toLowerCase();
   const preset = PRESETS[f.preset] || PRESETS.chase;
   let pool = f.rarities.length ? out.filter(c => f.rarities.includes(c.rarity)) : out.filter(c => preset.test(c));
@@ -833,12 +834,47 @@ function ensurePrices(){
   const ahead = S.pool.slice(S.idx, S.idx+24).map(c=>c.id);
   fetchPrices(ahead);
 }
+/* ---------- shared price history (recorded daily into the repo) ---------- */
+const shared = {}, sharedP = {};
+function loadShared(setId){
+  if(!/^[A-Za-z0-9._-]{1,30}$/.test(setId||"")) return Promise.resolve({});
+  if(!sharedP[setId]) sharedP[setId] = fetch("prices/" + encodeURIComponent(setId) + ".json", {cache:"no-cache"})
+    .then(r => r.ok ? r.json() : null)
+    .then(d => { const out = {};
+      if(d && d.cards && typeof d.cards === "object") for(const [k,v] of Object.entries(d.cards)){
+        if(!/^[A-Za-z0-9._-]{1,40}$/.test(k) || !Array.isArray(v)) continue;
+        const pts = v.filter(x => Array.isArray(x) && Number.isInteger(x[0]) && x[0]>19000 && x[0]<40000 && num(x[1])!=null).slice(-730);
+        if(pts.length) out[k] = pts; }
+      return (shared[setId] = out); })
+    .catch(() => (shared[setId] = {}));
+  return sharedP[setId];
+}
+function histFor(id){
+  const sh = shared[id.slice(0, id.lastIndexOf("-"))]?.[id] || [], lo = S.hist[id] || [];
+  if(!sh.length) return lo; if(!lo.length) return sh;
+  const m = new Map(lo.map(p => [p[0], p[1]])); for(const [d,v] of sh) m.set(d, v);
+  return [...m.entries()].sort((a,b) => a[0]-b[0]);
+}
+function trendOf(id){
+  // prefer our own US price records; fall back to Cardmarket (EU) averages
+  const h = histFor(id);
+  if(h.length >= 5 && h.at(-1)[0] - h[0][0] >= 14){
+    const now = h.at(-1)[0], avg = days => { const xs = h.filter(p => p[0] > now - days).map(p => p[1]); return xs.length ? xs.reduce((a,b) => a+b, 0) / xs.length : null; };
+    return {src:"usd", a1:h.at(-1)[1], a7:avg(7), a30:avg(30), days:h.length};
+  }
+  const cm = S.prices[id]?.cm; return cm ? {src:"eur", ...cm} : null;
+}
+
 /* ---------- live market signal (Claude's scoring rules) ---------- */
 function signalOf(id){
-  const pr = S.prices[id]; if(!pr || pr.p==null || pr.p < 3 || !pr.cm) return null;
-  const {a1, a7, a30} = pr.cm; if(!a7 || !a30 || a30 < 1) return null;
+  const price = priceOf(id); if(price==null || price < 3) return null;
+  const tr = trendOf(id); if(!tr) return null;
+  const {a1, a7, a30} = tr; if(!a7 || !a30 || a30 < 1) return null;
   const m30 = (a7 - a30) / a30, m1 = a1 ? (a1 - a7) / a7 : 0;
   const pct = x => Math.round(Math.abs(x) * 100);
+  const sg = signalRule(m30, m1, pct); return sg ? {...sg, tr} : null;
+}
+function signalRule(m30, m1, pct){
   if(m30 > 0.5 || m1 > 0.3){ const j = Math.max(m30, m1); return {k:"hot", icon:"⚠️", label:"Overheated", short:"+"+pct(j)+"%", why:`Jumped ${pct(j)}% very fast. Sharp spikes often cool off, so buying right now is riskier.`}; }
   if(m30 >= 0.08) return {k:"up", icon:"📈", label:"Heating up", short:"+"+pct(m30)+"%", why:`Up ${pct(m30)}% versus its 30-day average${m1 < -0.05 ? ", though it dipped in the last day" : " in a steady climb"}.`};
   if(m30 <= -0.15 && m1 >= -0.02) return {k:"dip", icon:"💎", label:"Possible dip", short:"−"+pct(m30)+"%", why:`Down ${pct(m30)}% from its 30-day average but leveling off. Could be a buying window.`};
@@ -1105,6 +1141,7 @@ async function preparePicks(){
   if(!S.picks) return;
   const all = [...S.picks.picks, ...S.picks.history];
   const sets = [...new Set(all.map(p => setOfId(p.id)))].filter(id => S.setMap[id]);
+  sets.forEach(id => loadShared(id).then(refreshSignals));
   if(!picksPrepared){
     const {out} = await loadSetsFor(sets, false);
     const want = new Set(all.map(p => p.id));
@@ -1418,22 +1455,24 @@ function buyLinks(c, want){
 }
 function openDetail(id){
   const c = findCard(id); if(!c) return; detailId = id;
+  const sid = id.slice(0, id.lastIndexOf("-"));
+  if(!shared[sid]) loadShared(sid).then(() => { if(sheetKind==="detail" && detailId===id) rerenderDetail(); refreshSignals(); });
   fetchPrices([id]);
   openSheet("detail", detailHTML(c));
   const t = sheet.querySelector(".detail-hero .tcg"); if(t) wireTilt(t);
 }
 function changeTxt(from, to){ if(from==null || to==null || !from) return ""; const d = (to-from)/from*100; return `${d>=0?"+":"−"}${Math.abs(d).toFixed(0)}%`; }
 function chartHTML(c){
-  const own = S.hist[c.id] || [], pr = S.prices[c.id];
+  const own = histFor(c.id), pr = S.prices[c.id];
   let pts, cur, title, sub, startLbl;
   const now = today();
   if(own.length >= 2){
     pts = own.map(([d, v]) => [d - now, v]); cur = "$";
-    title = "Price history"; sub = `TCGplayer · ${own.length} days recorded by ChaseDeck`;
+    title = "Price history"; sub = `TCGplayer (US) · ${own.length} day${own.length===1?"":"s"} of ChaseDeck price data`;
     startLbl = new Date(own[0][0]*86400000).toLocaleDateString(undefined,{month:"short",day:"numeric"});
   } else if(pr && pr.cm){
     pts = [[-30, pr.cm.a30], [-7, pr.cm.a7]]; if(pr.cm.a1!=null) pts.push([-1, pr.cm.a1]);
-    cur = "€"; title = "Price trend"; sub = "Cardmarket (EU) averages · your own history starts today"; startLbl = "30 days ago";
+    cur = "€"; title = "Price trend"; sub = "Cardmarket (EU) averages until ChaseDeck has 2+ days of US prices"; startLbl = "30 days ago";
   } else return "";
   const W = 320, H = 132, L = 6, Rr = 46, T = 16, B = 24;
   const xs = pts.map(p => p[0]), ys = pts.map(p => p[1]);
@@ -1448,7 +1487,7 @@ function chartHTML(c){
   const up = chg >= 0, col = Math.abs(chg) < 0.02 ? "#c4b2ff" : up ? "#3ef2b0" : "#ff6b88";
   const fmt = v => cur + (v >= 100 ? Math.round(v).toLocaleString() : v.toFixed(2));
   const grid = [y1 - (y1-y0)*0.15, y0 + (y1-y0)*0.15].map(v => `<line x1="${L}" x2="${W-Rr+4}" y1="${Y(v).toFixed(1)}" y2="${Y(v).toFixed(1)}" class="gl"/><text x="${W-Rr+10}" y="${(Y(v)+4).toFixed(1)}" class="gt">${fmt(v)}</text>`).join("");
-  const dots = coords.map(([x,y],i) => `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${i===coords.length-1?4.5:2.6}" fill="${i===coords.length-1?col:"#0f0c1f"}" stroke="${col}" stroke-width="2"/>`).join("");
+  const dots = coords.map(([x,y],i) => `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${i===coords.length-1?4.5:(coords.length>20?0:2.6)}" fill="${i===coords.length-1?col:"#0f0c1f"}" stroke="${col}" stroke-width="2"/>`).join("");
   const lx = coords.at(-1)[0], ly = coords.at(-1)[1];
   return `<div class="sec"><div class="sec-t"><h3>${title}</h3><span class="chg" style="color:${col}">${Math.abs(chg) < 0.005 ? "Flat" : (up?"▲ ":"▼ ")+Math.abs(chg*100).toFixed(1)+"%"}</span></div>
     <div class="chart">
@@ -1481,9 +1520,11 @@ function insightHTML(c){
     h += `<div class="sec"><div class="sec-t"><h3>Market signal</h3></div>
       <div class="insight ${sg.k}"><div class="ins-top"><span class="callpill ${sg.k}">${sg.icon} ${sg.label}</span><span class="conf">${sg.short} vs 30-day avg</span></div>
       <p>${esc(sg.why)}</p>
-      <div class="ins-nums"><span>1-day <b>€${pr.cm.a1!=null?pr.cm.a1.toFixed(2):"—"}</b></span><span>7-day <b>€${pr.cm.a7.toFixed(2)}</b></span><span>30-day <b>€${pr.cm.a30.toFixed(2)}</b></span></div></div></div>`;
+      <div class="ins-nums">${sg.tr.src==="usd"
+        ? `<span>Today <b>${money(sg.tr.a1)}</b></span><span>7-day avg <b>${money(sg.tr.a7)}</b></span><span>30-day avg <b>${money(sg.tr.a30)}</b></span>`
+        : `<span>1-day <b>€${sg.tr.a1!=null?sg.tr.a1.toFixed(2):"—"}</b></span><span>7-day <b>€${sg.tr.a7.toFixed(2)}</b></span><span>30-day <b>€${sg.tr.a30.toFixed(2)}</b></span>`}</div></div></div>`;
   }
-  if(pk || sg) h += `<div class="help" style="margin-top:8px">Signals use Cardmarket (EU) average prices. ${pk?"Claude's picks are AI research. ":""}This is analysis, not financial advice.</div>`;
+  if(pk || sg) h += `<div class="help" style="margin-top:8px">${sg ? (sg.tr.src==="usd" ? "Signals use ChaseDeck's daily TCGplayer price records. " : "Signals use Cardmarket (EU) averages until ChaseDeck has two weeks of US prices for this card. ") : ""}${pk?"Claude's picks are AI research. ":""}This is analysis, not financial advice.</div>`;
   return h;
 }
 function detailHTML(c){

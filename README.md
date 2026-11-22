@@ -24,6 +24,7 @@ ChaseDeck is a single `index.html` file with no build step, no server and no acc
 
 - Card data comes from the open [Pokémon TCG dataset](https://github.com/PokemonTCG/pokemon-tcg-data).
 - Prices are TCGplayer market prices from [TCGdex](https://tcgdex.dev) (free, no key needed), with the [pokemontcg.io](https://pokemontcg.io) API as a backup.
+- **Our own price data:** a GitHub Action ([`record-prices.yml`](.github/workflows/record-prices.yml)) runs every morning, records TCGplayer prices for about 3,800 chase-tier and vintage cards via TCGdex, and saves them to [`prices/`](prices). Charts and market signals use this history.
 - Weekly picks live in [`picks.json`](picks.json) in this repo.
 - Your chase list and swipes are stored in your browser's local storage. Nothing is sent to a server.
 
