@@ -8,7 +8,9 @@ Swipe through Pokémon cards to build your chase list, like a dating app for you
 
 - **Built-in guide.** A quick how-to opens on first visit; tap the **?** button anytime to see it again.
 - **Swipe to sort.** Swipe right to chase a card, left to pass, or up to mark it a Grail. Undo is one tap away.
-- **Build your deck.** Filter by set, era, rarity (chase tier, hits & holos, or exact rarities), Pokémon or artist, and deal in shuffled or release order.
+- **Build your deck.** Filter by price range (default $5+), favorite Pokémon, quick groups (Eeveelutions, starters, legendaries…), generation, card type, set, era and rarity, and deal in shuffled or release order.
+- **Market signals.** Live badges from each card's recent price trend: 📈 Heating up, 💎 Possible dip, ⚠️ Overheated, 📉 Sliding.
+- **Claude's picks.** A weekly list of cards worth targeting, researched by Claude, with the reasoning, sources, the price on the day of each call and a running track record.
 - **Live prices.** Shows the TCGplayer market price for each card, broken down by print variant.
 - **Chase list.** See the total left to chase, sort by priority, price, set or name, and mark cards as acquired.
 - **Graded or raw.** Set the version you want for each card (Raw, PSA 10, PSA 9, BGS 9.5, CGC 10).
@@ -22,7 +24,12 @@ ChaseDeck is a single `index.html` file with no build step, no server and no acc
 
 - Card data comes from the open [Pokémon TCG dataset](https://github.com/PokemonTCG/pokemon-tcg-data).
 - Prices are TCGplayer market prices from [TCGdex](https://tcgdex.dev) (free, no key needed), with the [pokemontcg.io](https://pokemontcg.io) API as a backup.
+- Weekly picks live in [`picks.json`](picks.json) in this repo.
 - Your chase list and swipes are stored in your browser's local storage. Nothing is sent to a server.
+
+## Disclaimer
+
+Market signals and Claude's picks are AI analysis of public market data. They can be wrong and are not financial advice.
 
 ## Security
 

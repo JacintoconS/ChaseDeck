@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-QqgsnvzkwV+4RFRzsdN9qP2Zfb94icYL5srG46GAZEM='; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src https://images.pokemontcg.io https://images.scrydex.com data: blob:; connect-src https://raw.githubusercontent.com https://api.tcgdex.net https://api.pokemontcg.io; base-uri 'none'; form-action 'none'; object-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-woW/cLrMoXbb3LGXNE5Y57KW90PQaNPujmYK3lPBlTE='; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src https://images.pokemontcg.io https://images.scrydex.com data: blob:; connect-src 'self' https://raw.githubusercontent.com https://api.tcgdex.net https://api.pokemontcg.io; base-uri 'none'; form-action 'none'; object-src 'none'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1">
 <meta name="theme-color" content="#0a0913">
@@ -171,8 +171,8 @@ img{user-select:none;-webkit-user-drag:none}
 @keyframes bob{50%{transform:translateY(-8px) rotate(2deg)}}
 
 /* ---------- Tabbar ---------- */
-.tabbar{position:relative;z-index:3;height:var(--tabbar);padding:6px 22px var(--safe-b);display:flex;gap:10px}
-.tab{flex:1;height:52px;border-radius:17px;display:flex;align-items:center;justify-content:center;gap:9px;font-weight:800;font-size:14px;color:var(--ink-3);transition:color .2s,background .25s;position:relative}
+.tabbar{position:relative;z-index:3;height:var(--tabbar);padding:6px 14px var(--safe-b);display:flex;gap:6px}
+.tab{flex:1;height:52px;border-radius:17px;display:flex;align-items:center;justify-content:center;gap:7px;font-weight:800;font-size:13.5px;color:var(--ink-3);transition:color .2s,background .25s;position:relative}
 .tab svg{width:21px;height:21px}
 .tab.on{color:var(--ink);background:var(--glass-2);box-shadow:inset 0 0 0 1px var(--line)}
 .tab .count{min-width:22px;height:20px;padding:0 6px;border-radius:10px;background:var(--chase-grad);color:#2e1400;font-size:11px;display:grid;place-items:center}
@@ -321,6 +321,50 @@ img{user-select:none;-webkit-user-drag:none}
 .export-box{width:100%;height:160px;border-radius:15px;padding:12px;background:rgba(0,0,0,.3);border:1px solid var(--line);font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11.5px;line-height:1.5;color:var(--ink-2);resize:vertical;outline:0}
 .ex-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 
+/* Signals, picks */
+.badges{position:absolute;top:10px;left:10px;right:10px;display:flex;flex-wrap:wrap;gap:6px;z-index:4;pointer-events:none}
+.badge{height:24px;padding:0 9px;border-radius:99px;font-size:11px;font-weight:800;display:inline-flex;align-items:center;gap:4px;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);background:rgba(14,11,28,.78);border:1px solid rgba(255,255,255,.16);color:#fff;box-shadow:0 6px 16px -6px rgba(0,0,0,.7);white-space:nowrap}
+.badge.sig.up{color:#8cf5c7;border-color:rgba(62,242,176,.4)}
+.badge.sig.dip{color:#9fe2ff;border-color:rgba(79,216,255,.45)}
+.badge.sig.hot{color:#ffd27a;border-color:rgba(255,190,90,.5)}
+.badge.sig.down{color:#ff9fb1;border-color:rgba(255,77,109,.45)}
+.badge.pick{background:linear-gradient(135deg,rgba(139,108,255,.92),rgba(255,111,181,.9));border-color:rgba(255,255,255,.35)}
+.swipe:not(.top) .badges{opacity:0}
+.insight{border-radius:16px;padding:13px 14px;background:var(--glass);border:1px solid var(--line)}
+.insight.pick{background:linear-gradient(135deg,rgba(139,108,255,.14),rgba(255,111,181,.08));border-color:rgba(185,147,255,.35)}
+.insight p{margin:9px 0 0;font-size:13.5px;line-height:1.5;color:var(--ink-2);font-weight:500}
+.ins-top{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.ins-nums{display:flex;flex-wrap:wrap;gap:6px 14px;margin-top:10px;font-size:12px;color:var(--ink-3);font-weight:700}
+.ins-nums b{color:var(--ink)}
+.callpill{height:26px;padding:0 10px;border-radius:99px;font-size:12px;font-weight:800;display:inline-flex;align-items:center;gap:5px;background:rgba(255,255,255,.1)}
+.callpill.up{background:rgba(62,242,176,.15);color:#8cf5c7}
+.callpill.dip{background:rgba(79,216,255,.15);color:#9fe2ff}
+.callpill.hot{background:rgba(255,190,90,.16);color:#ffd27a}
+.callpill.down{background:rgba(255,77,109,.15);color:#ff9fb1}
+.callpill.hold{background:rgba(255,224,138,.12);color:#ffe7a3}
+.conf{font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3)}
+.srcs{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.srcs a,.srcs span{font-size:12px;font-weight:700;color:#c4b2ff;text-decoration:none;padding:5px 9px;border-radius:9px;background:rgba(255,255,255,.06)}
+.picks-hero .total{margin-top:8px}
+.picklist{display:flex;flex-direction:column;gap:10px;margin-top:16px}
+.pickrow{display:flex;gap:12px;text-align:left;padding:10px;border-radius:18px;background:var(--glass);border:1px solid var(--line);animation:tileIn .45s cubic-bezier(.2,.8,.2,1) both;transition:transform .15s}
+.pickrow:active{transform:scale(.98)}
+.pthumb{width:74px;flex-shrink:0;aspect-ratio:63/88;border-radius:7px;overflow:hidden;background:#1b1830;box-shadow:0 10px 20px -10px rgba(0,0,0,.9)}
+.pthumb img{width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .3s}
+.pthumb img.ok{opacity:1}
+.pbody{flex:1;min-width:0}
+.ptop{display:flex;align-items:center;justify-content:space-between;gap:6px}
+.pname{font-weight:800;font-size:15px;margin-top:7px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pset{font-size:11.5px;color:var(--ink-3);font-weight:600;margin-top:1px}
+.preason{font-size:12.5px;color:var(--ink-2);line-height:1.45;margin-top:5px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.pnums{font-size:11.5px;color:var(--ink-3);font-weight:700;margin-top:6px}
+.pnums b{color:var(--ink)}
+.pos{color:#8cf5c7}.neg{color:#ff9fb1}
+.pickpill{background:linear-gradient(135deg,rgba(139,108,255,.3),rgba(255,111,181,.25));color:#fff}
+.field.mini{flex:1;height:44px;padding:0 12px}
+.field.mini .lbl{font-size:12px;font-weight:800;color:var(--ink-3);white-space:nowrap}
+.hint{font-size:11.5px;color:var(--ink-3);font-weight:700}
+
 /* Help */
 .help-hero{text-align:center;padding:4px 0 6px}
 .help-hero p{margin:8px auto 0;color:var(--ink-2);font-size:14px;line-height:1.5;max-width:330px;font-weight:500}
@@ -395,6 +439,11 @@ kbd{font-family:inherit;font-size:10.5px;padding:1px 6px;border-radius:5px;borde
       </div>
     </section>
 
+    <!-- PICKS VIEW -->
+    <section class="view" id="viewPicks" hidden>
+      <div class="list-scroll" id="picksScroll"></div>
+    </section>
+
     <!-- LIST VIEW -->
     <section class="view" id="viewList" hidden>
       <div class="list-scroll" id="listScroll"></div>
@@ -404,8 +453,10 @@ kbd{font-family:inherit;font-size:10.5px;padding:1px 6px;border-radius:5px;borde
   <nav class="tabbar">
     <button class="tab on" data-view="swipe" id="tabSwipe">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><rect x="6.5" y="3" width="11" height="16" rx="2" transform="rotate(8 12 11)"/><rect x="5" y="4.5" width="11" height="16" rx="2" fill="currentColor" fill-opacity=".15"/></svg>Swipe</button>
+    <button class="tab" data-view="picks" id="tabPicks">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><path d="M12 3l1.9 4.6L18.5 9l-4.6 1.9L12 15.5l-1.9-4.6L5.5 9l4.6-1.4z"/><path d="M18.5 15l.8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8z"/></svg>Picks</button>
     <button class="tab" data-view="list" id="tabList">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><path d="M12 20.5s-7-4.3-8.9-8.6C1.7 8.6 3.9 5.2 7.3 5.2c1.9 0 3.3 1 4.7 2.8 1.4-1.8 2.8-2.8 4.7-2.8 3.4 0 5.6 3.4 4.2 6.7-1.9 4.3-8.9 8.6-8.9 8.6z"/></svg>Chase list <span class="count" id="chaseCount">0</span></button>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><path d="M12 20.5s-7-4.3-8.9-8.6C1.7 8.6 3.9 5.2 7.3 5.2c1.9 0 3.3 1 4.7 2.8 1.4-1.8 2.8-2.8 4.7-2.8 3.4 0 5.6 3.4 4.2 6.7-1.9 4.3-8.9 8.6-8.9 8.6z"/></svg>List <span class="count" id="chaseCount">0</span></button>
   </nav>
 </div>
 
@@ -475,15 +526,32 @@ function cleanDecisions(obj){
   for(const [k,v] of Object.entries(obj).slice(0,50000)) if(/^[A-Za-z0-9._-]{1,40}$/.test(k) && ["pass","chase","super"].includes(v)) out[k]=v;
   return out;
 }
+/* ---------- Pokémon data ---------- */
+const DEX = ["Bulbasaur","Ivysaur","Venusaur","Charmander","Charmeleon","Charizard","Squirtle","Wartortle","Blastoise","Caterpie","Metapod","Butterfree","Weedle","Kakuna","Beedrill","Pidgey","Pidgeotto","Pidgeot","Rattata","Raticate","Spearow","Fearow","Ekans","Arbok","Pikachu","Raichu","Sandshrew","Sandslash","Nidoran♀","Nidorina","Nidoqueen","Nidoran♂","Nidorino","Nidoking","Clefairy","Clefable","Vulpix","Ninetales","Jigglypuff","Wigglytuff","Zubat","Golbat","Oddish","Gloom","Vileplume","Paras","Parasect","Venonat","Venomoth","Diglett","Dugtrio","Meowth","Persian","Psyduck","Golduck","Mankey","Primeape","Growlithe","Arcanine","Poliwag","Poliwhirl","Poliwrath","Abra","Kadabra","Alakazam","Machop","Machoke","Machamp","Bellsprout","Weepinbell","Victreebel","Tentacool","Tentacruel","Geodude","Graveler","Golem","Ponyta","Rapidash","Slowpoke","Slowbro","Magnemite","Magneton","Farfetch'd","Doduo","Dodrio","Seel","Dewgong","Grimer","Muk","Shellder","Cloyster","Gastly","Haunter","Gengar","Onix","Drowzee","Hypno","Krabby","Kingler","Voltorb","Electrode","Exeggcute","Exeggutor","Cubone","Marowak","Hitmonlee","Hitmonchan","Lickitung","Koffing","Weezing","Rhyhorn","Rhydon","Chansey","Tangela","Kangaskhan","Horsea","Seadra","Goldeen","Seaking","Staryu","Starmie","Mr. Mime","Scyther","Jynx","Electabuzz","Magmar","Pinsir","Tauros","Magikarp","Gyarados","Lapras","Ditto","Eevee","Vaporeon","Jolteon","Flareon","Porygon","Omanyte","Omastar","Kabuto","Kabutops","Aerodactyl","Snorlax","Articuno","Zapdos","Moltres","Dratini","Dragonair","Dragonite","Mewtwo","Mew","Chikorita","Bayleef","Meganium","Cyndaquil","Quilava","Typhlosion","Totodile","Croconaw","Feraligatr","Sentret","Furret","Hoothoot","Noctowl","Ledyba","Ledian","Spinarak","Ariados","Crobat","Chinchou","Lanturn","Pichu","Cleffa","Igglybuff","Togepi","Togetic","Natu","Xatu","Mareep","Flaaffy","Ampharos","Bellossom","Marill","Azumarill","Sudowoodo","Politoed","Hoppip","Skiploom","Jumpluff","Aipom","Sunkern","Sunflora","Yanma","Wooper","Quagsire","Espeon","Umbreon","Murkrow","Slowking","Misdreavus","Unown","Wobbuffet","Girafarig","Pineco","Forretress","Dunsparce","Gligar","Steelix","Snubbull","Granbull","Qwilfish","Scizor","Shuckle","Heracross","Sneasel","Teddiursa","Ursaring","Slugma","Magcargo","Swinub","Piloswine","Corsola","Remoraid","Octillery","Delibird","Mantine","Skarmory","Houndour","Houndoom","Kingdra","Phanpy","Donphan","Porygon2","Stantler","Smeargle","Tyrogue","Hitmontop","Smoochum","Elekid","Magby","Miltank","Blissey","Raikou","Entei","Suicune","Larvitar","Pupitar","Tyranitar","Lugia","Ho-Oh","Celebi","Treecko","Grovyle","Sceptile","Torchic","Combusken","Blaziken","Mudkip","Marshtomp","Swampert","Poochyena","Mightyena","Zigzagoon","Linoone","Wurmple","Silcoon","Beautifly","Cascoon","Dustox","Lotad","Lombre","Ludicolo","Seedot","Nuzleaf","Shiftry","Taillow","Swellow","Wingull","Pelipper","Ralts","Kirlia","Gardevoir","Surskit","Masquerain","Shroomish","Breloom","Slakoth","Vigoroth","Slaking","Nincada","Ninjask","Shedinja","Whismur","Loudred","Exploud","Makuhita","Hariyama","Azurill","Nosepass","Skitty","Delcatty","Sableye","Mawile","Aron","Lairon","Aggron","Meditite","Medicham","Electrike","Manectric","Plusle","Minun","Volbeat","Illumise","Roselia","Gulpin","Swalot","Carvanha","Sharpedo","Wailmer","Wailord","Numel","Camerupt","Torkoal","Spoink","Grumpig","Spinda","Trapinch","Vibrava","Flygon","Cacnea","Cacturne","Swablu","Altaria","Zangoose","Seviper","Lunatone","Solrock","Barboach","Whiscash","Corphish","Crawdaunt","Baltoy","Claydol","Lileep","Cradily","Anorith","Armaldo","Feebas","Milotic","Castform","Kecleon","Shuppet","Banette","Duskull","Dusclops","Tropius","Chimecho","Absol","Wynaut","Snorunt","Glalie","Spheal","Sealeo","Walrein","Clamperl","Huntail","Gorebyss","Relicanth","Luvdisc","Bagon","Shelgon","Salamence","Beldum","Metang","Metagross","Regirock","Regice","Registeel","Latias","Latios","Kyogre","Groudon","Rayquaza","Jirachi","Deoxys","Turtwig","Grotle","Torterra","Chimchar","Monferno","Infernape","Piplup","Prinplup","Empoleon","Starly","Staravia","Staraptor","Bidoof","Bibarel","Kricketot","Kricketune","Shinx","Luxio","Luxray","Budew","Roserade","Cranidos","Rampardos","Shieldon","Bastiodon","Burmy","Wormadam","Mothim","Combee","Vespiquen","Pachirisu","Buizel","Floatzel","Cherubi","Cherrim","Shellos","Gastrodon","Ambipom","Drifloon","Drifblim","Buneary","Lopunny","Mismagius","Honchkrow","Glameow","Purugly","Chingling","Stunky","Skuntank","Bronzor","Bronzong","Bonsly","Mime Jr.","Happiny","Chatot","Spiritomb","Gible","Gabite","Garchomp","Munchlax","Riolu","Lucario","Hippopotas","Hippowdon","Skorupi","Drapion","Croagunk","Toxicroak","Carnivine","Finneon","Lumineon","Mantyke","Snover","Abomasnow","Weavile","Magnezone","Lickilicky","Rhyperior","Tangrowth","Electivire","Magmortar","Togekiss","Yanmega","Leafeon","Glaceon","Gliscor","Mamoswine","Porygon-Z","Gallade","Probopass","Dusknoir","Froslass","Rotom","Uxie","Mesprit","Azelf","Dialga","Palkia","Heatran","Regigigas","Giratina","Cresselia","Phione","Manaphy","Darkrai","Shaymin","Arceus","Victini","Snivy","Servine","Serperior","Tepig","Pignite","Emboar","Oshawott","Dewott","Samurott","Patrat","Watchog","Lillipup","Herdier","Stoutland","Purrloin","Liepard","Pansage","Simisage","Pansear","Simisear","Panpour","Simipour","Munna","Musharna","Pidove","Tranquill","Unfezant","Blitzle","Zebstrika","Roggenrola","Boldore","Gigalith","Woobat","Swoobat","Drilbur","Excadrill","Audino","Timburr","Gurdurr","Conkeldurr","Tympole","Palpitoad","Seismitoad","Throh","Sawk","Sewaddle","Swadloon","Leavanny","Venipede","Whirlipede","Scolipede","Cottonee","Whimsicott","Petilil","Lilligant","Basculin","Sandile","Krokorok","Krookodile","Darumaka","Darmanitan","Maractus","Dwebble","Crustle","Scraggy","Scrafty","Sigilyph","Yamask","Cofagrigus","Tirtouga","Carracosta","Archen","Archeops","Trubbish","Garbodor","Zorua","Zoroark","Minccino","Cinccino","Gothita","Gothorita","Gothitelle","Solosis","Duosion","Reuniclus","Ducklett","Swanna","Vanillite","Vanillish","Vanilluxe","Deerling","Sawsbuck","Emolga","Karrablast","Escavalier","Foongus","Amoonguss","Frillish","Jellicent","Alomomola","Joltik","Galvantula","Ferroseed","Ferrothorn","Klink","Klang","Klinklang","Tynamo","Eelektrik","Eelektross","Elgyem","Beheeyem","Litwick","Lampent","Chandelure","Axew","Fraxure","Haxorus","Cubchoo","Beartic","Cryogonal","Shelmet","Accelgor","Stunfisk","Mienfoo","Mienshao","Druddigon","Golett","Golurk","Pawniard","Bisharp","Bouffalant","Rufflet","Braviary","Vullaby","Mandibuzz","Heatmor","Durant","Deino","Zweilous","Hydreigon","Larvesta","Volcarona","Cobalion","Terrakion","Virizion","Tornadus","Thundurus","Reshiram","Zekrom","Landorus","Kyurem","Keldeo","Meloetta","Genesect","Chespin","Quilladin","Chesnaught","Fennekin","Braixen","Delphox","Froakie","Frogadier","Greninja","Bunnelby","Diggersby","Fletchling","Fletchinder","Talonflame","Scatterbug","Spewpa","Vivillon","Litleo","Pyroar","Flabébé","Floette","Florges","Skiddo","Gogoat","Pancham","Pangoro","Furfrou","Espurr","Meowstic","Honedge","Doublade","Aegislash","Spritzee","Aromatisse","Swirlix","Slurpuff","Inkay","Malamar","Binacle","Barbaracle","Skrelp","Dragalge","Clauncher","Clawitzer","Helioptile","Heliolisk","Tyrunt","Tyrantrum","Amaura","Aurorus","Sylveon","Hawlucha","Dedenne","Carbink","Goomy","Sliggoo","Goodra","Klefki","Phantump","Trevenant","Pumpkaboo","Gourgeist","Bergmite","Avalugg","Noibat","Noivern","Xerneas","Yveltal","Zygarde","Diancie","Hoopa","Volcanion","Rowlet","Dartrix","Decidueye","Litten","Torracat","Incineroar","Popplio","Brionne","Primarina","Pikipek","Trumbeak","Toucannon","Yungoos","Gumshoos","Grubbin","Charjabug","Vikavolt","Crabrawler","Crabominable","Oricorio","Cutiefly","Ribombee","Rockruff","Lycanroc","Wishiwashi","Mareanie","Toxapex","Mudbray","Mudsdale","Dewpider","Araquanid","Fomantis","Lurantis","Morelull","Shiinotic","Salandit","Salazzle","Stufful","Bewear","Bounsweet","Steenee","Tsareena","Comfey","Oranguru","Passimian","Wimpod","Golisopod","Sandygast","Palossand","Pyukumuku","Type: Null","Silvally-GX","Minior","Komala","Turtonator","Togedemaru","Mimikyu","Bruxish","Drampa","Dhelmise","Jangmo-o","Hakamo-o","Kommo-o","Tapu Koko","Tapu Lele","Tapu Bulu","Tapu Fini","Cosmog","Cosmoem","Solgaleo-GX","Lunala-GX","Nihilego-GX","Buzzwole-GX","Pheromosa","Xurkitree","Celesteela-GX","Kartana-GX","Guzzlord-GX","Necrozma","Magearna","Marshadow","Poipole","Naganadel-GX","Stakataka-GX","Blacephalon","Zeraora","Meltan","Melmetal","Grookey","Thwackey","Rillaboom","Scorbunny","Raboot","Cinderace","Sobble","Drizzile","Inteleon","Skwovet","Greedent","Rookidee","Corvisquire","Corviknight","Blipbug","Dottler","Orbeetle","Nickit","Thievul","Gossifleur","Eldegoss","Wooloo","Dubwool","Chewtle","Drednaw","Yamper","Boltund","Rolycoly","Carkol","Coalossal","Applin","Flapple","Appletun","Silicobra","Sandaconda","Cramorant","Arrokuda","Barraskewda","Toxel","Toxtricity","Sizzlipede","Centiskorch","Clobbopus","Grapploct","Sinistea","Polteageist","Hatenna","Hattrem","Hatterene","Impidimp","Morgrem","Grimmsnarl","Obstagoon","Perrserker","Cursola","Sirfetch'd","Mr. Rime","Runerigus","Milcery","Alcremie","Falinks","Pincurchin","Snom","Frosmoth","Stonjourner","Eiscue","Indeedee","Morpeko","Cufant","Copperajah","Dracozolt","Arctozolt","Dracovish","Arctovish","Duraludon","Dreepy","Drakloak","Dragapult","Zacian","Zamazenta","Eternatus","Kubfu","Urshifu","Zarude","Regieleki","Regidrago","Glastrier","Spectrier","Calyrex","Wyrdeer","Kleavor","Ursaluna","Basculegion","Sneasler","Overqwil","Enamorus","Sprigatito","Floragato","Meowscarada","Fuecoco","Crocalor","Skeledirge","Quaxly","Quaxwell","Quaquaval","Lechonk","Oinkologne","Tarountula","Spidops","Nymble","Lokix","Pawmi","Pawmo","Pawmot","Tandemaus","Maushold","Fidough","Dachsbun","Smoliv","Dolliv","Arboliva","Squawkabilly","Nacli","Naclstack","Garganacl","Charcadet","Armarouge","Ceruledge","Tadbulb","Bellibolt","Wattrel","Kilowattrel","Maschiff","Mabosstiff","Shroodle","Grafaiai","Bramblin","Brambleghast","Toedscool","Toedscruel","Klawf","Capsakid","Scovillain","Rellor","Rabsca","Flittle","Espathra","Tinkatink","Tinkatuff","Tinkaton","Wiglett","Wugtrio","Bombirdier","Finizen","Palafin","Varoom","Revavroom","Cyclizar","Orthworm","Glimmet","Glimmora","Greavard","Houndstone","Flamigo","Cetoddle","Cetitan","Veluza","Dondozo","Tatsugiri","Annihilape","Clodsire","Farigiraf","Dudunsparce","Kingambit","Great Tusk","Scream Tail","Brute Bonnet","Flutter Mane","Slither Wing","Sandy Shocks","Iron Treads","Iron Bundle","Iron Hands","Iron Jugulis","Iron Moth","Iron Thorns","Frigibax","Arctibax","Baxcalibur","Gimmighoul","Gholdengo","Wo-Chien","Chien-Pao","Ting-Lu","Chi-Yu","Roaring Moon","Iron Valiant","Koraidon","Miraidon","Walking Wake","Iron Leaves","Dipplin","Poltchageist","Sinistcha","Okidogi","Munkidori","Fezandipiti","Ogerpon","Archaludon","Hydrapple","Gouging Fire","Raging Bolt","Iron Boulder","Iron Crown","Terapagos","Pecharunt"];
+const GEN_RANGES = [[1,151],[152,251],[252,386],[387,493],[494,649],[650,721],[722,809],[810,905],[906,1025]];
+const rng = (a,b) => Array.from({length:b-a+1}, (_,i) => a+i);
+const GROUPS = [
+  ["Eeveelutions", [133,134,135,136,196,197,470,471,700]],
+  ["Kanto starters", rng(1,9)],
+  ["All starters", [[1,9],[152,160],[252,260],[387,395],[495,503],[650,658],[722,730],[810,818],[906,914]].flatMap(([a,b]) => rng(a,b))],
+  ["Legendary & mythical", [144,145,146,150,151,243,244,245,249,250,251,377,378,379,380,381,382,383,384,385,386,...rng(480,494),...rng(638,649),...rng(716,721),...rng(785,809),...rng(888,898),905,...rng(1001,1010),...rng(1014,1017),1024,1025]],
+  ["Pikachu & pals", [25,26,172,311,312,417,587,702,777,877,921,922,923]],
+  ["Gengar line", [92,93,94]],
+  ["Dragonite & friends", [147,148,149,371,372,373,443,444,445]]
+];
+const GEN_OF = n => GEN_RANGES.findIndex(([a,b]) => n>=a && n<=b) + 1;
+
 /* ---------- state ---------- */
 const S = {
   sets: [], setMap: {}, cardCache: {},
   pool: [], idx: 0, loading: false, loadP: 0,
-  filters: Object.assign({sets:null, preset:"chase", q:"", order:"shuffle", hideSwiped:true, rarities:[]}, LS.get("filters", {})),
+  filters: Object.assign({sets:null, preset:"chase", q:"", order:"shuffle", hideSwiped:true, rarities:[], minPrice:5, maxPrice:0, mons:[], gens:[], kinds:[]}, LS.get("filters", {})),
+  cands: [], buildId: 0, pricing: {on:false, done:0, total:0}, deckMode: "browse",
+  picks: null, picksCards: {},
   decisions: {},
   chase: {},
   history: [],
-  prices: (() => { const raw = LS.get("prices", {}), out = {}; if(raw && typeof raw==="object") for(const [k,v] of Object.entries(raw)) if(/^[A-Za-z0-9._-]{1,40}$/.test(k) && v && typeof v==="object"){ const all={}; if(v.all && typeof v.all==="object") for(const [a,b] of Object.entries(v.all)) if(/^[A-Za-z0-9]{1,30}$/.test(a) && num(b)!=null) all[a]=b; out[k]={p:num(v.p), v:typeof v.v==="string"&&/^[A-Za-z0-9]{1,30}$/.test(v.v)?v.v:null, all, url:safeLink(v.url), upd:/^[\d\/: ]{1,20}$/.test(v.upd||"")?v.upd:null, t:num(v.t)??0}; } return out; })(),
+  prices: (() => { const raw = LS.get("prices", {}), out = {}; if(raw && typeof raw==="object") for(const [k,v] of Object.entries(raw)) if(/^[A-Za-z0-9._-]{1,40}$/.test(k) && v && typeof v==="object"){ const all={}; if(v.all && typeof v.all==="object") for(const [a,b] of Object.entries(v.all)) if(/^[A-Za-z0-9]{1,30}$/.test(a) && num(b)!=null) all[a]=b; out[k]={p:num(v.p), v:typeof v.v==="string"&&/^[A-Za-z0-9]{1,30}$/.test(v.v)?v.v:null, all, url:safeLink(v.url), upd:/^[\d\/: ]{1,20}$/.test(v.upd||"")?v.upd:null, t:num(v.t)??0, cm:(v.cm && typeof v.cm==="object" && num(v.cm.a7)!=null && num(v.cm.a30)!=null) ? {a1:num(v.cm.a1), a7:num(v.cm.a7), a30:num(v.cm.a30)} : null}; } return out; })(),
   apiKey: LS.get("apikey", ""),
   apiState: "unknown", // ok | down | unknown
   view: "swipe",
@@ -495,7 +563,11 @@ S.chase = cleanChase(LS.get("chase", {}));
 S.decisions = cleanDecisions(LS.get("decisions", {}));
 { const f=S.filters; if(!PRESETS[f.preset]) f.preset="chase"; if(!["shuffle","newest","oldest"].includes(f.order)) f.order="shuffle";
   f.q = str(f.q,60); f.rarities = Array.isArray(f.rarities) ? f.rarities.filter(r=>typeof r==="string").slice(0,60) : [];
-  f.sets = Array.isArray(f.sets) ? f.sets.filter(x=>typeof x==="string" && /^[A-Za-z0-9._-]{1,30}$/.test(x)) : null; f.hideSwiped = f.hideSwiped!==false; }
+  f.sets = Array.isArray(f.sets) ? f.sets.filter(x=>typeof x==="string" && /^[A-Za-z0-9._-]{1,30}$/.test(x)) : null; f.hideSwiped = f.hideSwiped!==false;
+  f.minPrice = num(f.minPrice) ?? 0; f.maxPrice = num(f.maxPrice) ?? 0;
+  f.mons = Array.isArray(f.mons) ? [...new Set(f.mons.filter(n => Number.isInteger(n) && n>=1 && n<=DEX.length))].slice(0,1025) : [];
+  f.gens = Array.isArray(f.gens) ? f.gens.filter(n => Number.isInteger(n) && n>=1 && n<=9) : [];
+  f.kinds = Array.isArray(f.kinds) ? f.kinds.filter(k => ["Pokémon","Trainer","Energy"].includes(k)) : []; }
 if(!["hunting","got","all"].includes(S.listFilter)) S.listFilter="hunting";
 if(!["priority","priceDesc","priceAsc","newest","set","name"].includes(S.listSort)) S.listSort="priority";
 if(typeof S.apiKey!=="string" || !/^[A-Za-z0-9-]{0,64}$/.test(S.apiKey)) S.apiKey="";
@@ -539,7 +611,8 @@ async function loadSets(){
 function norm(c, set){
   return { id:c.id, name:c.name, number:c.number, rarity:c.rarity||"Unknown", artist:c.artist||"",
     img:safeImg(c.images?.small), imgL:safeImg(c.images?.large), setId:set.id, setName:set.name, series:set.series,
-    release:set.release, setTotal:set.total, supertype:c.supertype, n:parseInt(c.number,10)||0 };
+    release:set.release, setTotal:set.total, supertype:c.supertype, n:parseInt(c.number,10)||0,
+    dex:(Array.isArray(c.nationalPokedexNumbers) ? c.nationalPokedexNumbers : []).filter(n => Number.isInteger(n) && n>=1 && n<=1025).slice(0,4) };
 }
 async function loadSetCards(id){
   if(S.cardCache[id]) return S.cardCache[id];
@@ -549,27 +622,78 @@ async function loadSetCards(id){
 }
 function defaultSets(){ return S.sets.filter(s => s.series!=="Other" && s.series!=="POP" && s.series!=="NP").slice(0,8).map(s=>s.id); }
 
+async function loadSetsFor(ids, progress){
+  let done = 0; const out = []; const queue = ids.slice(); const errors = [];
+  const worker = async () => { while(queue.length){ const id = queue.shift(); try{ out.push(...await loadSetCards(id)); }catch(e){ errors.push(id); } done++; if(progress){ S.loadP = done/ids.length; updateLoad(); } } };
+  await Promise.all(Array.from({length:Math.min(8,ids.length)}, worker));
+  return {out, errors};
+}
+const priceFilterOn = () => S.deckMode==="browse" && (S.filters.minPrice>0 || S.filters.maxPrice>0);
+function inRange(c){
+  const p = S.prices[c.id]?.p; if(p==null) return false;
+  const f = S.filters; return p >= (f.minPrice||0) && (!f.maxPrice || p <= f.maxPrice);
+}
+function monMatch(c, f){
+  if(!f.mons.length && !f.gens.length) return true;
+  if(!c.dex.length) return false;
+  return c.dex.some(n => f.mons.includes(n) || f.gens.includes(GEN_OF(n)));
+}
 async function buildPool(){
-  const f = S.filters;
+  S.deckMode = "browse";
+  const f = S.filters; const myBuild = ++S.buildId;
   if(!f.sets || !f.sets.length) f.sets = defaultSets();
   const ids = f.sets.filter(id => S.setMap[id]);
-  S.loading = true; S.loadP = 0; renderDeck();
-  let done = 0; const out = [];
-  const queue = ids.slice(); const errors=[];
-  const worker = async () => { while(queue.length){ const id = queue.shift(); try{ out.push(...await loadSetCards(id)); }catch(e){ errors.push(id); } done++; S.loadP = done/ids.length; updateLoad(); } };
-  await Promise.all(Array.from({length:Math.min(8,ids.length)}, worker));
+  S.loading = true; S.loadP = 0; S.loadMsg = "Shuffling your deck…"; S.pricing = {on:false, done:0, total:0}; renderDeck();
+  const {out, errors} = await loadSetsFor(ids, true);
+  if(myBuild !== S.buildId) return;
   const q = f.q.trim().toLowerCase();
   const preset = PRESETS[f.preset] || PRESETS.chase;
-  let pool = out.filter(c => preset.test(c));
-  if(f.rarities.length) pool = out.filter(c => f.rarities.includes(c.rarity));
+  let pool = f.rarities.length ? out.filter(c => f.rarities.includes(c.rarity)) : out.filter(c => preset.test(c));
+  if(f.kinds.length) pool = pool.filter(c => f.kinds.includes(c.supertype));
+  pool = pool.filter(c => monMatch(c, f));
   if(q) pool = pool.filter(c => c.name.toLowerCase().includes(q) || c.artist.toLowerCase().includes(q));
   if(f.hideSwiped) pool = pool.filter(c => !S.decisions[c.id]);
   if(f.order === "shuffle") shuffle(pool);
   else if(f.order === "newest") pool.sort((a,b) => b.release.localeCompare(a.release) || a.n-b.n);
   else pool.sort((a,b) => a.release.localeCompare(b.release) || a.n-b.n);
-  S.pool = pool; S.idx = 0; S.history = []; S.loading = false;
+  S.cands = pool; S.idx = 0; S.history = [];
   if(errors.length && !out.length) toast(ICON.warn, "Couldn't reach the card catalog. Check your connection.");
-  renderAll(); ensurePrices();
+  if(priceFilterOn() && pool.length){
+    S.pool = []; S.loadMsg = "Checking prices…"; S.loadP = 0; renderDeck();
+    runPricer(myBuild);
+  } else {
+    S.pool = pool; S.loading = false; renderAll(); ensurePrices();
+  }
+}
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+async function runPricer(myBuild){
+  const cands = S.cands; let i = 0;
+  S.pricing = {on:true, done:0, total:cands.length};
+  while(i < cands.length && myBuild === S.buildId){
+    const chunk = cands.slice(i, i+24); i += chunk.length;
+    await fetchPrices(chunk.map(c => c.id));
+    while(chunk.some(c => S.pricingIds.has(c.id))) await sleep(150);
+    if(myBuild !== S.buildId) return;
+    const anyPriced = chunk.some(c => S.prices[c.id]);
+    if(!anyPriced && S.apiState === "down"){
+      // price service unreachable: don't hide everything, fall back to an unfiltered deck
+      S.pool.push(...cands.slice(i - chunk.length));
+      S.pricing = {on:false, done:cands.length, total:cands.length};
+      toast(ICON.warn, "Prices are offline, so the price filter is paused");
+      S.loading = false; renderDeck(); return;
+    }
+    for(const c of chunk) if(inRange(c)) S.pool.push(c);
+    S.pricing.done = i; S.loadP = i / cands.length;
+    if(S.loading){
+      if(S.pool.length >= 3 || i >= cands.length){ S.loading = false; renderDeck(); } else updateLoad();
+    } else if(deckEl.querySelectorAll(".swipe").length < 3 && !busy && !deckEl.querySelector(".swipe.dragging")) renderDeck();
+    else renderMeta();
+    // pause when plenty of cards are ready, to save requests
+    while(myBuild === S.buildId && S.pool.length - S.idx > 40) await sleep(600);
+  }
+  if(myBuild !== S.buildId) return;
+  S.pricing.on = false; S.loading = false;
+  if(!deckEl.querySelector(".swipe.dragging") && !busy) renderDeck(); else renderMeta();
 }
 
 /* ---------- live prices ---------- */
@@ -610,6 +734,13 @@ function dexCardIndex(setId){
   })().catch(e => { delete dexCards[setId]; throw e; });
   return dexCards[setId];
 }
+function pickTrend(cm, variant){
+  if(!cm || typeof cm!=="object") return null;
+  const holo = /holo/i.test(variant||"") && !/reverse/i.test(variant||"") && num(cm["avg30-holo"]) != null;
+  const g = k => num(cm[holo ? k+"-holo" : k]);
+  const t = {a1:g("avg1"), a7:g("avg7"), a30:g("avg30")};
+  return (t.a7!=null && t.a30!=null) ? t : null;
+}
 function pickDexPrice(pr){
   const tp = pr && pr.tcgplayer; if(!tp || typeof tp!=="object") return null;
   let best = null; const all = {};
@@ -621,7 +752,7 @@ function pickDexPrice(pr){
   }
   if(!best) return null;
   const upd = typeof tp.updated==="string" && /^\d{4}-\d{2}-\d{2}/.test(tp.updated) ? tp.updated.slice(0,10).replace(/-/g,"/") : null;
-  return { p:best.p, v:best.v, all, url:null, upd, t:Date.now() };
+  return { p:best.p, v:best.v, all, url:null, upd, t:Date.now(), cm:pickTrend(pr && pr.cardmarket, best.v) };
 }
 async function pool(items, n, fn){ const q = items.slice(); await Promise.all(Array.from({length:Math.min(n,q.length)}, async () => { while(q.length) await fn(q.shift()); })); }
 async function fetchPrices(ids){
@@ -661,12 +792,35 @@ async function fetchPrices(ids){
 }
 function setApi(s){ if(S.apiState===s) return; S.apiState=s; renderMeta(); renderBanner(); }
 function ensurePrices(){
+  if(S.pricing.on) return;
   const ahead = S.pool.slice(S.idx, S.idx+24).map(c=>c.id);
   fetchPrices(ahead);
 }
+/* ---------- live market signal (Claude's scoring rules) ---------- */
+function signalOf(id){
+  const pr = S.prices[id]; if(!pr || pr.p==null || pr.p < 3 || !pr.cm) return null;
+  const {a1, a7, a30} = pr.cm; if(!a7 || !a30 || a30 < 1) return null;
+  const m30 = (a7 - a30) / a30, m1 = a1 ? (a1 - a7) / a7 : 0;
+  const pct = x => Math.round(Math.abs(x) * 100);
+  if(m30 > 0.5 || m1 > 0.3){ const j = Math.max(m30, m1); return {k:"hot", icon:"⚠️", label:"Overheated", short:"+"+pct(j)+"%", why:`Jumped ${pct(j)}% very fast. Sharp spikes often cool off, so buying right now is riskier.`}; }
+  if(m30 >= 0.08) return {k:"up", icon:"📈", label:"Heating up", short:"+"+pct(m30)+"%", why:`Up ${pct(m30)}% versus its 30-day average${m1 < -0.05 ? ", though it dipped in the last day" : " in a steady climb"}.`};
+  if(m30 <= -0.15 && m1 >= -0.02) return {k:"dip", icon:"💎", label:"Possible dip", short:"−"+pct(m30)+"%", why:`Down ${pct(m30)}% from its 30-day average but leveling off. Could be a buying window.`};
+  if(m30 <= -0.15) return {k:"down", icon:"📉", label:"Sliding", short:"−"+pct(m30)+"%", why:`Down ${pct(m30)}% from its 30-day average and still falling. Waiting may get you a better price.`};
+  return null;
+}
+const CALLS = {buy:{icon:"📈", label:"Buy", cls:"up"}, dip:{icon:"💎", label:"Buy the dip", cls:"dip"}, hold:{icon:"🟡", label:"Hold", cls:"hold"}, sell:{icon:"📉", label:"Sell", cls:"down"}, overheated:{icon:"⚠️", label:"Overheated", cls:"hot"}};
+function pickOf(id){ return S.picks?.picks.find(p => p.id === id) || null; }
+function badgesHTML(id){
+  const sg = signalOf(id), pk = pickOf(id); let h = "";
+  if(pk) h += `<span class="badge pick ${CALLS[pk.call].cls}">✦ Claude: ${CALLS[pk.call].label}</span>`;
+  if(sg) h += `<span class="badge sig ${sg.k}">${sg.icon} ${sg.label} ${sg.short}</span>`;
+  return h;
+}
+function refreshSignals(){ document.querySelectorAll("[data-sig-for]").forEach(el => { el.innerHTML = badgesHTML(el.dataset.sigFor); }); }
 function priceOf(id){ return S.prices[id]?.p ?? S.chase[id]?.card?.price ?? null; }
 function refreshPrices(){
   document.querySelectorAll("[data-price-for]").forEach(el => { const p = priceOf(el.dataset.priceFor); el.textContent = money(p); el.classList.toggle("na", p==null); });
+  refreshSignals();
   // keep chase snapshots fresh
   let ch=false; for(const id in S.chase){ const p=S.prices[id]; if(p && p.p!=null && S.chase[id].card.price!==p.p){ S.chase[id].card.price=p.p; S.chase[id].card.tcgUrl=p.url||S.chase[id].card.tcgUrl; ch=true; } }
   if(ch){ saveChase(); if(S.view==="list") renderList(true); }
@@ -691,6 +845,7 @@ function cardHTML(c, depth){
   const t = tier(c.rarity); const p = priceOf(c.id);
   return `<div class="swipe tier-${t} ${depth===0?"top":"depth-"+depth}" data-id="${esc(c.id)}">
     <div class="tcg">${imgTag(c, depth===0)}<div class="holo"></div><div class="glare"></div>
+      <div class="badges" data-sig-for="${esc(c.id)}">${badgesHTML(c.id)}</div>
       <div class="stamp like">CHASE</div><div class="stamp nope">PASS</div><div class="stamp super">GRAIL</div></div>
     <div class="tag">
       <div class="nm">${esc(c.name)}</div>
@@ -701,16 +856,21 @@ function cardHTML(c, depth){
 function renderDeck(){
   if(S.loading){
     deckEl.innerHTML = ""; stateEl.hidden = false;
-    stateEl.innerHTML = `<div class="loader-card"></div><h2 style="font-size:20px;margin-top:14px">Shuffling your deck…</h2><div class="progress"><i id="loadBar" style="width:${S.loadP*100}%"></i></div>`;
+    stateEl.innerHTML = `<div class="loader-card"></div><h2 style="font-size:20px;margin-top:14px" id="loadMsg">${esc(S.loadMsg||"Shuffling your deck…")}</h2><div class="progress"><i id="loadBar" style="width:${S.loadP*100}%"></i></div>${S.pricing.on?`<p style="font-size:13px" id="loadSub">Only dealing cards ${priceRangeLabel()}</p>`:""}`;
     setActs(false); return;
   }
   const rest = S.pool.slice(S.idx, S.idx+3);
+  if(!rest.length && S.pricing.on){
+    deckEl.innerHTML = ""; stateEl.hidden = false;
+    stateEl.innerHTML = `<div class="loader-card"></div><h2 style="font-size:20px;margin-top:14px">Finding more cards ${esc(priceRangeLabel())}…</h2><div class="progress"><i id="loadBar" style="width:${S.loadP*100}%"></i></div>`;
+    setActs(false); renderMeta(); return;
+  }
   if(!rest.length){
     deckEl.innerHTML = ""; stateEl.hidden = false;
     const none = !S.pool.length;
     stateEl.innerHTML = `<div class="art"><i></i><i></i><i></i></div>
       <h2>${none ? "No cards match" : "Deck cleared!"}</h2>
-      <p>${none ? "Try a different era, set or rarity, or turn off “hide swiped” to see cards again." : `You went through all ${S.pool.length} cards. ${Object.keys(S.chase).length} are on your chase list.`}</p>
+      <p>${none ? (priceFilterOn() ? `No cards ${esc(priceRangeLabel())} in this deck. Try a lower minimum price, more sets, or a different rarity.` : "Try a different era, set or rarity, or turn off “hide swiped” to see cards again.") : `You went through all ${S.pool.length} cards. ${Object.keys(S.chase).length} are on your chase list.`}</p>
       <div class="btn-row" style="margin-top:6px"><button class="btn primary" data-act="filters">${ICON.sliders} New deck</button>${none?"":`<button class="btn ghost" data-act="list">${ICON.heart} View list</button>`}</div>`;
     setActs(false); renderMeta(); return;
   }
@@ -722,16 +882,25 @@ function renderDeck(){
   setActs(true); renderMeta(); preload(S.idx+1);
   $("#btnUndo").disabled = !S.history.length;
 }
-function updateLoad(){ const b = $("#loadBar"); if(b) b.style.width = (S.loadP*100)+"%"; }
+function updateLoad(){ const b = $("#loadBar"); if(b) b.style.width = (S.loadP*100)+"%"; const m = $("#loadMsg"); if(m && S.pricing.on) m.textContent = `Checking prices… ${S.pricing.done}/${S.pricing.total}`; }
+function priceRangeLabel(){ const f = S.filters; if(f.minPrice && f.maxPrice) return `$${f.minPrice}–$${f.maxPrice}`; if(f.minPrice) return `$${f.minPrice}+`; if(f.maxPrice) return `under $${f.maxPrice}`; return ""; }
 function setActs(on){ ["#btnPass","#btnChase","#btnSuper","#btnInfo"].forEach(s => $(s).disabled = !on); $("#btnUndo").disabled = !S.history.length; }
 function renderMeta(){
   const left = Math.max(0, S.pool.length - S.idx);
-  const nSets = (S.filters.sets||[]).length;
+  const f = S.filters, nSets = (f.sets||[]).length;
   const apiCls = S.apiState==="down" ? "off" : "";
-  $("#deckMeta").innerHTML = S.loading ? "" :
-    `<span class="pill" title="${S.apiState==="down"?"Live prices offline":"Live TCGplayer prices"}"><i class="live ${apiCls}"></i><b>${left.toLocaleString()}</b> left</span>
-     <button class="pill" data-act="filters">${S.filters.rarities.length?"Custom rarity":esc(PRESETS[S.filters.preset]?.label||"Custom")} · ${nSets} set${nSets===1?"":"s"}${S.filters.q?` · “${esc(S.filters.q)}”`:""}</button>`;
-  const dot = $("#filterDot"); dot.hidden = !S.filters.q; dot.textContent = "1";
+  const live = `<span class="pill" title="${S.apiState==="down"?"Live prices offline":"Live TCGplayer prices"}"><i class="live ${apiCls}"></i><b>${left.toLocaleString()}${S.pricing.on?"+":""}</b> left</span>`;
+  if(S.deckMode === "picks"){
+    $("#deckMeta").innerHTML = S.loading ? "" : live + `<button class="pill pickpill" data-act="exitPicks">✦ Claude's picks <span aria-hidden="true">✕</span></button>`;
+  } else {
+    const bits = [f.rarities.length ? "Custom rarity" : (PRESETS[f.preset]?.label || "Custom")];
+    if(f.mons.length || f.gens.length) bits.push(f.mons.length===1 && !f.gens.length ? DEX[f.mons[0]-1] : `${f.mons.length + f.gens.length} Pokémon filters`);
+    else bits.push(`${nSets} set${nSets===1?"":"s"}`);
+    if(priceRangeLabel()) bits.push(priceRangeLabel());
+    $("#deckMeta").innerHTML = S.loading ? "" : live + `<button class="pill" data-act="filters">${esc(bits.join(" · "))}</button>`;
+  }
+  const n = (f.q?1:0) + (f.mons.length||f.gens.length?1:0) + (f.kinds.length?1:0);
+  const dot = $("#filterDot"); dot.hidden = !n; dot.textContent = n;
 }
 function renderBanner(){
   $("#apiBanner").innerHTML = S.apiState==="down" ? `<div class="banner">${ICON.warn}<span>Prices are offline right now. Swiping still works.</span></div>` : "";
@@ -866,10 +1035,96 @@ function hideToast(){ const t=$("#toast"); t.classList.remove("on"); t.style.poi
 /* ---------- views ---------- */
 function setView(v){
   S.view = v;
-  $("#viewSwipe").hidden = v!=="swipe"; $("#viewList").hidden = v!=="list";
-  $("#tabSwipe").classList.toggle("on", v==="swipe"); $("#tabList").classList.toggle("on", v==="list");
-  $("#brandSub").textContent = v==="swipe" ? "Swipe your grails" : "Your hunt, organized";
+  $("#viewSwipe").hidden = v!=="swipe"; $("#viewList").hidden = v!=="list"; $("#viewPicks").hidden = v!=="picks";
+  $("#tabSwipe").classList.toggle("on", v==="swipe"); $("#tabList").classList.toggle("on", v==="list"); $("#tabPicks").classList.toggle("on", v==="picks");
+  $("#brandSub").textContent = v==="swipe" ? "Swipe your grails" : v==="picks" ? "What to target now" : "Your hunt, organized";
   if(v==="list"){ renderList(); fetchPrices(Object.keys(S.chase)); }
+  if(v==="picks"){ renderPicks(); preparePicks(); }
+}
+
+/* ---------- Claude's picks ---------- */
+function cleanPicks(d){
+  if(!d || typeof d!=="object") return null;
+  const day = v => typeof v==="string" && /^\d{4}-\d{2}-\d{2}$/.test(v) ? v : null;
+  const updated = day(d.updated);
+  const one = p => {
+    if(!p || typeof p!=="object") return null;
+    const id = str(p.id,40); if(!/^[A-Za-z0-9._-]+-[A-Za-z0-9._]+$/.test(id)) return null;
+    if(!CALLS[p.call]) return null;
+    return { id, call:p.call, conf:["high","medium","low"].includes(p.confidence) ? p.confidence : "medium",
+      reason:str(p.reason,400), price:num(p.price), date:day(p.date) || updated,
+      sources:(Array.isArray(p.sources) ? p.sources : []).slice(0,6).map(x => ({name:str(x && x.name,60), url:(x && typeof x.url==="string" && /^https:\/\/[^\s"'<>\\]+$/i.test(x.url)) ? x.url.slice(0,400) : null})).filter(x => x.name) };
+  };
+  return { updated, note:str(d.note,400), picks:(Array.isArray(d.picks)?d.picks:[]).slice(0,100).map(one).filter(Boolean), history:(Array.isArray(d.history)?d.history:[]).slice(0,2000).map(one).filter(Boolean) };
+}
+async function loadPicks(){
+  try{ const r = await fetch("picks.json", {cache:"no-cache"}); if(!r.ok) throw 0; S.picks = cleanPicks(await r.json()) || {updated:null, note:"", picks:[], history:[]}; }
+  catch{ S.picks = {updated:null, note:"", picks:[], history:[], offline:true}; }
+  refreshSignals(); if(S.view==="picks") renderPicks();
+}
+const setOfId = id => id.slice(0, id.lastIndexOf("-"));
+let picksPrepared = false;
+async function preparePicks(){
+  if(!S.picks) return;
+  const all = [...S.picks.picks, ...S.picks.history];
+  const sets = [...new Set(all.map(p => setOfId(p.id)))].filter(id => S.setMap[id]);
+  if(!picksPrepared){
+    const {out} = await loadSetsFor(sets, false);
+    const want = new Set(all.map(p => p.id));
+    for(const c of out) if(want.has(c.id)) S.picksCards[c.id] = c;
+    picksPrepared = true; if(S.view==="picks") renderPicks();
+  }
+  await fetchPrices(all.map(p => p.id).filter(id => S.picksCards[id]));
+  if(S.view==="picks") renderPicks(true);
+}
+function trackRecord(){
+  const seen = new Set();
+  const all = [...(S.picks?.picks||[]), ...(S.picks?.history||[])].filter(p => { const k = p.id+"|"+p.date; if(seen.has(k) || !p.price || p.call==="hold") return false; seen.add(k); return true; });
+  let n = 0, wins = 0, sum = 0;
+  for(const p of all){ const now = S.prices[p.id]?.p; if(now==null) continue; const d = (now - p.price) / p.price; const bull = p.call==="buy" || p.call==="dip"; n++; sum += bull ? d : -d; if(bull ? d > 0 : d < 0) wins++; }
+  return {n, wins, avg: n ? sum/n : 0};
+}
+function renderPicks(soft){
+  const sc = $("#picksScroll"); const keep = sc.scrollTop; const P = S.picks;
+  const head = `<div class="list-head"><h1>Claude's picks</h1></div>`;
+  if(!P){ sc.innerHTML = head + `<div class="list-empty"><div class="loader-card" style="margin:20px auto"></div></div>`; return; }
+  const tr = trackRecord();
+  const upd = P.updated ? new Date(P.updated+"T12:00:00").toLocaleDateString(undefined,{month:"short",day:"numeric"}) : null;
+  const rows = P.picks.map((p,i) => {
+    const c = S.picksCards[p.id], C = CALLS[p.call], now = S.prices[p.id]?.p;
+    return `<button class="pickrow" data-open="${esc(p.id)}" style="${soft?"animation:none":`animation-delay:${Math.min(i,10)*40}ms`}">
+      <div class="pthumb">${c ? `<img src="${esc(c.img)}" alt="" loading="lazy">` : ""}</div>
+      <div class="pbody">
+        <div class="ptop"><span class="callpill ${C.cls}">${C.icon} ${C.label}</span><span class="conf">${esc(p.conf)}</span></div>
+        <div class="pname">${esc(c ? c.name : p.id)}</div>
+        <div class="pset">${c ? esc(c.setName)+" · #"+esc(c.number) : ""}</div>
+        ${p.reason ? `<div class="preason">${esc(p.reason)}</div>` : ""}
+        <div class="pnums">${p.price!=null?`Called <b>${money(p.price)}</b>`:""}${now!=null?` · Now <b>${money(now)}</b> <span class="${p.price && now>=p.price?"pos":"neg"}">${changeTxt(p.price, now)}</span>`:""}</div>
+      </div></button>`;
+  }).join("");
+  sc.innerHTML = head + `
+    <div class="hero picks-hero">
+      <div class="eyebrow">${upd ? "Updated "+esc(upd) : "Weekly AI research"}</div>
+      <div class="total" style="font-size:30px">${P.picks.length ? `${P.picks.length} card${P.picks.length===1?"":"s"} to watch` : "First picks coming soon"}</div>
+      <div class="note">${esc(P.note || "Claude researches the market each week and picks cards worth targeting.")}</div>
+      <div class="hero-stats">
+        <div class="stat"><b>${tr.n ? Math.round(tr.wins/tr.n*100)+"%" : "—"}</b><span>Hit rate</span></div>
+        <div class="stat"><b>${tr.n ? (tr.avg>=0?"+":"−")+Math.abs(tr.avg*100).toFixed(1)+"%" : "—"}</b><span>Avg move</span></div>
+        <div class="stat"><b>${tr.n}</b><span>Calls tracked</span></div>
+      </div>
+      ${P.picks.length ? `<button class="btn primary block" style="margin-top:16px" data-act="swipePicks">✦ Swipe these picks</button>` : ""}
+    </div>
+    ${P.picks.length ? `<div class="picklist">${rows}</div>` : `<div class="list-empty"><p style="margin:0">${P.offline ? "Picks load when the app is opened from its web link." : "Check back soon. Every pick will show the price on the day it was called, so you can see how the calls hold up."}</p></div>`}
+    <div class="help" style="text-align:center;margin:18px 6px 0">Picks are AI research based on public market data and reports. They can be wrong. Not financial advice.</div>`;
+  sc.scrollTop = keep; wireImgs(sc);
+}
+async function startPicksDeck(){
+  await preparePicks();
+  const order = {high:0, medium:1, low:2};
+  const cards = S.picks.picks.slice().sort((a,b) => order[a.conf]-order[b.conf]).map(p => S.picksCards[p.id]).filter(Boolean);
+  S.buildId++; S.deckMode = "picks"; S.pricing = {on:false, done:0, total:0};
+  S.cands = cards; S.pool = cards.slice(); S.idx = 0; S.history = []; S.loading = false;
+  setView("swipe"); renderAll(); ensurePrices();
 }
 
 /* ---------- chase list ---------- */
@@ -995,7 +1250,30 @@ function renderFilterBody(){
   }
   body.innerHTML = `
     <div class="sec">
-      <div class="field">${ICON.search}<input id="fQ" maxlength="60" placeholder="Pokémon or artist: Charizard, Umbreon…" value="${esc(draft.q)}" autocomplete="off"></div>
+      <div class="field">${ICON.search}<input id="fQ" maxlength="60" placeholder="Search name or artist" value="${esc(draft.q)}" autocomplete="off"></div>
+    </div>
+    <div class="sec">
+      <div class="sec-t"><h3>Price</h3><span class="hint">TCGplayer market</span></div>
+      <div class="chips" style="flex-wrap:wrap">${[0,5,10,25,50,100].map(v => `<button class="chip ${draft.minPrice===v?"on gold":""}" data-min="${v}">${v?"$"+v+"+":"Any price"}</button>`).join("")}</div>
+      <div class="row" style="margin-top:10px">
+        <div class="field mini"><span class="lbl">Min $</span><input id="fMin" inputmode="decimal" maxlength="7" value="${draft.minPrice||""}" placeholder="0"></div>
+        <div class="field mini"><span class="lbl">Max $</span><input id="fMax" inputmode="decimal" maxlength="7" value="${draft.maxPrice||""}" placeholder="No max"></div>
+      </div>
+      <div class="help">Cards without a known price are hidden while a price filter is on.</div>
+    </div>
+    <div class="sec">
+      <div class="sec-t"><h3>Favorite Pokémon</h3>${draft.mons.length||draft.gens.length?`<button data-act="clearMons">Clear</button>`:""}</div>
+      <div class="field" style="height:44px">${ICON.search}<input id="fMon" maxlength="30" placeholder="Add a Pokémon: Umbreon, Gengar…" value="${esc(draft._monQ||"")}" autocomplete="off"></div>
+      <div class="chips" id="monSuggest" style="margin-top:8px;flex-wrap:wrap">${monSuggestHTML()}</div>
+      ${draft.mons.length ? `<div class="wrapchips" style="margin-top:8px">${draft.mons.slice(0,14).map(n => `<button class="chip on gold" data-unmon="${n}">${esc(DEX[n-1])} ${ICON.x}</button>`).join("")}${draft.mons.length>14?`<span class="chip">+${draft.mons.length-14} more</span>`:""}</div>` : ""}
+      <div class="sec-t" style="margin-top:14px"><h3 style="font-size:10.5px;color:var(--ink-3)">Quick groups</h3></div>
+      <div class="wrapchips">${GROUPS.map(([g,list],i) => `<button class="chip ${list.every(n=>draft.mons.includes(n))?"on":""}" data-group="${i}">${esc(g)}</button>`).join("")}</div>
+      <div class="sec-t" style="margin-top:14px"><h3 style="font-size:10.5px;color:var(--ink-3)">Generations</h3></div>
+      <div class="wrapchips">${GEN_RANGES.map((r,i) => `<button class="chip ${draft.gens.includes(i+1)?"on":""}" data-gen="${i+1}">Gen ${i+1}</button>`).join("")}</div>
+    </div>
+    <div class="sec">
+      <div class="sec-t"><h3>Card type</h3></div>
+      <div class="seg">${[["","All"],["Pokémon","Pokémon"],["Trainer","Trainers"],["Energy","Energy"]].map(([k,l]) => `<button data-kind="${esc(k)}" class="${(k? (draft.kinds.length===1&&draft.kinds[0]===k) : !draft.kinds.length)?"on":""}">${l}</button>`).join("")}</div>
     </div>
     <div class="sec">
       <div class="sec-t"><h3>Rarity</h3>${draft.rarities.length?`<button data-act="clearRar">Use presets</button>`:""}</div>
@@ -1023,25 +1301,42 @@ function renderFilterBody(){
     </div>`;
   body.scrollTop = keep;
   const q = $("#fQ"); q.oninput = () => { draft.q = q.value; sheetDirty = true; };
+  const mq = $("#fMon"); mq.oninput = () => { draft._monQ = mq.value; $("#monSuggest").innerHTML = monSuggestHTML(); };
+  const pnum = v => { const n = parseFloat(String(v).replace(/[^0-9.]/g,"")); return isFinite(n) && n>0 ? Math.min(n, 1e6) : 0; };
+  const mn = $("#fMin"), mx = $("#fMax");
+  mn.onchange = () => { draft.minPrice = pnum(mn.value); sheetDirty = true; renderFilterBody(); };
+  mx.onchange = () => { draft.maxPrice = pnum(mx.value); sheetDirty = true; renderFilterBody(); };
   q.onkeydown = e => { if(e.key==="Enter"){ q.blur(); applyAndClose(); } };
   const sq2 = $("#fSetQ"); sq2.oninput = () => { draft._setQ = sq2.value; renderFilterBody(); const n=$("#fSetQ"); n.focus(); n.setSelectionRange(n.value.length,n.value.length); };
   const k = $("#fKey"); k.onchange = () => { const v = k.value.trim(); if(v && !/^[A-Za-z0-9-]{1,64}$/.test(v)){ toast(ICON.warn,"That doesn't look like an API key"); return; } S.apiKey = v; LS.set("apikey", S.apiKey); S.apiState="unknown"; renderBanner(); renderMeta(); };
 }
+function monSuggestHTML(){
+  const q = (draft._monQ||"").trim().toLowerCase(); if(!q) return "";
+  const hits = []; DEX.forEach((n,i) => { const l = n.toLowerCase(); if(l.startsWith(q) || (q.length>2 && l.includes(q))) hits.push(i+1); });
+  hits.sort((a,b) => DEX[a-1].toLowerCase().startsWith(q) === DEX[b-1].toLowerCase().startsWith(q) ? a-b : (DEX[a-1].toLowerCase().startsWith(q) ? -1 : 1));
+  return hits.slice(0,8).map(n => `<button class="chip ${draft.mons.includes(n)?"on":""}" data-mon="${n}">＋ ${esc(DEX[n-1])}</button>`).join("") || `<span class="hint">No Pokémon named “${esc(q)}”</span>`;
+}
 function applyFilterDraft(){
-  const d = Object.assign({}, draft); delete d._setQ; delete d._open; delete d._rarOpen;
+  const d = Object.assign({}, draft); delete d._setQ; delete d._open; delete d._rarOpen; delete d._monQ;
   if(!d.sets.length) d.sets = defaultSets();
   S.filters = d; LS.set("filters", d); buildPool();
 }
 function applyAndClose(){ sheetDirty = false; closeSheet(); applyFilterDraft(); if(S.view!=="swipe") setView("swipe"); }
 
 sheet.addEventListener("click", e => {
-  const t = e.target.closest("[data-act],[data-set],[data-series],[data-toggle],[data-preset],[data-order],[data-rar],[data-prio],[data-want],[data-ex]");
+  const t = e.target.closest("[data-act],[data-set],[data-series],[data-toggle],[data-min],[data-mon],[data-unmon],[data-group],[data-gen],[data-kind],[data-preset],[data-order],[data-rar],[data-prio],[data-want],[data-ex]");
   if(!t) return;
   if(sheetKind==="filters"){
     sheetDirty = true;
     if(t.dataset.set){ const i = draft.sets.indexOf(t.dataset.set); i>=0 ? draft.sets.splice(i,1) : draft.sets.push(t.dataset.set); t.classList.toggle("on"); refreshSeriesLabels(); return; }
     if(t.dataset.toggle){ const o=draft._open, i=o.indexOf(t.dataset.toggle); i>=0?o.splice(i,1):o.push(t.dataset.toggle); sheetDirty=false; renderFilterBody(); sheetDirty=true; return; }
     if(t.dataset.series){ const ids = S.sets.filter(s=>s.series===t.dataset.series).map(s=>s.id); const allOn = ids.every(id => draft.sets.includes(id)); draft.sets = allOn ? draft.sets.filter(id => !ids.includes(id)) : [...new Set([...draft.sets, ...ids])]; }
+    else if(t.dataset.min!=null){ draft.minPrice = +t.dataset.min; }
+    else if(t.dataset.mon){ const n=+t.dataset.mon; if(!draft.mons.includes(n)) draft.mons.push(n); draft._monQ=""; }
+    else if(t.dataset.unmon){ draft.mons = draft.mons.filter(n => n !== +t.dataset.unmon); }
+    else if(t.dataset.group!=null){ const list = GROUPS[+t.dataset.group][1]; const all = list.every(n => draft.mons.includes(n)); draft.mons = all ? draft.mons.filter(n => !list.includes(n)) : [...new Set([...draft.mons, ...list])]; }
+    else if(t.dataset.gen){ const g=+t.dataset.gen, i=draft.gens.indexOf(g); i>=0 ? draft.gens.splice(i,1) : draft.gens.push(g); }
+    else if(t.dataset.kind!=null){ draft.kinds = t.dataset.kind ? [t.dataset.kind] : []; }
     else if(t.dataset.preset){ draft.preset = t.dataset.preset; draft.rarities = []; }
     else if(t.dataset.order){ draft.order = t.dataset.order; }
     else if(t.dataset.rar){ const r=t.dataset.rar, i=draft.rarities.indexOf(r); i>=0 ? draft.rarities.splice(i,1) : draft.rarities.push(r); }
@@ -1050,6 +1345,7 @@ sheet.addEventListener("click", e => {
       if(a==="close"){ closeSheet(); return; }
       if(a==="apply"){ applyAndClose(); return; }
       if(a==="clearRar"){ draft.rarities = []; draft._rarOpen=false; }
+      if(a==="clearMons"){ draft.mons = []; draft.gens = []; }
       if(a==="rarOpen"){ draft._rarOpen = !(draft._rarOpen||draft.rarities.length); if(!draft._rarOpen) draft.rarities=[]; }
       if(a==="latest") draft.sets = defaultSets();
       if(a==="allSets") draft.sets = S.sets.map(s=>s.id);
@@ -1072,7 +1368,7 @@ function refreshSeriesLabels(){
 
 /* ---- detail ---- */
 let detailId = null;
-function findCard(id){ return S.chase[id]?.card || S.pool.find(c => c.id===id) || null; }
+function findCard(id){ return S.chase[id]?.card || S.pool.find(c => c.id===id) || S.cands.find(c => c.id===id) || S.picksCards[id] || null; }
 function buyLinks(c, want){
   const p = S.prices[c.id];
   const base = `${c.name} ${c.setName} ${c.number}`;
@@ -1088,6 +1384,29 @@ function openDetail(id){
   fetchPrices([id]);
   openSheet("detail", detailHTML(c));
   const t = sheet.querySelector(".detail-hero .tcg"); if(t) wireTilt(t);
+}
+function changeTxt(from, to){ if(from==null || to==null || !from) return ""; const d = (to-from)/from*100; return `${d>=0?"+":"−"}${Math.abs(d).toFixed(0)}%`; }
+function insightHTML(c){
+  const pk = pickOf(c.id), sg = signalOf(c.id), pr = S.prices[c.id];
+  let h = "";
+  if(pk){
+    const C = CALLS[pk.call], now = priceOf(c.id);
+    h += `<div class="sec"><div class="sec-t"><h3>✦ Claude's take</h3><span style="font-size:11.5px;color:var(--ink-3);font-weight:700">${esc(pk.date||"")}</span></div>
+      <div class="insight pick ${C.cls}">
+        <div class="ins-top"><span class="callpill ${C.cls}">${C.icon} ${C.label}</span><span class="conf">${esc(pk.conf)} confidence</span></div>
+        ${pk.reason ? `<p>${esc(pk.reason)}</p>` : ""}
+        ${pk.price!=null ? `<div class="ins-nums"><span>Called at <b>${money(pk.price)}</b></span>${now!=null?`<span>Now <b>${money(now)}</b> ${changeTxt(pk.price, now)}</span>`:""}</div>` : ""}
+        ${pk.sources.length ? `<div class="srcs">${pk.sources.map(s => s.url ? `<a href="${esc(s.url)}" target="_blank" rel="noopener noreferrer">${esc(s.name)} ↗</a>` : `<span>${esc(s.name)}</span>`).join("")}</div>` : ""}
+      </div></div>`;
+  }
+  if(sg){
+    h += `<div class="sec"><div class="sec-t"><h3>Market signal</h3></div>
+      <div class="insight ${sg.k}"><div class="ins-top"><span class="callpill ${sg.k}">${sg.icon} ${sg.label}</span><span class="conf">${sg.short} vs 30-day avg</span></div>
+      <p>${esc(sg.why)}</p>
+      <div class="ins-nums"><span>1-day <b>€${pr.cm.a1!=null?pr.cm.a1.toFixed(2):"—"}</b></span><span>7-day <b>€${pr.cm.a7.toFixed(2)}</b></span><span>30-day <b>€${pr.cm.a30.toFixed(2)}</b></span></div></div></div>`;
+  }
+  if(pk || sg) h += `<div class="help" style="margin-top:8px">Signals use Cardmarket (EU) average prices. ${pk?"Claude's picks are AI research. ":""}This is analysis, not financial advice.</div>`;
+  return h;
 }
 function detailHTML(c){
   const e = S.chase[c.id], t = tier(c.rarity), p = S.prices[c.id];
@@ -1106,6 +1425,7 @@ function detailHTML(c){
         <div class="prices">${variants.length ? variants.map(([v,m],i) => `<div class="pbox ${i===0?"main":""}"><span>${esc(vName(v))}</span><b>${money(m)}</b></div>`).join("") :
           `<div class="pbox main"><span>Raw market</span><b data-price-for="${esc(c.id)}">${money(priceOf(c.id))}</b><em>${S.apiState==="down"?"price service offline":S.prices[c.id]?"no TCGplayer listing":"loading…"}</em></div>`}</div>
       </div>
+      ${insightHTML(c)}
 
       ${e ? `
       <div class="sec"><div class="sec-t"><h3>Priority</h3></div>
@@ -1186,11 +1506,12 @@ function openHelp(first){
       </div>
       <div class="sec"><div class="sec-t"><h3>Getting started</h3></div>
       <div class="steps">
-        ${st(1,"Build your deck",`Tap the <b>sliders</b> button (top right) to pick sets, eras and rarity, or search a Pokémon or artist. Tap <b>Deal cards</b> to shuffle them in.`)}
+        ${st(1,"Build your deck",`Tap the <b>sliders</b> button (top right). Set a <b>minimum price</b> (default $5+), pick <b>favorite Pokémon</b> or generations, and choose sets and rarity. Tap <b>Deal cards</b>.`)}
         ${st(2,"Swipe",`Drag a card or use the buttons. Made a mistake? The <b>undo arrow</b> brings back the last card.`)}
-        ${st(3,"Tap a card for details",`See prices by print, the artist, and links to buy it on <b>TCGplayer</b>, <b>eBay</b>, sold comps and <b>PriceCharting</b>.`)}
-        ${st(4,"Work your chase list",`The <b>Chase list</b> tab shows what's left to buy. Tap a card to set its priority, choose <b>Raw or a grade</b> (PSA 10, BGS 9.5…), and flip <b>Got it</b> when it lands in your binder.`)}
-        ${st(5,"Share and back up",`Use the <b>share button</b> on your list to copy it as text or CSV. Your list is saved on this device only, so copy a <b>backup code</b> now and then.`)}
+        ${st(3,"Read the badges",`<b>📈 Heating up</b>, <b>💎 Possible dip</b>, <b>⚠️ Overheated</b> and <b>📉 Sliding</b> come from each card's recent price trend. <b>✦ Claude</b> badges mark this week's researched picks. Tap a card for the reasons, prices and buy links.`)}
+        ${st(4,"Check Claude's picks",`The <b>Picks</b> tab lists cards worth targeting this week, with the reasoning, the price when each was called, and how past picks have done. Tap <b>Swipe these picks</b> to go through them.`)}
+        ${st(5,"Work your chase list",`The <b>List</b> tab shows what's left to buy. Tap a card to set its priority, choose <b>Raw or a grade</b> (PSA 10, BGS 9.5…), and flip <b>Got it</b> when it lands in your binder.`)}
+        ${st(6,"Share and back up",`Use the <b>share button</b> on your list to copy it as text or CSV. Your list is saved on this device only, so copy a <b>backup code</b> now and then.`)}
       </div></div>
       <div class="tipbox">Tip: add ChaseDeck to your home screen (Share → Add to Home Screen) so it opens like an app.</div>
     </div>
@@ -1267,6 +1588,8 @@ document.addEventListener("click", e => {
   if(t.dataset.s){ S.listSort = t.dataset.s; LS.set("listSort", S.listSort); return renderList(); }
   const a = t.dataset.act;
   if(a==="filters") openFilters();
+  if(a==="swipePicks") startPicksDeck();
+  if(a==="exitPicks") buildPool();
   if(a==="list") setView("list");
   if(a==="swipe") setView("swipe");
 });
@@ -1311,6 +1634,7 @@ async function boot(){
     $("#retryBtn").addEventListener("click", () => location.reload());
     setActs(false); return;
   }
+  loadPicks();
   const first = !LS.get("seen", false);
   await buildPool();
   if(first){ LS.set("seen", true); setTimeout(() => openHelp(true), 500); }
