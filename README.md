@@ -12,6 +12,8 @@ Swipe through Pokémon cards to build your chase list, like a dating app for you
 - **Market signals.** Live badges from each card's recent price trend: 📈 Heating up, 💎 Possible dip, ⚠️ Overheated, 📉 Sliding.
 - **Claude's picks.** A weekly list of cards worth targeting, researched by Claude, with the reasoning, sources, the price on the day of each call and a running track record.
 - **Live prices.** Shows the TCGplayer market price for each card, broken down by print variant.
+- **Folders.** Your own folders (PC, To flip…) plus smart folders that fill themselves by set, Pokémon, price, status or market signal (Buy now, Consider selling). File cards right after a swipe, or select several at once.
+- **Collection tracking.** Mark cards as owned, record what you paid, and see your gain at market price.
 - **Chase list.** See the total left to chase, sort by priority, price, set or name, and mark cards as acquired.
 - **Graded or raw.** Set the version you want for each card (Raw, PSA 10, PSA 9, BGS 9.5, CGC 10).
 - **Buy links.** Jump straight to TCGplayer, eBay listings, eBay sold comps and PriceCharting.

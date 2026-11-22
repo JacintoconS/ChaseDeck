@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-wjmx2SOB2pPbNw6Ecsf7Tim1bdat61mYK8mRUesv/0g='; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' https://images.pokemontcg.io https://images.scrydex.com data: blob:; connect-src 'self' https://raw.githubusercontent.com https://api.tcgdex.net https://api.pokemontcg.io; manifest-src 'self'; base-uri 'none'; form-action 'none'; object-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-YHm5LIwlJCA/xd02LxpGjCRGqCz1zfWfJcBQ925wY9w='; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' https://images.pokemontcg.io https://images.scrydex.com data: blob:; connect-src 'self' https://raw.githubusercontent.com https://api.tcgdex.net https://api.pokemontcg.io; manifest-src 'self'; base-uri 'none'; form-action 'none'; object-src 'none'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1">
 <meta name="theme-color" content="#0a0913">
@@ -384,6 +384,60 @@ img{user-select:none;-webkit-user-drag:none}
 .chart .csub{font-size:11px;color:var(--ink-3);font-weight:600;margin-top:6px}
 .chg{font-size:12.5px;font-weight:800}
 
+/* Folders */
+.fchip{--fc:#c4b2ff;height:36px;padding:0 12px;border-radius:12px;display:inline-flex;align-items:center;gap:7px;flex-shrink:0;font-size:13px;font-weight:800;color:var(--ink-2);background:var(--glass);border:1px solid var(--line);white-space:nowrap;transition:all .2s}
+.fchip b{font-size:11px;font-weight:800;color:var(--ink-3);background:rgba(255,255,255,.08);border-radius:7px;padding:2px 6px}
+.fchip.on{color:#fff;background:color-mix(in srgb,var(--fc) 24%,transparent);border-color:color-mix(in srgb,var(--fc) 70%,transparent);box-shadow:0 6px 18px -8px var(--fc)}
+.fchip.on b{color:#fff;background:color-mix(in srgb,var(--fc) 45%,transparent)}
+.fchip.add{color:#c4b2ff;border-style:dashed}
+.fchip.sm{height:32px;font-size:12.5px;border-radius:11px}
+.frow-chips{margin:2px -18px 12px;padding:2px 18px}
+.fhero{background:linear-gradient(160deg,color-mix(in srgb,var(--fc) 22%,transparent),rgba(255,255,255,.025));border-color:color-mix(in srgb,var(--fc) 40%,transparent)}
+.fhero .smart{font-size:9.5px;letter-spacing:.1em;padding:2px 6px;border-radius:6px;background:rgba(255,255,255,.14);margin-left:4px;vertical-align:2px}
+.fedit{position:absolute;top:16px;right:16px;font-size:12px;font-weight:800;color:#fff;background:rgba(255,255,255,.12);padding:6px 10px;border-radius:9px}
+.fdots{position:absolute;left:7px;bottom:7px;display:flex;gap:3px}
+.fdots i{width:9px;height:9px;border-radius:50%;box-shadow:0 0 0 2px rgba(10,9,19,.8)}
+.tile.got .thumb img{filter:saturate(.75) brightness(.8)}
+.tile .got-badge{inset:auto 7px 7px auto;width:30px;height:30px}
+.got-badge span{width:30px;height:30px}
+.got-badge svg{width:16px;height:16px}
+.selmark{position:absolute;top:50%;left:50%;width:42px;height:42px;margin:-21px 0 0 -21px;border-radius:50%;border:2.5px solid rgba(255,255,255,.85);background:rgba(10,9,19,.45);display:none;place-items:center;color:#fff}
+.selmark svg{width:22px;height:22px;opacity:0}
+.tile.selecting .selmark{display:grid}
+.tile.picked .selmark{background:var(--violet);border-color:var(--violet)}
+.tile.picked .selmark svg{opacity:1}
+.tile.picked .thumb{box-shadow:0 0 0 3px var(--violet),0 16px 30px -14px rgba(0,0,0,.9)}
+.icon-btn.active{background:rgba(139,108,255,.3);border-color:rgba(185,147,255,.6)}
+.selbar,.fbar{position:fixed;left:50%;z-index:15;transform:translate(-50%,20px);opacity:0;pointer-events:none;transition:all .35s cubic-bezier(.2,.9,.3,1.2);width:calc(100% - 24px);max-width:536px;border-radius:20px;background:rgba(26,22,48,.95);border:1px solid rgba(255,255,255,.14);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);box-shadow:0 18px 50px -12px rgba(0,0,0,.85)}
+.selbar.on,.fbar.on{opacity:1;transform:translate(-50%,0);pointer-events:auto}
+.selbar{bottom:calc(var(--tabbar) + 10px);display:flex;align-items:center;gap:6px;padding:8px;flex-wrap:wrap}
+.sb-n{font-weight:800;font-size:13px;padding:0 6px;margin-right:auto}
+.btn.sm{height:36px;padding:0 11px;font-size:12.5px;border-radius:11px}
+.btn[disabled]{opacity:.4;pointer-events:none}
+.fbar{bottom:calc(var(--tabbar) + 104px);padding:10px 10px 10px 14px;display:flex;align-items:center;gap:10px}
+.fb-t{font-size:12.5px;font-weight:800;color:var(--ink-2);white-space:nowrap}
+.fb-chips{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none}
+.fb-chips::-webkit-scrollbar{display:none}
+.fd-preview{--fc:#8b6cff;display:flex;align-items:center;gap:12px;padding:16px;border-radius:18px;font-family:var(--display);font-weight:800;font-size:22px;background:linear-gradient(135deg,color-mix(in srgb,var(--fc) 30%,transparent),rgba(255,255,255,.03));border:1px solid color-mix(in srgb,var(--fc) 50%,transparent)}
+.fd-emoji{width:42px;height:42px;border-radius:13px;display:grid;place-items:center;font-size:22px;background:rgba(255,255,255,.1);flex-shrink:0}
+.emoji-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:8px}
+.emo{height:46px;border-radius:13px;font-size:22px;background:var(--glass);border:1px solid var(--line)}
+.emo.on{background:rgba(139,108,255,.25);border-color:rgba(185,147,255,.7)}
+.colors{display:flex;gap:12px}
+.dotc{width:36px;height:36px;border-radius:50%;background:var(--c);box-shadow:inset 0 0 0 2px rgba(255,255,255,.2)}
+.dotc.on{box-shadow:0 0 0 3px var(--bg),0 0 0 5px var(--c)}
+.sel{flex:1;min-width:0;background:none;border:0;outline:0;font-size:15px;font-weight:600;color:var(--ink);-webkit-appearance:none;appearance:none}
+.sel option{background:#1a1630;color:#fff}
+.flist{display:flex;flex-direction:column;gap:8px}
+.frow{--fc:#8b6cff;display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:16px;background:var(--glass);border:1px solid var(--line);text-align:left}
+.frow .fd-emoji{background:color-mix(in srgb,var(--fc) 25%,transparent)}
+.fr-n{flex:1;font-weight:800;font-size:15px}
+.fr-c{font-size:12px;font-weight:800;color:var(--ink-3)}
+.frow.new{border-style:dashed;color:#c4b2ff}
+.paidrow{display:flex;align-items:center;gap:10px;margin-top:10px}
+.paidrow .field{flex:1}
+.gainpill{font-size:12.5px;font-weight:800;padding:8px 10px;border-radius:11px;background:rgba(255,255,255,.06);white-space:nowrap}
+
 /* Help */
 .help-hero{text-align:center;padding:4px 0 6px}
 .help-hero p{margin:8px auto 0;color:var(--ink-2);font-size:14px;line-height:1.5;max-width:330px;font-weight:500}
@@ -479,6 +533,8 @@ kbd{font-family:inherit;font-size:10.5px;padding:1px 6px;border-radius:5px;borde
   </nav>
 </div>
 
+<div class="fbar" id="fbar"></div>
+<div class="selbar" id="selbar"></div>
 <div class="scrim" id="scrim"></div>
 <div class="sheet" id="sheet" role="dialog" aria-modal="true"></div>
 <div class="toast" id="toast"></div>
@@ -533,7 +589,40 @@ function cleanCard(c){
 function cleanEntry(e){
   const card = cleanCard(e && e.card); if(!card) return null;
   const prio = [1,2,3].includes(e.prio) ? e.prio : 2;
-  return { card, prio, want: GRADES.includes(e.want) ? e.want : "Raw", got: e.got===true, note: str(e.note,500), added: num(e.added) ?? Date.now() };
+  return { card, prio, want: GRADES.includes(e.want) ? e.want : "Raw", got: e.got===true, note: str(e.note,500), added: num(e.added) ?? Date.now(),
+    folders: Array.isArray(e.folders) ? [...new Set(e.folders.filter(f => typeof f==="string" && /^[a-z0-9]{1,12}$/.test(f)))].slice(0,30) : [], paid: num(e.paid) };
+}
+const FOLDER_COLORS = ["#8b6cff","#3ef2b0","#ffb547","#4fd8ff","#ff6fb5","#ff4d6d"];
+const FOLDER_EMOJI = ["💎","💸","🔥","📈","⚠️","🎁","📦","⭐","❤️","🌙","⚡","🐉","👻","🌊","🍀","🏆","🎯","🧸"];
+const STARTER_FOLDERS = [
+  {id:"pc", name:"PC", emoji:"💎", color:"#8b6cff", type:"manual"},
+  {id:"flip", name:"To flip", emoji:"💸", color:"#3ef2b0", type:"manual"},
+  {id:"grails", name:"Grails", emoji:"🔥", color:"#ffb547", type:"smart", rule:{kind:"status", value:"grail"}},
+  {id:"buynow", name:"Buy now", emoji:"📈", color:"#4fd8ff", type:"smart", rule:{kind:"signal", value:"buy"}},
+  {id:"sell", name:"Consider selling", emoji:"⚠️", color:"#ff6fb5", type:"smart", rule:{kind:"signal", value:"sell"}}
+];
+function cleanRule(r){
+  if(!r || typeof r!=="object") return null;
+  switch(r.kind){
+    case "signal": return ["buy","sell"].includes(r.value) ? {kind:"signal", value:r.value} : null;
+    case "set": return typeof r.value==="string" && /^[A-Za-z0-9._-]{1,30}$/.test(r.value) ? {kind:"set", value:r.value} : null;
+    case "pokemon": return Number.isInteger(r.value) && r.value>=1 && r.value<=1025 ? {kind:"pokemon", value:r.value} : null;
+    case "price": { const min = num(r.min) ?? 0, max = num(r.max) ?? 0; return (min || max) ? {kind:"price", min, max} : null; }
+    case "status": return ["grail","graded","got","hunting"].includes(r.value) ? {kind:"status", value:r.value} : null;
+  }
+  return null;
+}
+function cleanFolders(arr){
+  if(!Array.isArray(arr)) return null;
+  const out = [], ids = new Set();
+  for(const f of arr.slice(0,30)){
+    if(!f || typeof f!=="object" || typeof f.id!=="string" || !/^[a-z0-9]{1,12}$/.test(f.id) || ids.has(f.id)) continue;
+    const type = f.type==="smart" ? "smart" : "manual", rule = type==="smart" ? cleanRule(f.rule) : null;
+    if(type==="smart" && !rule) continue;
+    ids.add(f.id);
+    out.push({ id:f.id, name:str(f.name,30) || "Folder", emoji:FOLDER_EMOJI.includes(f.emoji) ? f.emoji : "📁", color:FOLDER_COLORS.includes(f.color) ? f.color : FOLDER_COLORS[0], type, ...(rule ? {rule} : {}) });
+  }
+  return out;
 }
 function cleanChase(obj){
   const out = {}; if(!obj || typeof obj!=="object") return out;
@@ -580,6 +669,9 @@ const S = {
 };
 S.chase = cleanChase(LS.get("chase", {}));
 S.decisions = cleanDecisions(LS.get("decisions", {}));
+S.folders = cleanFolders(LS.get("folders", null)) || STARTER_FOLDERS.map(f => ({...f}));
+S.listFolder = LS.get("listFolder", "all"); if(S.listFolder!=="all" && !S.folders.some(f => f.id===S.listFolder)) S.listFolder = "all";
+const saveFolders = () => LS.set("folders", S.folders);
 { const f=S.filters; if(!PRESETS[f.preset]) f.preset="chase"; if(!["shuffle","newest","oldest"].includes(f.order)) f.order="shuffle";
   f.q = str(f.q,60); f.rarities = Array.isArray(f.rarities) ? f.rarities.filter(r=>typeof r==="string").slice(0,60) : [];
   f.sets = Array.isArray(f.sets) ? f.sets.filter(x=>typeof x==="string" && /^[A-Za-z0-9._-]{1,30}$/.test(x)) : null; f.hideSwiped = f.hideSwiped!==false;
@@ -1054,11 +1146,12 @@ function decide(card, kind){
   let added = false;
   if(kind !== "pass"){
     if(!S.chase[card.id]){
-      S.chase[card.id] = { card: snapshot(card), prio: kind==="super"?3:2, want:"Raw", got:false, note:"", added:Date.now() };
+      S.chase[card.id] = { card: snapshot(card), prio: kind==="super"?3:2, want:"Raw", got:false, note:"", added:Date.now(), folders:[], paid:null };
       added = true;
     } else if(kind==="super"){ S.chase[card.id].prio = 3; }
     saveChase(); bumpCount();
     toast(kind==="super"?ICON.star:ICON.heart, `${kind==="super"?"Grail locked":"Added"}: ${card.name}`, "Undo", undo);
+    showFolderBar(card.id);
   }
   S.history.push({id:card.id, kind, added});
   S.idx++; renderDeck(); ensurePrices();
@@ -1107,11 +1200,12 @@ function hideToast(){ const t=$("#toast"); t.classList.remove("on"); t.style.poi
 
 /* ---------- views ---------- */
 function setView(v){
-  S.view = v;
+  S.view = v; if(v!=="list" && sel.on){ sel.on=false; sel.ids.clear(); renderSelBar(); }
+  if(v!=="swipe") hideFolderBar();
   $("#viewSwipe").hidden = v!=="swipe"; $("#viewList").hidden = v!=="list"; $("#viewPicks").hidden = v!=="picks";
   $("#tabSwipe").classList.toggle("on", v==="swipe"); $("#tabList").classList.toggle("on", v==="list"); $("#tabPicks").classList.toggle("on", v==="picks");
   $("#brandSub").textContent = v==="swipe" ? "Swipe your grails" : v==="picks" ? "What to target now" : "Your hunt, organized";
-  if(v==="list"){ renderList(); fetchPrices(Object.keys(S.chase)); }
+  if(v==="list"){ renderList(); fetchPrices(Object.keys(S.chase)).then(() => S.view==="list" && renderList(true)); [...new Set(Object.values(S.chase).map(e => e.card.setId))].forEach(id => loadShared(id).then(() => S.view==="list" && renderList(true))); }
   if(v==="picks"){ renderPicks(); preparePicks(); }
 }
 
@@ -1201,9 +1295,143 @@ async function startPicksDeck(){
   setView("swipe"); renderAll(); ensurePrices();
 }
 
+/* ---------- folders ---------- */
+const escRe = x => x.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+function inFolder(e, f){
+  if(!f || f.id==="all") return true;
+  if(f.type==="manual") return e.folders.includes(f.id);
+  const r = f.rule, c = e.card;
+  switch(r.kind){
+    case "signal": { const sg = signalOf(c.id); if(!sg) return false; return r.value==="buy" ? (!e.got && (sg.k==="up" || sg.k==="dip")) : (e.got && (sg.k==="hot" || sg.k==="up")); }
+    case "set": return c.setId === r.value;
+    case "pokemon": return new RegExp("(^|[^A-Za-z])" + escRe(DEX[r.value-1]) + "($|[^A-Za-z])", "i").test(c.name);
+    case "price": { const p = priceOf(c.id); return p!=null && p >= (r.min||0) && (!r.max || p <= r.max); }
+    case "status": return r.value==="grail" ? (e.prio===3 && !e.got) : r.value==="graded" ? e.want!=="Raw" : r.value==="got" ? e.got : !e.got;
+  }
+  return false;
+}
+const folderById = id => S.folders.find(f => f.id===id) || null;
+function ruleText(f){
+  if(f.type!=="smart") return "Cards you add yourself";
+  const r = f.rule;
+  return r.kind==="signal" ? (r.value==="buy" ? "Cards you're hunting that show 📈 or 💎" : "Cards you own that are climbing or spiking")
+    : r.kind==="set" ? `Every card from ${S.setMap[r.value]?.name || r.value}`
+    : r.kind==="pokemon" ? `Every ${DEX[r.value-1]} card`
+    : r.kind==="price" ? (r.min && r.max ? `Cards $${r.min}–$${r.max}` : r.min ? `Cards $${r.min}+` : `Cards under $${r.max}`)
+    : ({grail:"Cards marked 🔥 Grail", graded:"Cards you want graded", got:"Cards you own", hunting:"Cards you're still hunting"})[r.value];
+}
+function folderEntries(fid){ const f = fid==="all" ? null : folderById(fid); return Object.values(S.chase).filter(e => inFolder(e, f)); }
+
+/* quick "Add to folder?" bar after a right swipe */
+let fbarTimer = null, fbarCard = null;
+function showFolderBar(id){
+  const manual = S.folders.filter(f => f.type==="manual"); if(!manual.length) return;
+  fbarCard = id; const bar = $("#fbar");
+  const draw = () => { const e = S.chase[fbarCard]; if(!e) return hideFolderBar();
+    bar.innerHTML = `<span class="fb-t">Add to folder?</span><div class="fb-chips">${manual.map(f => `<button class="fchip sm ${e.folders.includes(f.id)?"on":""}" style="--fc:${f.color}" data-fb="${f.id}">${f.emoji} ${esc(f.name)}</button>`).join("")}</div>`; };
+  draw(); bar.classList.add("on");
+  bar.onclick = ev => { const b = ev.target.closest("[data-fb]"); if(!b) return; const e = S.chase[fbarCard]; if(!e) return;
+    const i = e.folders.indexOf(b.dataset.fb); i>=0 ? e.folders.splice(i,1) : e.folders.push(b.dataset.fb); saveChase(); draw(); arm(); };
+  const arm = () => { clearTimeout(fbarTimer); fbarTimer = setTimeout(hideFolderBar, 4500); }; arm();
+}
+function hideFolderBar(){ clearTimeout(fbarTimer); $("#fbar").classList.remove("on"); }
+
+/* folder editor */
+let fdraft = null;
+function openFolderEditor(id){
+  const f = id ? folderById(id) : null;
+  fdraft = f ? JSON.parse(JSON.stringify(f)) : {id:null, name:"", emoji:"📦", color:FOLDER_COLORS[Math.floor(Math.random()*FOLDER_COLORS.length)], type:"manual"};
+  openSheet("folder", `<div class="sheet-head"><h2>${f ? "Edit folder" : "New folder"}</h2><button class="icon-btn" data-act="close" aria-label="Close">${ICON.x}</button></div>
+    <div class="sheet-body" id="fdBody"></div>
+    <div class="sheet-foot">${f ? `<button class="btn danger" data-act="fdDelete">Delete</button>` : ""}<button class="btn primary block" style="flex:1" data-act="fdSave">${f ? "Save" : "Create folder"}</button></div>`);
+  renderFolderEditor();
+}
+function renderFolderEditor(){
+  const b = $("#fdBody"); if(!b) return; const keep = b.scrollTop, d = fdraft, r = d.rule || {};
+  const kinds = [["signal","Market signal"],["set","Set"],["pokemon","Pokémon"],["price","Price"],["status","Status"]];
+  let ruleUI = "";
+  if(d.type==="smart"){
+    if(r.kind==="signal") ruleUI = `<div class="seg">${[["buy","📈 Good buys"],["sell","⚠️ Consider selling"]].map(([k,l]) => `<button data-rv="${k}" class="${r.value===k?"on":""}">${l}</button>`).join("")}</div>`;
+    else if(r.kind==="set") ruleUI = `<div class="field"><select id="fdSet" class="sel"><option value="">Choose a set…</option>${S.sets.map(s => `<option value="${esc(s.id)}" ${r.value===s.id?"selected":""}>${esc(s.name)} (${esc(s.release.slice(0,4))})</option>`).join("")}</select></div>`;
+    else if(r.kind==="pokemon") ruleUI = `<div class="field" style="height:44px">${ICON.search}<input id="fdMon" maxlength="30" placeholder="Search a Pokémon" value="${esc(d._monQ ?? (r.value ? DEX[r.value-1] : ""))}" autocomplete="off"></div><div class="wrapchips" id="fdMonSug" style="margin-top:8px">${fdMonSug()}</div>`;
+    else if(r.kind==="price") ruleUI = `<div class="pricebox"><div class="field mini"><span class="lbl">Min $</span><input id="fdMin" inputmode="decimal" maxlength="7" value="${r.min||""}" placeholder="0"></div><div class="field mini"><span class="lbl">Max $</span><input id="fdMax" inputmode="decimal" maxlength="7" value="${r.max||""}" placeholder="No max"></div></div>`;
+    else if(r.kind==="status") ruleUI = `<div class="wrapchips">${[["grail","🔥 Grails"],["graded","Want graded"],["got","Got it"],["hunting","Still hunting"]].map(([k,l]) => `<button class="chip ${r.value===k?"on":""}" data-rv="${k}">${l}</button>`).join("")}</div>`;
+  }
+  b.innerHTML = `
+    <div class="sec"><div class="fd-preview" style="--fc:${d.color}"><span class="fd-emoji">${d.emoji}</span><span>${esc(d.name || "Folder name")}</span></div></div>
+    <div class="sec"><div class="field"><input id="fdName" maxlength="30" placeholder="Folder name, e.g. PC or To flip" value="${esc(d.name)}" autocomplete="off"></div></div>
+    <div class="sec"><div class="sec-t"><h3>Icon</h3></div><div class="emoji-grid">${FOLDER_EMOJI.map(x => `<button class="emo ${d.emoji===x?"on":""}" data-emo="${x}">${x}</button>`).join("")}</div></div>
+    <div class="sec"><div class="sec-t"><h3>Color</h3></div><div class="colors">${FOLDER_COLORS.map(c => `<button class="dotc ${d.color===c?"on":""}" style="--c:${c}" data-col="${c}" aria-label="Color"></button>`).join("")}</div></div>
+    <div class="sec"><div class="sec-t"><h3>Type</h3></div>
+      <div class="seg">${[["manual","I pick the cards"],["smart","Fill automatically"]].map(([k,l]) => `<button data-ftype="${k}" class="${d.type===k?"on":""}">${l}</button>`).join("")}</div>
+      <div class="help">${d.type==="manual" ? "Add cards from a card's details, after a right swipe, or by selecting several in your list." : "Pick a rule. Matching cards from your list show up here on their own."}</div></div>
+    ${d.type==="smart" ? `<div class="sec"><div class="sec-t"><h3>Rule</h3></div><div class="wrapchips" style="margin-bottom:10px">${kinds.map(([k,l]) => `<button class="chip ${r.kind===k?"on":""}" data-rk="${k}">${l}</button>`).join("")}</div>${ruleUI}</div>` : ""}`;
+  b.scrollTop = keep;
+  $("#fdName").oninput = ev => { d.name = ev.target.value; const pv = b.querySelector(".fd-preview span:last-child"); if(pv) pv.textContent = d.name || "Folder name"; };
+  const ss = $("#fdSet"); if(ss) ss.onchange = () => { d.rule = {kind:"set", value:ss.value}; if(!d.name && ss.value) { d.name = S.setMap[ss.value]?.name.slice(0,30) || ""; renderFolderEditor(); } };
+  const mq = $("#fdMon"); if(mq) mq.oninput = () => { d._monQ = mq.value; $("#fdMonSug").innerHTML = fdMonSug(); };
+  const pn = v => { const n = parseFloat(String(v).replace(/[^0-9.]/g,"")); return isFinite(n) && n>0 ? Math.min(n,1e6) : 0; };
+  const mn = $("#fdMin"), mx = $("#fdMax"); if(mn){ mn.onchange = () => { d.rule.min = pn(mn.value); }; mx.onchange = () => { d.rule.max = pn(mx.value); }; }
+}
+function fdMonSug(){
+  const q = (fdraft._monQ||"").trim().toLowerCase(); if(!q) return "";
+  const hits = []; DEX.forEach((n,i) => { if(n.toLowerCase().startsWith(q)) hits.push(i+1); });
+  return hits.slice(0,8).map(n => `<button class="chip ${fdraft.rule?.value===n?"on":""}" data-fmon="${n}">${esc(DEX[n-1])}</button>`).join("") || `<span class="hint">No match</span>`;
+}
+function folderEditorClick(t){
+  const d = fdraft; const a = t.dataset.act;
+  if(a==="close") return closeSheet();
+  if(t.dataset.emo){ d.emoji = t.dataset.emo; }
+  else if(t.dataset.col){ d.color = t.dataset.col; }
+  else if(t.dataset.ftype){ d.type = t.dataset.ftype; if(d.type==="smart" && !d.rule) d.rule = {kind:"signal", value:"buy"}; }
+  else if(t.dataset.rk){ d.rule = {kind:t.dataset.rk}; if(t.dataset.rk==="signal") d.rule.value="buy"; if(t.dataset.rk==="status") d.rule.value="grail"; delete d._monQ; }
+  else if(t.dataset.rv){ d.rule.value = t.dataset.rv; }
+  else if(t.dataset.fmon){ d.rule = {kind:"pokemon", value:+t.dataset.fmon}; d._monQ = DEX[+t.dataset.fmon-1]; if(!d.name) d.name = DEX[+t.dataset.fmon-1]; }
+  else if(a==="fdDelete"){
+    if(!t.dataset.armed){ t.dataset.armed="1"; t.textContent="Tap to confirm"; return; }
+    S.folders = S.folders.filter(f => f.id!==d.id); for(const e of Object.values(S.chase)) e.folders = e.folders.filter(x => x!==d.id);
+    saveFolders(); saveChase(); if(S.listFolder===d.id){ S.listFolder="all"; LS.set("listFolder","all"); }
+    closeSheet(); renderList(); toast(ICON.x, "Folder deleted"); return;
+  }
+  else if(a==="fdSave"){
+    if(!d.name.trim()){ toast(ICON.warn, "Give your folder a name"); $("#fdName")?.focus(); return; }
+    if(d.type==="smart" && !cleanRule(d.rule)){ toast(ICON.warn, "Finish the rule first"); return; }
+    if(!d.id){ if(S.folders.length >= 30){ toast(ICON.warn, "You can have up to 30 folders"); return; } d.id = Math.random().toString(36).slice(2,10); }
+    const clean = cleanFolders([{...d, name:d.name.trim()}])[0];
+    const i = S.folders.findIndex(f => f.id===clean.id); i>=0 ? S.folders[i] = clean : S.folders.push(clean);
+    saveFolders(); S.listFolder = clean.id; LS.set("listFolder", clean.id);
+    const back = folderReturn; folderReturn = null; closeSheet();
+    if(back){ const e = S.chase[back]; if(e && clean.type==="manual" && !e.folders.includes(clean.id)){ e.folders.push(clean.id); saveChase(); } openDetail(back); }
+    else { S.listFilter = "all"; renderList(); }
+    toast(ICON.check, `${clean.emoji} ${clean.name} ${i>=0?"saved":"created"}`); return;
+  }
+  renderFolderEditor();
+}
+let folderReturn = null;
+
+/* bulk select */
+const sel = {on:false, ids:new Set()};
+function toggleSelect(on){ sel.on = on; sel.ids.clear(); renderList(true); renderSelBar(); }
+function renderSelBar(){
+  const bar = $("#selbar");
+  if(!sel.on){ bar.classList.remove("on"); return; }
+  const fid = S.listFolder, f = folderById(fid), n = sel.ids.size;
+  bar.innerHTML = `<span class="sb-n">${n} selected</span>
+    <button class="btn ghost sm" data-sel="folder" ${n?"":"disabled"}>📁 Add to folder</button>
+    ${f && f.type==="manual" ? `<button class="btn ghost sm" data-sel="unfolder" ${n?"":"disabled"}>Remove from ${esc(f.name)}</button>` : `<button class="btn ghost sm" data-sel="got" ${n?"":"disabled"}>✓ Got it</button>`}
+    <button class="btn ghost sm" data-sel="done">Done</button>`;
+  bar.classList.add("on");
+}
+function openFolderPicker(){
+  const manual = S.folders.filter(f => f.type==="manual");
+  openSheet("picker", `<div class="sheet-head"><h2>Add ${sel.ids.size} card${sel.ids.size===1?"":"s"} to…</h2><button class="icon-btn" data-act="close" aria-label="Close">${ICON.x}</button></div>
+    <div class="sheet-body"><div class="flist">${manual.map(f => `<button class="frow" data-pick="${f.id}" style="--fc:${f.color}"><span class="fd-emoji">${f.emoji}</span><span class="fr-n">${esc(f.name)}</span><span class="fr-c">${folderEntries(f.id).length}</span></button>`).join("") || `<div class="help">You don't have any pick-your-own folders yet.</div>`}
+    <button class="frow new" data-act="newFolder"><span class="fd-emoji">＋</span><span class="fr-n">New folder</span></button></div></div>`);
+}
+
 /* ---------- chase list ---------- */
 function chaseEntries(){
-  let arr = Object.values(S.chase);
+  let arr = folderEntries(S.listFolder);
   if(S.listFilter==="hunting") arr = arr.filter(e => !e.got);
   else if(S.listFilter==="got") arr = arr.filter(e => e.got);
   const pr = e => priceOf(e.card.id) ?? -1;
@@ -1218,17 +1446,32 @@ function chaseEntries(){
   return arr.sort(sorters[S.listSort] || sorters.priority);
 }
 function renderList(soft){
-  const all = Object.values(S.chase);
+  const fid = S.listFolder, F = fid==="all" ? null : folderById(fid);
+  const all = folderEntries(fid);
   const hunting = all.filter(e => !e.got), got = all.filter(e => e.got);
   const sum = a => a.reduce((t,e) => t + (priceOf(e.card.id)||0), 0);
   const toGo = sum(hunting), owned = sum(got);
   const pct = all.length ? Math.round(got.length/all.length*100) : 0;
   const grails = hunting.filter(e => e.prio===3).length;
+  const paidOnes = got.filter(e => e.paid!=null && priceOf(e.card.id)!=null);
+  const gain = paidOnes.reduce((t,e) => t + priceOf(e.card.id) - e.paid, 0);
   const items = chaseEntries();
   const sc = $("#listScroll"); const keep = sc.scrollTop;
   const sorts = [["priority","Priority"],["priceDesc","Price ↓"],["priceAsc","Price ↑"],["newest","Newest"],["set","Set"],["name","A–Z"]];
-  sc.innerHTML = `
-    <div class="list-head"><h1>Chase list</h1><button class="icon-btn" id="openExport" aria-label="Export">${ICON.share}</button></div>
+  const chip = (id, emoji, name, color, n) => `<button class="fchip ${fid===id?"on":""}" style="--fc:${color}" data-folder="${id}"><span>${emoji}</span>${esc(name)}<b>${n}</b></button>`;
+  const folderRow = `<div class="chips frow-chips">${chip("all","🗂️","All","#c4b2ff",Object.keys(S.chase).length)}${S.folders.map(f => chip(f.id, f.emoji, f.name, f.color, folderEntries(f.id).length)).join("")}<button class="fchip add" data-act="newFolder">＋ New</button></div>`;
+  const hero = F ? `
+    <div class="hero fhero" style="--fc:${F.color}">
+      <div class="eyebrow">${F.emoji} ${esc(F.name)} ${F.type==="smart" ? `<span class="smart">AUTO</span>` : ""}</div>
+      <div class="total">${moneyBig(sum(all))}</div>
+      <div class="note">${esc(ruleText(F))} · ${all.length} card${all.length===1?"":"s"}</div>
+      <div class="hero-stats">
+        <div class="stat"><b>${hunting.length}</b><span>Hunting</span></div>
+        <div class="stat"><b>${got.length}</b><span>Owned</span></div>
+        <div class="stat"><b class="${paidOnes.length ? (gain>=0?"pos":"neg") : ""}">${paidOnes.length ? (gain>=0?"+":"−")+money(Math.abs(gain)) : (got.length ? money(owned) : "—")}</b><span>${paidOnes.length ? "Gain" : "Owned value"}</span></div>
+      </div>
+      <button class="fedit" data-act="editFolder">Edit folder</button>
+    </div>` : `
     <div class="hero">
       <div class="eyebrow">Left to chase</div>
       <div class="total">${moneyBig(toGo)}</div>
@@ -1239,31 +1482,43 @@ function renderList(soft){
         <div class="stat"><b>${pct}%</b><span>Complete</span></div>
       </div>
       <div class="bar"><i style="width:${pct}%"></i></div>
-    </div>
+    </div>`;
+  const emptyMsg = !Object.keys(S.chase).length ? "Swipe right on cards you love and they’ll land here."
+    : F && !all.length ? (F.type==="manual" ? "Open a card and tap this folder under “Folders”, or use Select to add several at once." : "No cards in your list match this rule yet.")
+    : S.listFilter==="got" ? "Tap a card and mark it “Got it” when it lands in your binder." : S.listFilter==="hunting" ? "Nothing left to hunt here." : "Nothing here yet.";
+  sc.innerHTML = `
+    <div class="list-head"><h1>${F ? esc(F.name) : "Chase list"}</h1><div class="row"><button class="icon-btn ${sel.on?"active":""}" data-act="select" aria-label="Select cards">${sel.on ? ICON.x : ICON.check}</button><button class="icon-btn" id="openExport" aria-label="Export">${ICON.share}</button></div></div>
+    ${folderRow}
+    ${hero}
     <div class="controls">
       <div class="seg" id="listSeg">
         <button data-f="hunting" class="${S.listFilter==="hunting"?"on":""}">Hunting · ${hunting.length}</button>
         <button data-f="got" class="${S.listFilter==="got"?"on":""}">Got it · ${got.length}</button>
-        <button data-f="all" class="${S.listFilter==="all"?"on":""}">All</button>
+        <button data-f="all" class="${S.listFilter==="all"?"on":""}">All · ${all.length}</button>
       </div>
       <div class="chips" style="margin-top:10px" id="sortChips">${sorts.map(([k,l]) => `<button class="chip ${S.listSort===k?"on":""}" data-s="${k}">${l}</button>`).join("")}</div>
     </div>
     ${items.length ? `<div class="grid">${items.map((e,i) => tileHTML(e,i,soft)).join("")}</div>` :
       `<div class="list-empty"><div class="empty" style="position:relative;inset:auto;padding:0"><div class="art"><i></i><i></i><i></i></div></div>
-        <h3>${all.length ? "Nothing here yet" : "Your list is empty"}</h3>
-        <p style="margin:0 0 18px;font-size:14px">${all.length ? (S.listFilter==="got"?"Tap a card and mark it “Got it” when it lands in your binder.":"You’ve collected everything. Legend.") : "Swipe right on cards you love and they’ll land here."}</p>
-        ${all.length?"":`<button class="btn primary" data-act="swipe">${ICON.heart} Start swiping</button>`}</div>`}
+        <h3>${Object.keys(S.chase).length ? "Nothing here yet" : "Your list is empty"}</h3>
+        <p style="margin:0 0 18px;font-size:14px">${emptyMsg}</p>
+        ${Object.keys(S.chase).length?"":`<button class="btn primary" data-act="swipe">${ICON.heart} Start swiping</button>`}</div>`}
+    <div style="height:${sel.on?70:0}px"></div>
   `;
   sc.scrollTop = keep;
+  const fr = sc.querySelector(".frow-chips .fchip.on"); if(fr && !soft) fr.scrollIntoView({inline:"center", block:"nearest"});
   wireImgs(sc);
 }
 function tileHTML(e, i, soft){
   const c = e.card, p = priceOf(c.id);
-  return `<button class="tile ${e.got?"got":""}" data-open="${esc(c.id)}" style="${soft?"animation:none":`animation-delay:${Math.min(i,12)*35}ms`}">
+  const dots = e.folders.map(id => folderById(id)).filter(Boolean).slice(0,4).map(f => `<i style="background:${f.color}" title="${esc(f.name)}"></i>`).join("");
+  return `<button class="tile ${e.got?"got":""} ${sel.on?"selecting":""} ${sel.ids.has(c.id)?"picked":""}" data-open="${esc(c.id)}" style="${soft?"animation:none":`animation-delay:${Math.min(i,12)*35}ms`}">
     <div class="thumb"><img src="${esc(c.img)}" alt="${esc(c.name)}" loading="lazy">
       <span class="prio p${e.prio}">${e.prio===3?"🔥 Grail":PRIO[e.prio].label}</span>
       <span class="grade ${e.want==="Raw"?"raw":""}">${esc(e.want)}</span>
-      <div class="got-badge"><span>${ICON.check}</span></div></div>
+      <div class="got-badge"><span>${ICON.check}</span></div>
+      ${dots ? `<div class="fdots">${dots}</div>` : ""}
+      <div class="selmark">${ICON.check}</div></div>
     <div class="meta"><div class="n">${esc(c.name)}</div><div class="s"><span>${esc(c.setName)} #${esc(c.number)}</span><b data-price-for="${esc(c.id)}">${money(p)}</b></div></div>
   </button>`;
 }
@@ -1398,7 +1653,7 @@ function applyFilterDraft(){
 function applyAndClose(){ sheetDirty = false; closeSheet(); applyFilterDraft(); if(S.view!=="swipe") setView("swipe"); }
 
 sheet.addEventListener("click", e => {
-  const t = e.target.closest("[data-act],[data-set],[data-series],[data-toggle],[data-min],[data-mon],[data-unmon],[data-group],[data-gen],[data-kind],[data-preset],[data-order],[data-rar],[data-prio],[data-want],[data-ex]");
+  const t = e.target.closest("[data-emo],[data-col],[data-ftype],[data-rk],[data-rv],[data-fmon],[data-pick],[data-dfold],[data-act],[data-set],[data-series],[data-toggle],[data-min],[data-mon],[data-unmon],[data-group],[data-gen],[data-kind],[data-preset],[data-order],[data-rar],[data-prio],[data-want],[data-ex]");
   if(!t) return;
   if(sheetKind==="filters"){
     sheetDirty = true;
@@ -1430,6 +1685,13 @@ sheet.addEventListener("click", e => {
     renderFilterBody(); return;
   }
   if(sheetKind==="detail") return detailClick(t);
+  if(sheetKind==="folder") return folderEditorClick(t);
+  if(sheetKind==="picker"){
+    if(t.dataset.act==="close") return closeSheet();
+    if(t.dataset.act==="newFolder"){ closeSheet(); setTimeout(() => openFolderEditor(null), 320); return; }
+    if(t.dataset.pick){ const f = folderById(t.dataset.pick); let n = 0; for(const id of sel.ids){ const e = S.chase[id]; if(e && !e.folders.includes(f.id)){ e.folders.push(f.id); n++; } } saveChase(); closeSheet(); toggleSelect(false); toast(ICON.check, `Added ${n} card${n===1?"":"s"} to ${f.name}`); }
+    return;
+  }
   if(sheetKind==="export") return exportClick(t);
   if(sheetKind==="help" && t.dataset.act==="close") return closeSheet();
 });
@@ -1460,6 +1722,7 @@ function openDetail(id){
   fetchPrices([id]);
   openSheet("detail", detailHTML(c));
   const t = sheet.querySelector(".detail-hero .tcg"); if(t) wireTilt(t);
+  wireNote();
 }
 function changeTxt(from, to){ if(from==null || to==null || !from) return ""; const d = (to-from)/from*100; return `${d>=0?"+":"−"}${Math.abs(d).toFixed(0)}%`; }
 function chartHTML(c){
@@ -1552,7 +1815,11 @@ function detailHTML(c){
         <div class="seg prio-seg">${[3,2,1].map(n => `<button data-prio="${n}" class="p${n} ${e.prio===n?"on":""}">${n===3?"🔥 Grail":PRIO[n].label}</button>`).join("")}</div></div>
       <div class="sec"><div class="sec-t"><h3>I want it</h3></div>
         <div class="chips" style="flex-wrap:wrap">${GRADES.map(g => `<button class="chip ${want===g?"on":""}" data-want="${g}">${g==="Raw"?"Raw / ungraded":g}</button>`).join("")}</div></div>
-      <div class="sec"><div class="toggle-row" data-act="got"><div><div class="t">Got it!</div><div class="d">Mark as acquired. It moves to your collected pile.</div></div><div class="switch ${e.got?"on":""}"></div></div></div>
+      <div class="sec"><div class="sec-t"><h3>Folders</h3></div>
+        <div class="wrapchips">${S.folders.filter(f => f.type==="manual").map(f => `<button class="fchip sm ${e.folders.includes(f.id)?"on":""}" style="--fc:${f.color}" data-dfold="${f.id}">${f.emoji} ${esc(f.name)}</button>`).join("")}<button class="fchip sm add" data-act="newFolderFromCard">＋ New folder</button></div>
+        ${S.folders.some(f => f.type==="smart" && inFolder(e,f)) ? `<div class="help">Also shows in: ${S.folders.filter(f => f.type==="smart" && inFolder(e,f)).map(f => f.emoji+" "+esc(f.name)).join(", ")} (automatic)</div>` : ""}</div>
+      <div class="sec"><div class="toggle-row" data-act="got"><div><div class="t">Got it!</div><div class="d">Mark as owned. Owned cards can go in folders like PC or To flip.</div></div><div class="switch ${e.got?"on":""}"></div></div>
+        ${e.got ? `<div class="paidrow"><div class="field mini"><span class="lbl">I paid $</span><input id="paidIn" inputmode="decimal" maxlength="8" value="${e.paid!=null?e.paid:""}" placeholder="optional"></div>${e.paid!=null && priceOf(c.id)!=null ? `<span class="gainpill ${priceOf(c.id)>=e.paid?"pos":"neg"}">${priceOf(c.id)>=e.paid?"+":"−"}${money(Math.abs(priceOf(c.id)-e.paid))} (${changeTxt(e.paid, priceOf(c.id))})</span>` : ""}</div>` : ""}</div>
       <div class="sec"><div class="sec-t"><h3>Notes</h3></div><textarea class="note-in" id="noteIn" maxlength="500" placeholder="Max budget, condition, seller to watch…">${esc(e.note)}</textarea></div>
       ` : ""}
 
@@ -1566,7 +1833,7 @@ function detailHTML(c){
       ${e ? `<div class="sec"><button class="btn danger block" data-act="remove">Remove from chase list</button></div>` : ""}
       <div style="height:6px"></div>
     </div>
-    ${e ? "" : `<div class="sheet-foot"><button class="btn primary block" data-act="add">${ICON.heart} Add to chase list</button></div>`}`;
+    ${e ? "" : `<div class="sheet-foot"><button class="btn ghost" data-act="own">✓ I own it</button><button class="btn primary block" style="flex:1" data-act="add">${ICON.heart} Add to chase list</button></div>`}`;
 }
 function rerenderDetail(){
   const c = findCard(detailId); if(!c || sheetKind!=="detail") return;
@@ -1577,18 +1844,28 @@ function rerenderDetail(){
   const nb = sheet.querySelector(".sheet-body"); if(nb) nb.scrollTop = keep;
   wireNote();
 }
-function wireNote(){ const n = $("#noteIn"); if(n) n.oninput = () => { const e=S.chase[detailId]; if(e){ e.note=n.value; saveChase(); } }; }
+function wireNote(){
+  const n = $("#noteIn"); if(n) n.oninput = () => { const e=S.chase[detailId]; if(e){ e.note=n.value; saveChase(); } };
+  const pi = $("#paidIn"); if(pi) pi.onchange = () => { const e=S.chase[detailId]; if(!e) return; const v = parseFloat(pi.value.replace(/[^0-9.]/g,"")); e.paid = isFinite(v) && v>=0 ? Math.min(v,1e7) : null; saveChase(); rerenderDetail(); };
+}
 function detailClick(t){
   const e = S.chase[detailId];
   if(t.dataset.act==="close") return closeSheet();
+  if(t.dataset.act==="own"){
+    const c = findCard(detailId);
+    S.chase[detailId] = { card:snapshot(c), prio:2, want:"Raw", got:true, note:"", added:Date.now(), folders:[], paid:null }; saveChase(); bumpCount();
+    toast(ICON.check, "Added to your collection: "+c.name); return rerenderDetail();
+  }
+  if(t.dataset.act==="newFolderFromCard"){ folderReturn = detailId; closeSheet(); setTimeout(() => openFolderEditor(null), 320); return; }
   if(t.dataset.act==="add"){
     const c = findCard(detailId);
     if(S.pool[S.idx]?.id === detailId){ closeSheet(); setTimeout(() => act("chase"), 250); return; }
-    S.chase[detailId] = { card:snapshot(c), prio:2, want:"Raw", got:false, note:"", added:Date.now() }; saveChase(); bumpCount();
+    S.chase[detailId] = { card:snapshot(c), prio:2, want:"Raw", got:false, note:"", added:Date.now(), folders:[], paid:null }; saveChase(); bumpCount();
     toast(ICON.heart, "Added: "+c.name); return rerenderDetail();
   }
   if(!e) return;
-  if(t.dataset.prio){ e.prio = +t.dataset.prio; }
+  if(t.dataset.dfold){ const i = e.folders.indexOf(t.dataset.dfold); i>=0 ? e.folders.splice(i,1) : e.folders.push(t.dataset.dfold); }
+  else if(t.dataset.prio){ e.prio = +t.dataset.prio; }
   else if(t.dataset.want){ e.want = t.dataset.want; }
   else if(t.dataset.act==="got"){ e.got = !e.got; if(e.got){ celebrateAt(t); toast(ICON.check, "Collected: "+e.card.name); } }
   else if(t.dataset.act==="remove"){
@@ -1630,7 +1907,7 @@ function openHelp(first){
         ${st(2,"Swipe",`Drag a card or use the buttons. Made a mistake? The <b>undo arrow</b> brings back the last card.`)}
         ${st(3,"Read the badges",`<b>📈 Heating up</b>, <b>💎 Possible dip</b>, <b>⚠️ Overheated</b> and <b>📉 Sliding</b> come from each card's recent price trend. <b>✦ Claude</b> badges mark this week's researched picks. Tap a card for the reasons, prices and buy links.`)}
         ${st(4,"Check Claude's picks",`The <b>Picks</b> tab lists cards worth targeting this week, with the reasoning, the price when each was called, and how past picks have done. Tap <b>Swipe these picks</b> to go through them.`)}
-        ${st(5,"Work your chase list",`The <b>List</b> tab shows what's left to buy. Tap a card to set its priority, choose <b>Raw or a grade</b> (PSA 10, BGS 9.5…), and flip <b>Got it</b> when it lands in your binder.`)}
+        ${st(5,"Organize with folders",`The <b>List</b> tab has folders like <b>PC</b> and <b>To flip</b>, plus automatic ones (<b>Grails</b>, <b>Buy now</b>, <b>Consider selling</b>). After a right swipe, tap a folder to file the card. Tap a card to set priority, Raw or graded, <b>Got it</b> and what you paid. Use <b>＋ New</b> to make your own, or the ✓ button to select several cards at once.`)}
         ${st(6,"Share and back up",`Use the <b>share button</b> on your list to copy it as text or CSV. Your list is saved on this device only, so copy a <b>backup code</b> now and then.`)}
       </div></div>
       <div class="tipbox">Tip: add ChaseDeck to your home screen (Share → Add to Home Screen) so it opens like an app.</div>
@@ -1640,16 +1917,17 @@ function openHelp(first){
 
 /* ---- export ---- */
 function exportText(){
-  const items = Object.values(S.chase).sort((a,b) => (a.got-b.got) || b.prio-a.prio || (priceOf(b.card.id)||0)-(priceOf(a.card.id)||0));
+  const F = S.listFolder==="all" ? null : folderById(S.listFolder);
+  const items = folderEntries(S.listFolder).sort((a,b) => (a.got-b.got) || b.prio-a.prio || (priceOf(b.card.id)||0)-(priceOf(a.card.id)||0));
   const hunting = items.filter(e=>!e.got), got = items.filter(e=>e.got);
   const line = e => `${e.prio===3?"🔥 ":e.prio===2?"• ":"◦ "}${e.card.name} — ${e.card.setName} #${e.card.number} (${e.card.rarity})${e.want!=="Raw"?" · want "+e.want:""} · ${money(priceOf(e.card.id))}${e.note?` · ${e.note}`:""}`;
   const total = hunting.reduce((t,e)=>t+(priceOf(e.card.id)||0),0);
-  return `MY POKÉMON CHASE LIST\n${hunting.length} cards · ${money(total)} raw market\n\n` + hunting.map(line).join("\n") + (got.length?`\n\n✓ GOT IT (${got.length})\n`+got.map(e=>"✓ "+e.card.name+" — "+e.card.setName+" #"+e.card.number).join("\n"):"");
+  return `${F ? (F.emoji+" "+F.name).toUpperCase() : "MY POKÉMON CHASE LIST"}\n${hunting.length} cards · ${money(total)} raw market\n\n` + hunting.map(line).join("\n") + (got.length?`\n\n✓ GOT IT (${got.length})\n`+got.map(e=>"✓ "+e.card.name+" — "+e.card.setName+" #"+e.card.number).join("\n"):"");
 }
 function exportCSV(){
   const q = v => { let t = String(v??""); if(/^[=+\-@\t\r]/.test(t)) t = "'" + t; return `"${t.replace(/"/g,'""')}"`; };
-  const rows = [["Name","Set","Number","Rarity","Artist","Priority","Want","Acquired","Market price (USD)","Added","Notes","TCGplayer","Card ID"]];
-  for(const e of Object.values(S.chase)){ const c=e.card; rows.push([c.name,c.setName,c.number,c.rarity,c.artist,PRIO[e.prio].label,e.want,e.got?"Yes":"No",priceOf(c.id)??"",new Date(e.added).toISOString().slice(0,10),e.note,(S.prices[c.id]?.url||c.tcgUrl||""),c.id]); }
+  const rows = [["Name","Set","Number","Rarity","Artist","Priority","Want","Owned","Paid (USD)","Market price (USD)","Folders","Added","Notes","TCGplayer","Card ID"]];
+  for(const e of folderEntries(S.listFolder)){ const c=e.card; rows.push([c.name,c.setName,c.number,c.rarity,c.artist,PRIO[e.prio].label,e.want,e.got?"Yes":"No",e.paid??"",priceOf(c.id)??"",e.folders.map(id => folderById(id)?.name).filter(Boolean).join("; "),new Date(e.added).toISOString().slice(0,10),e.note,(S.prices[c.id]?.url||c.tcgUrl||""),c.id]); }
   return rows.map(r => r.map(q).join(",")).join("\n");
 }
 function openExport(){
@@ -1681,7 +1959,7 @@ function exportClick(t){
   if(k==="csv"){ $("#exBox").value = exportCSV(); copy(exportCSV(), "CSV"); }
   if(k==="dl"){ const blob = new Blob([exportCSV()],{type:"text/csv"}); const a=document.createElement("a"); a.href=URL.createObjectURL(blob); a.download=`chase-list-${new Date().toISOString().slice(0,10)}.csv`; document.body.appendChild(a); a.click(); setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove();},500); toast(ICON.check,"CSV downloaded"); }
   if(k==="share"){ const text = exportText(); if(navigator.share){ navigator.share({title:"My Pokémon chase list", text}).catch(()=>{}); } else copy(text,"List"); }
-  if(k==="backup"){ const code = "CHASEDECK1:" + btoa(unescape(encodeURIComponent(JSON.stringify({chase:S.chase, decisions:S.decisions})))); $("#exBox").value = code; copy(code, "Backup code"); }
+  if(k==="backup"){ const code = "CHASEDECK1:" + btoa(unescape(encodeURIComponent(JSON.stringify({chase:S.chase, decisions:S.decisions, folders:S.folders})))); $("#exBox").value = code; copy(code, "Backup code"); }
   if(k==="restore"){
     const box = $("#restoreBox");
     if(box.style.display==="none"){ box.style.display="block"; box.focus(); t.textContent="Restore now"; return; }
@@ -1692,6 +1970,7 @@ function exportClick(t){
       const incoming = cleanChase(d && d.chase); const n = Object.keys(incoming).length;
       if(!n) throw 0;
       S.chase = Object.assign({}, S.chase, incoming); S.decisions = Object.assign({}, S.decisions, cleanDecisions(d.decisions)); saveChase(); saveDecisions(); bumpCount();
+      const inF = cleanFolders(d.folders) || []; for(const f of inF){ if(!S.folders.some(x => x.id===f.id) && S.folders.length < 30) S.folders.push(f); } saveFolders();
       toast(ICON.check, `Restored ${n} card${n===1?"":"s"}`); closeSheet(); setView("list");
     }catch{ toast(ICON.warn, "That backup code didn't work"); }
   }
@@ -1700,8 +1979,18 @@ function exportClick(t){
 /* ---------- global events ---------- */
 document.addEventListener("error", e => { const t=e.target; if(t && t.classList && t.classList.contains("setlogo")){ const sp=document.createElement("span"); sp.className="fallback"; sp.textContent=t.alt; t.replaceWith(sp); } }, true);
 document.addEventListener("click", e => {
-  const t = e.target.closest("[data-act],[data-open],[data-f],[data-s],[data-view]");
-  if(!t || sheet.contains(t)) return;
+  const t = e.target.closest("[data-act],[data-open],[data-f],[data-s],[data-view],[data-folder],[data-sel]");
+  if(!t || sheet.contains(t) || $("#fbar").contains(t)) return;
+  if(t.dataset.folder){ S.listFolder = t.dataset.folder; LS.set("listFolder", S.listFolder); if(S.listFolder!=="all"){ S.listFilter="all"; } $("#listScroll").scrollTop = 0; return renderList(); }
+  if(t.dataset.sel){
+    const k = t.dataset.sel;
+    if(k==="done") return toggleSelect(false);
+    if(k==="folder") return openFolderPicker();
+    if(k==="unfolder"){ const fid = S.listFolder; for(const id of sel.ids){ const e=S.chase[id]; if(e) e.folders = e.folders.filter(x => x!==fid); } saveChase(); const n=sel.ids.size; toggleSelect(false); toast(ICON.check, `Removed ${n} card${n===1?"":"s"}`); return; }
+    if(k==="got"){ for(const id of sel.ids){ const e=S.chase[id]; if(e) e.got = true; } saveChase(); const n=sel.ids.size; toggleSelect(false); toast(ICON.check, `Marked ${n} as owned`); return; }
+    return;
+  }
+  if(t.dataset.open && sel.on){ const id=t.dataset.open; sel.ids.has(id) ? sel.ids.delete(id) : sel.ids.add(id); t.classList.toggle("picked"); renderSelBar(); return; }
   if(t.dataset.view) return setView(t.dataset.view);
   if(t.dataset.open) return openDetail(t.dataset.open);
   if(t.dataset.f){ S.listFilter = t.dataset.f; LS.set("listFilter", S.listFilter); return renderList(); }
@@ -1709,6 +1998,9 @@ document.addEventListener("click", e => {
   const a = t.dataset.act;
   if(a==="filters") openFilters();
   if(a==="swipePicks") startPicksDeck();
+  if(a==="newFolder") openFolderEditor(null);
+  if(a==="editFolder") openFolderEditor(S.listFolder);
+  if(a==="select") toggleSelect(!sel.on);
   if(a==="exitPicks") buildPool();
   if(a==="list") setView("list");
   if(a==="swipe") setView("swipe");
