@@ -1,0 +1,47 @@
+name: Backfill price history (run once)
+
+# Builds ChaseDeck's price baseline from tcgcsv.com's daily TCGplayer archives
+# (Feb 2024 onward). Run it by hand once from the Actions tab. tcgcsv asks that
+# archives are downloaded once, not repeatedly, so please don't schedule this.
+on:
+  workflow_dispatch:
+    inputs:
+      from:
+        description: "Start date (YYYY-MM-DD). Earliest is 2024-02-08."
+        required: false
+        default: "2024-02-08"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: record-prices
+  cancel-in-progress: false
+
+jobs:
+  backfill:
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install 7-Zip
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq p7zip-full
+      - name: Build price history
+        env:
+          BACKFILL_FROM: ${{ inputs.from }}
+        run: python scripts/backfill_prices.py
+      - name: Save to repo
+        run: |
+          git config user.name "chasedeck-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add prices
+          if git diff --cached --quiet; then
+            echo "No changes"
+          else
+            git commit -m "Backfill price history from tcgcsv.com archives"
+            git pull --rebase
+            git push
+          fi

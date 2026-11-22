@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-YHm5LIwlJCA/xd02LxpGjCRGqCz1zfWfJcBQ925wY9w='; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' https://images.pokemontcg.io https://images.scrydex.com data: blob:; connect-src 'self' https://raw.githubusercontent.com https://api.tcgdex.net https://api.pokemontcg.io; manifest-src 'self'; base-uri 'none'; form-action 'none'; object-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-RoCo/jOprBCPhDIM6UI/WvD98sATWfFZ4hNWJuQgWOA='; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' https://images.pokemontcg.io https://images.scrydex.com data: blob:; connect-src 'self' https://raw.githubusercontent.com https://api.tcgdex.net https://api.pokemontcg.io; manifest-src 'self'; base-uri 'none'; form-action 'none'; object-src 'none'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1">
 <meta name="theme-color" content="#0a0913">
@@ -381,6 +381,9 @@ img{user-select:none;-webkit-user-drag:none}
 .chart .ctag{opacity:0;animation:fadeIn .4s ease 1s forwards}
 @keyframes draw{to{stroke-dashoffset:0}}
 @keyframes fadeIn{to{opacity:1}}
+.ranges{display:flex;gap:4px;margin:-2px 0 8px;padding:3px;border-radius:11px;background:rgba(0,0,0,.25);width:max-content}
+.ranges button{height:28px;padding:0 12px;border-radius:8px;font-size:12px;font-weight:800;color:var(--ink-3)}
+.ranges button.on{background:rgba(255,255,255,.14);color:var(--ink)}
 .chart .csub{font-size:11px;color:var(--ink-3);font-weight:600;margin-top:6px}
 .chg{font-size:12.5px;font-weight:800}
 
@@ -670,6 +673,7 @@ const S = {
 S.chase = cleanChase(LS.get("chase", {}));
 S.decisions = cleanDecisions(LS.get("decisions", {}));
 S.folders = cleanFolders(LS.get("folders", null)) || STARTER_FOLDERS.map(f => ({...f}));
+S.chartRange = ["1m","3m","1y","all"].includes(LS.get("chartRange","3m")) ? LS.get("chartRange","3m") : "3m";
 S.listFolder = LS.get("listFolder", "all"); if(S.listFolder!=="all" && !S.folders.some(f => f.id===S.listFolder)) S.listFolder = "all";
 const saveFolders = () => LS.set("folders", S.folders);
 { const f=S.filters; if(!PRESETS[f.preset]) f.preset="chase"; if(!["shuffle","newest","oldest"].includes(f.order)) f.order="shuffle";
@@ -1653,7 +1657,7 @@ function applyFilterDraft(){
 function applyAndClose(){ sheetDirty = false; closeSheet(); applyFilterDraft(); if(S.view!=="swipe") setView("swipe"); }
 
 sheet.addEventListener("click", e => {
-  const t = e.target.closest("[data-emo],[data-col],[data-ftype],[data-rk],[data-rv],[data-fmon],[data-pick],[data-dfold],[data-act],[data-set],[data-series],[data-toggle],[data-min],[data-mon],[data-unmon],[data-group],[data-gen],[data-kind],[data-preset],[data-order],[data-rar],[data-prio],[data-want],[data-ex]");
+  const t = e.target.closest("[data-range],[data-emo],[data-col],[data-ftype],[data-rk],[data-rv],[data-fmon],[data-pick],[data-dfold],[data-act],[data-set],[data-series],[data-toggle],[data-min],[data-mon],[data-unmon],[data-group],[data-gen],[data-kind],[data-preset],[data-order],[data-rar],[data-prio],[data-want],[data-ex]");
   if(!t) return;
   if(sheetKind==="filters"){
     sheetDirty = true;
@@ -1726,13 +1730,20 @@ function openDetail(id){
 }
 function changeTxt(from, to){ if(from==null || to==null || !from) return ""; const d = (to-from)/from*100; return `${d>=0?"+":"−"}${Math.abs(d).toFixed(0)}%`; }
 function chartHTML(c){
-  const own = histFor(c.id), pr = S.prices[c.id];
+  const full = histFor(c.id), pr = S.prices[c.id];
+  const RANGES = [["1m","1M",30],["3m","3M",91],["1y","1Y",365],["all","All",1e6]];
+  const span = full.length ? full.at(-1)[0] - full[0][0] : 0;
+  const avail = RANGES.filter(([,,d],i) => i===0 || span > RANGES[i-1][2]);
+  let rk = S.chartRange || "3m"; if(!avail.some(r => r[0]===rk)) rk = avail.at(-1)[0];
+  const rdays = RANGES.find(r => r[0]===rk)[2];
+  let own = full.length ? full.filter(p => p[0] > full.at(-1)[0] - rdays) : full;
+  if(own.length < 2 && full.length >= 2) own = full.slice(-2);
   let pts, cur, title, sub, startLbl;
   const now = today();
   if(own.length >= 2){
     pts = own.map(([d, v]) => [d - now, v]); cur = "$";
-    title = "Price history"; sub = `TCGplayer (US) · ${own.length} day${own.length===1?"":"s"} of ChaseDeck price data`;
-    startLbl = new Date(own[0][0]*86400000).toLocaleDateString(undefined,{month:"short",day:"numeric"});
+    title = "Price history"; sub = `TCGplayer (US) · ChaseDeck price data since ${new Date(full[0][0]*86400000).toLocaleDateString(undefined,{month:"short", year:"numeric"})}`;
+    startLbl = new Date(own[0][0]*86400000).toLocaleDateString(undefined, rdays > 300 ? {month:"short", year:"numeric"} : {month:"short", day:"numeric"});
   } else if(pr && pr.cm){
     pts = [[-30, pr.cm.a30], [-7, pr.cm.a7]]; if(pr.cm.a1!=null) pts.push([-1, pr.cm.a1]);
     cur = "€"; title = "Price trend"; sub = "Cardmarket (EU) averages until ChaseDeck has 2+ days of US prices"; startLbl = "30 days ago";
@@ -1752,8 +1763,9 @@ function chartHTML(c){
   const grid = [y1 - (y1-y0)*0.15, y0 + (y1-y0)*0.15].map(v => `<line x1="${L}" x2="${W-Rr+4}" y1="${Y(v).toFixed(1)}" y2="${Y(v).toFixed(1)}" class="gl"/><text x="${W-Rr+10}" y="${(Y(v)+4).toFixed(1)}" class="gt">${fmt(v)}</text>`).join("");
   const dots = coords.map(([x,y],i) => `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${i===coords.length-1?4.5:(coords.length>20?0:2.6)}" fill="${i===coords.length-1?col:"#0f0c1f"}" stroke="${col}" stroke-width="2"/>`).join("");
   const lx = coords.at(-1)[0], ly = coords.at(-1)[1];
+  const rangeChips = cur==="$" && avail.length > 1 ? `<div class="ranges">${avail.map(([k,l]) => `<button class="${k===rk?"on":""}" data-range="${k}">${l}</button>`).join("")}</div>` : "";
   return `<div class="sec"><div class="sec-t"><h3>${title}</h3><span class="chg" style="color:${col}">${Math.abs(chg) < 0.005 ? "Flat" : (up?"▲ ":"▼ ")+Math.abs(chg*100).toFixed(1)+"%"}</span></div>
-    <div class="chart">
+    <div class="chart">${rangeChips}
       <svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(title)} chart">
         <defs><linearGradient id="cfill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${col}" stop-opacity=".35"/><stop offset="1" stop-color="${col}" stop-opacity="0"/></linearGradient></defs>
         ${grid}
@@ -1850,6 +1862,7 @@ function wireNote(){
 }
 function detailClick(t){
   const e = S.chase[detailId];
+  if(t.dataset.range){ S.chartRange = t.dataset.range; LS.set("chartRange", S.chartRange); return rerenderDetail(); }
   if(t.dataset.act==="close") return closeSheet();
   if(t.dataset.act==="own"){
     const c = findCard(detailId);

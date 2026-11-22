@@ -2,7 +2,7 @@ name: Record prices
 
 on:
   schedule:
-    - cron: "17 11 * * *"   # every day around 5:17 AM Central
+    - cron: "37 21 * * *"   # every day around 3:37 PM Central, after tcgcsv.com updates (~20:00 UTC)
   workflow_dispatch:         # lets you run it by hand from the Actions tab
 
 permissions:
