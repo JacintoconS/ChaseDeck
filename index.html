@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-ExmzIw0OcqHXV+u1ctlI/UmE3iYsJr3xOePSWruxZps='; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' https://images.pokemontcg.io https://images.scrydex.com data: blob:; connect-src 'self' https://raw.githubusercontent.com https://api.tcgdex.net https://api.pokemontcg.io; manifest-src 'self'; base-uri 'none'; form-action 'none'; object-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-h3TKs68XJKTpHbdG/qyuz6z8SS+cfWCclkvpV6nh1fc='; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' https://images.pokemontcg.io https://images.scrydex.com data: blob:; connect-src 'self' https://raw.githubusercontent.com https://api.tcgdex.net https://api.pokemontcg.io; manifest-src 'self'; base-uri 'none'; form-action 'none'; object-src 'none'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1">
 <meta name="theme-color" content="#0a0913">
@@ -454,6 +454,23 @@ img{user-select:none;-webkit-user-drag:none}
 .tm-pill.na{background:rgba(255,255,255,.1);color:var(--ink-2)}
 .tm-meter{flex:1;height:8px;border-radius:8px;position:relative;background:linear-gradient(90deg,#ff6b88,#ffd27a 50%,#3ef2b0)}
 .tm-meter i{position:absolute;top:50%;width:16px;height:16px;margin:-8px 0 0 -8px;border-radius:50%;background:#fff;box-shadow:0 2px 8px rgba(0,0,0,.5),0 0 0 3px rgba(10,9,19,.6)}
+.tm-stage{font-size:11px;font-weight:800;letter-spacing:.02em;padding:4px 9px;border-radius:99px;background:rgba(255,255,255,.08);color:var(--ink-2);margin-left:6px}
+.tm-why li span{flex:1}
+.tm-why li em{font-style:normal;font-size:11.5px;font-weight:800;color:var(--ink-3);font-variant-numeric:tabular-nums;margin-left:6px;white-space:nowrap}
+.tm-why li.gp em{color:#8cf5c7}.tm-why li.gn em{color:#ff9fb1}
+.tm-foot{margin:10px 0 0;font-size:11.5px;line-height:1.45;color:var(--ink-3)}
+.field.mini.fee{max-width:132px}
+.graded{display:flex;flex-direction:column;gap:12px}
+.gvn{display:flex;justify-content:space-between;align-items:baseline;font-size:12.5px;font-weight:800;color:var(--ink-2);margin-bottom:6px}
+.gvn span{font-size:11px;font-weight:700;color:var(--ink-3)}
+.gboxes{display:grid;grid-template-columns:repeat(auto-fit,minmax(72px,1fr));gap:6px}
+.gbox{background:var(--glass);border:1px solid var(--line);border-radius:12px;padding:8px 9px;display:flex;flex-direction:column;gap:2px;min-width:0}
+.gbox.main{border-color:rgba(196,178,255,.45);background:linear-gradient(135deg,rgba(140,110,255,.16),rgba(255,255,255,.03))}
+.gbox span{font-size:10.5px;font-weight:800;color:var(--ink-3);letter-spacing:.03em}
+.gbox b{font-size:14.5px;font-weight:800;font-variant-numeric:tabular-nums;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.gbox em{font-style:normal;font-size:10px;color:var(--ink-3);line-height:1.3}
+.ghint{margin:2px 0 0;font-size:12.5px;line-height:1.45;color:var(--ink-2)}
+.help a{color:inherit;text-decoration:underline}
 .tm-why{list-style:none;margin:12px 0 0;padding:0;display:flex;flex-direction:column;gap:7px}
 .tm-why li{display:flex;gap:9px;font-size:13px;line-height:1.45;color:var(--ink-2);font-weight:500}
 .tm-why li b{width:18px;height:18px;border-radius:50%;flex-shrink:0;display:grid;place-items:center;font-size:10.5px;margin-top:1px}
@@ -713,6 +730,7 @@ S.chase = cleanChase(LS.get("chase", {}));
 S.decisions = cleanDecisions(LS.get("decisions", {}));
 S.folders = cleanFolders(LS.get("folders", null)) || STARTER_FOLDERS.map(f => ({...f}));
 if(!LS.get("hasTargetFolder", false)){ if(!S.folders.some(f => f.rule?.kind==="target") && S.folders.length < 30) S.folders.push({...STARTER_FOLDERS.at(-1), rule:{kind:"target"}}); LS.set("folders", S.folders); LS.set("hasTargetFolder", true); }
+S.fee = (() => { const f = num(LS.get("fee", 0)); return f!=null && f>=0 && f<=50 ? f : 0; })();
 S.chartRange = ["1m","3m","1y","all"].includes(LS.get("chartRange","3m")) ? LS.get("chartRange","3m") : "3m";
 S.listFolder = LS.get("listFolder", "all"); if(S.listFolder!=="all" && !S.folders.some(f => f.id===S.listFolder)) S.listFolder = "all";
 const saveFolders = () => LS.set("folders", S.folders);
@@ -1281,11 +1299,13 @@ function cleanPicks(d){
       reason:str(p.reason,400), price:num(p.price), date:day(p.date) || updated,
       sources:(Array.isArray(p.sources) ? p.sources : []).slice(0,6).map(x => ({name:str(x && x.name,60), url:(x && typeof x.url==="string" && /^https:\/\/[^\s"'<>\\]+$/i.test(x.url)) ? x.url.slice(0,400) : null})).filter(x => x.name) };
   };
-  return { updated, note:str(d.note,400), picks:(Array.isArray(d.picks)?d.picks:[]).slice(0,100).map(one).filter(Boolean), history:(Array.isArray(d.history)?d.history:[]).slice(0,2000).map(one).filter(Boolean) };
+  const reprint = new Map((Array.isArray(d.reprintWatch) ? d.reprintWatch : []).slice(0,60).filter(x => x && /^[A-Za-z0-9._-]{1,30}$/.test(x.set||"")).map(x => [x.set, str(x.note,160) || "reprint or restock announced"]));
+  return { updated, note:str(d.note,400), reprint, picks:(Array.isArray(d.picks)?d.picks:[]).slice(0,100).map(one).filter(Boolean), history:(Array.isArray(d.history)?d.history:[]).slice(0,2000).map(one).filter(Boolean) };
 }
 async function loadPicks(){
-  try{ const r = await fetch("picks.json", {cache:"no-cache"}); if(!r.ok) throw 0; S.picks = cleanPicks(await r.json()) || {updated:null, note:"", picks:[], history:[]}; }
-  catch{ S.picks = {updated:null, note:"", picks:[], history:[], offline:true}; }
+  try{ const r = await fetch("picks.json", {cache:"no-cache"}); if(!r.ok) throw 0; S.picks = cleanPicks(await r.json()) || {updated:null, note:"", picks:[], history:[], reprint:new Map()}; }
+  catch{ S.picks = {updated:null, note:"", picks:[], history:[], reprint:new Map(), offline:true}; }
+  timingCache.clear();
   refreshSignals(); if(S.view==="picks") renderPicks();
 }
 const setOfId = id => id.slice(0, id.lastIndexOf("-"));
@@ -1794,7 +1814,10 @@ function openDetail(id){
   const t = sheet.querySelector(".detail-hero .tcg"); if(t) wireTilt(t);
   wireNote();
 }
-/* ---------- buy / sell timing (Claude's rules, from ChaseDeck price history) ---------- */
+/* ---------- buy / sell timing (Claude's rules, from ChaseDeck price history) ----------
+   Every factor adds or removes points from 50. The rules come from Claude's market research
+   (release cycle, print status, seasons, reprints, buyouts, character demand) and were
+   tuned against ChaseDeck's price history since Feb 2024. */
 function targetHit(e){
   const p = priceOf(e.card.id); if(p==null) return false;
   return (!e.got && e.target!=null && p <= e.target) || (e.got && e.sellAt!=null && p >= e.sellAt);
@@ -1803,54 +1826,132 @@ const timingCache = new Map();
 function timingOf(id, owned){
   const h = histFor(id), last = h.at(-1);
   const price = last && today() - last[0] <= 3 ? last[1] : (priceOf(id) ?? last?.[1]);
-  const key = id + "|" + (owned?1:0) + "|" + h.length + "|" + price;
+  const key = id + "|" + (owned?1:0) + "|" + h.length + "|" + price + "|" + (S.graded?1:0) + "|" + (S.picks?.reprint?.size||0);
   if(timingCache.has(key)) return timingCache.get(key);
-  const out = computeTiming(id, owned, h, price); timingCache.set(key, out); return out;
+  const card = findCard(id);
+  const out = computeTiming({owned, h, price, asOf:today(), name:card?.name, setName:card?.setName, release:card?.release,
+    reprint:S.picks?.reprint?.get(setOfId(id)) || null, gem:gradedScarcity(id)});
+  timingCache.set(key, out); return out;
 }
-function computeTiming(id, owned, h, price){
+const STAR_MONS = /\b(charizard|pikachu|umbreon|gengar|eevee|espeon|sylveon|vaporeon|jolteon|flareon|leafeon|glaceon|rayquaza|lugia|mewtwo|mew|greninja|dragonite|snorlax|gardevoir|giratina|lucario)\b/i;
+const SPECIAL_SET = /\b151\b|prismatic|paldean fates|shining fates|hidden fates|celebrations|crown zenith|pok[eé]mon go|champion'?s path|shrouded fable|ascended heroes|black bolt|white flare|dragon majesty|generations|detective pikachu|calling of legends|southern islands|legendary collection|double crisis|30th/i;
+function stageOf(relDays, special){
+  if(relDays==null) return null;
+  const [a, b] = special ? [30, 90] : [42, 120];
+  if(relDays < a) return {k:"launch", n:"Launch hype", buy:-20, sell:10, t:"Release hype: chase cards usually drop 30–50% within the first weeks"};
+  if(relDays < b) return {k:"settle", n:"Settling", buy:-10, sell:5, t:"Still settling as more packs get opened"};
+  if(relDays < 300) return special ? {k:"window", n:"Buy window", buy:8, sell:-3, t:"Special sets have tended to find their floor 3–9 months after release, then climb"}
+    : {k:"drift", n:"First-year drift", buy:-5, sell:3, t:"Standard sets have usually kept drifting lower through their first year as reprints land"};
+  if(relDays < 540) return {k:"print", n:"In print", buy:-6, sell:4, t:"Likely still printing, so reprints can add supply"};
+  if(relDays < 730) return {k:"winding", n:"Print winding down", buy:0, sell:0, t:"Printing is likely winding down. Prices often stay flat until leftover stock clears"};
+  return {k:"oop", n:"Out of print", buy:5, sell:-4, t:"Out of print: fixed supply has historically drifted up"};
+}
+function seasonOf(day){
+  const m = new Date(day * 864e5).getUTCMonth();
+  if(m <= 1) return {buy:8, sell:-6, t:"January–February is historically the cheapest time of year"};
+  if(m >= 9) return {buy:-3, sell:8, t:"Holiday season: demand and prices usually run 10–30% hot"};
+  return null;
+}
+function computeTiming(o){
+  const {owned, h, price, asOf} = o;
   if(price==null) return null;
-  const card = findCard(id), now = h.length ? h.at(-1)[0] : today();
+  const now = h.length ? h.at(-1)[0] : asOf;
   const yr = h.filter(p => p[0] > now - 365);
   const last30 = h.filter(p => p[0] > now - 30);
   const ratio = last30.length >= 10 ? new Set(last30.map(p => p[1])).size / last30.length : null;
   const liq = ratio==null ? null : ratio > 0.6 ? "often" : ratio > 0.3 ? "sometimes" : "rarely";
-  const relDays = card?.release ? Math.floor((Date.now() - Date.parse(card.release.replace(/\//g,"-"))) / 864e5) : null;
-  if(yr.length < 8 || now - yr[0][0] < 45) return {rating:"na", reasons:[], liq, relDays, price};
+  const relDays = o.release ? Math.floor(asOf - Date.parse(o.release.replace(/\//g,"-")) / 864e5) : null;
+  const stage = stageOf(relDays, SPECIAL_SET.test(o.setName||""));
+  if(yr.length < 8 || now - yr[0][0] < 45) return {rating:"na", reasons:[], liq, relDays, price, stage};
   const lo = Math.min(...yr.map(p => p[1])), hi = Math.max(...yr.map(p => p[1]));
   const pos = hi > lo ? (price - lo) / (hi - lo) : 0.5;
   const at = d => { const c = h.filter(p => p[0] <= now - d); return c.length ? c.at(-1)[1] : null; };
   const ch = b => b ? (price - b) / b : 0, pc = x => Math.round(Math.abs(x) * 100) + "%";
   const d7 = ch(at(7)), d30 = ch(at(30));
   const range = `${money(lo)}–${money(hi)}`;
-  const falling = d30 < -0.12 && d7 < -0.03, settling = d30 < -0.08 && d7 >= -0.01, spiking = d30 > 0.35 || d7 > 0.2, climbing = d30 > 0.03;
-  const isNew = relDays!=null && relDays < 90, inPrint = relDays!=null && relDays < 540, oop = relDays!=null && relDays > 730;
+  const recent = h.filter(p => p[0] > now - 150 && p[0] <= now - 30).map(p => p[1]);
+  const peak = recent.length ? Math.max(...recent) : null, fromPeak = peak ? (price - peak) / peak : 0;
+  const spiking = d30 > 0.35 || d7 > 0.2;
+  const buyout = spiking && (liq==="rarely" || (d7 > 0.4 && price < 40));
+  const floor = !spiking && fromPeak <= -0.15 && d30 > -0.04 && d30 < 0.1 && d7 >= -0.02;
+  const falling = d30 < -0.12 && d7 < -0.03, settling = d30 < -0.08 && d7 >= -0.01, climbing = d30 > 0.03;
+  const season = seasonOf(asOf), star = STAR_MONS.test(o.name||"");
   const R = []; let sc = 50;
+  const add = (pts, t) => { pts = Math.round(pts); sc += pts; R.push({g:Math.sign(pts), pts, t}); };
   if(!owned){
-    sc += (0.5 - pos) * 50;
-    R.push(pos < 0.3 ? {g:1, t:`Near the low end of its 1-year range (${range})`} : pos > 0.8 ? {g:-1, t:`Near its 1-year high (range ${range})`} : {g:0, t:`Middle of its 1-year range (${range})`});
-    if(spiking){ sc -= 20; R.push({g:-1, t:`Spiking (+${pc(Math.max(d30,d7))} recently). Spikes often cool off`}); }
-    else if(falling){ sc -= 20; R.push({g:-1, t:`Still falling (−${pc(d30)} this month). Waiting may get a better price`}); }
-    else if(settling){ sc += 10; R.push({g:1, t:`Dropped ${pc(d30)} this month but has stopped falling`}); }
-    else if(climbing){ sc += 5; R.push({g:1, t:`Climbing steadily (+${pc(d30)} this month)`}); }
-    else R.push({g:0, t:"Price has been steady this month"});
-    if(isNew){ sc -= 15; R.push({g:-1, t:"New set: prices usually fall for a few months after release"}); }
-    else if(inPrint){ sc -= 5; R.push({g:-1, t:"Set is likely still being printed, so supply keeps growing"}); }
-    else if(oop){ sc += 5; R.push({g:1, t:"Out of print: no new supply is coming"}); }
-    if(liq==="rarely") R.push({g:0, t:"Sells rarely, so its price moves in jumps"});
+    add((0.5 - pos) * 30, pos < 0.3 ? `Near the low end of its 1-year range (${range})` : pos > 0.8 ? `Near its 1-year high (range ${range})` : `Middle of its 1-year range (${range})`);
+    if(buyout) add(-25, `Looks like a buyout: jumped ${pc(Math.max(d30,d7))} on thin trading. These usually give it back`);
+    else if(spiking) add(-20, `Spiking (+${pc(Math.max(d30,d7))} recently). Spikes often cool off`);
+    else if(floor) add(15, `Fell ${pc(fromPeak)} from its recent high, then held steady for a month: a floor may be forming`);
+    else if(falling) add(-8, `Still falling (−${pc(d30)} this month). Waiting may get a better price`);
+    else if(settling) add(10, `Dropped ${pc(d30)} this month but has stopped falling`);
+    else if(climbing) add(8, `Climbing steadily (+${pc(d30)} this month)`);
+    else R.push({g:0, pts:0, t:"Price has been steady this month"});
+    if(stage) add(stage.buy, stage.t);
+    if(season) add(season.buy, season.t);
+    if(o.reprint) add(-10, "Reprint risk: " + o.reprint);
+    if(star) add(6, "Top-tier Pokémon: holds value and recovers from dips better than most");
+    if(o.gem) add(3, o.gem);
+    if(liq==="rarely" && !buyout) R.push({g:0, pts:0, t:"Sells rarely, so its price moves in jumps"});
     const rating = sc >= 62 ? "great" : sc >= 42 ? "fair" : "wait";
-    return {rating, reasons:R, liq, relDays, price, lo, hi, pos, score:Math.round(sc)};
+    return {rating, reasons:R, liq, relDays, price, lo, hi, pos, stage, score:Math.round(sc)};
   }
-  sc += (pos - 0.5) * 50;
-  R.push(pos > 0.8 ? {g:1, t:`Near its 1-year high (range ${range})`} : pos < 0.3 ? {g:-1, t:`Near its 1-year low (range ${range}). Selling now locks in a low price`} : {g:0, t:`Middle of its 1-year range (${range})`});
-  if(spiking){ sc += 15; R.push({g:1, t:`Spiking (+${pc(Math.max(d30,d7))} recently): a good moment to sell into`}); }
-  else if(falling){ R.push({g:0, t:`Falling (−${pc(d30)} this month). If you're not holding long term, selling sooner limits the drop`}); }
-  else if(climbing){ sc -= 5; R.push({g:-1, t:`Still climbing (+${pc(d30)} this month). Holding may pay more`}); }
-  if(inPrint && !isNew){ sc += 5; R.push({g:1, t:"Still in print: reprints can push the price lower later"}); }
-  else if(oop){ sc -= 5; R.push({g:-1, t:"Out of print: long-term holders have often been rewarded"}); }
-  if(liq==="rarely") R.push({g:0, t:"Sells rarely, so finding a buyer may take time"});
+  add((pos - 0.5) * 30, pos > 0.8 ? `Near its 1-year high (range ${range})` : pos < 0.3 ? `Near its 1-year low (range ${range}). Selling now locks in a low price` : `Middle of its 1-year range (${range})`);
+  if(buyout) add(20, `Buyout spike (+${pc(Math.max(d30,d7))} on thin trading): sell into it before it fades`);
+  else if(spiking) add(15, `Spiking (+${pc(Math.max(d30,d7))} recently): a good moment to sell into`);
+  else if(falling) R.push({g:0, pts:0, t:`Falling (−${pc(d30)} this month). If you're not holding long term, selling sooner limits the drop`});
+  else if(climbing) add(-5, `Still climbing (+${pc(d30)} this month). Holding may pay more`);
+  if(stage) add(stage.sell, stage.t);
+  if(season) add(season.sell, season.t);
+  if(o.reprint) add(10, "Reprint risk: " + o.reprint + ". Selling before new supply lands avoids the drop");
+  if(star) add(-3, "Top-tier Pokémon: long-term holders have usually been rewarded");
+  if(liq==="rarely") R.push({g:0, pts:0, t:"Sells rarely, so finding a buyer may take time"});
   const rating = sc >= 65 ? "good" : sc >= 40 ? "fairsell" : "hold";
   const aim = Math.max(price, hi * 0.95);
-  return {rating, reasons:R, liq, relDays, price, lo, hi, pos, aim, score:Math.round(sc)};
+  return {rating, reasons:R, liq, relDays, price, lo, hi, pos, aim, stage, score:Math.round(sc)};
+}
+/* ---------- graded (PSA) prices: prices/_graded.json, refreshed monthly ---------- */
+S.graded = null; let gradedP = null;
+function loadGraded(){
+  if(!gradedP) gradedP = fetch("prices/_graded.json", {cache:"no-cache"}).then(r => r.ok ? r.json() : null).then(d => {
+    const out = {}; const G = ["7","8","9","10"];
+    const cleanG = e => { if(!e || typeof e!=="object") return null; const o = {v:num(e.v), l:num(e.l), a:num(e.a), p:Number.isInteger(e.p) && e.p>=0 ? e.p : null, s:e.s===1, d:/^\d{4}-\d{2}-\d{2}$/.test(e.d||"") ? e.d : null}; return (o.v!=null || o.p!=null) ? o : null; };
+    if(d && d.cards && typeof d.cards==="object") for(const [id, c] of Object.entries(d.cards).slice(0, 20000)){
+      if(!/^[A-Za-z0-9._-]{1,40}$/.test(id) || !c || typeof c!=="object") continue;
+      const v = (Array.isArray(c.v) ? c.v : []).slice(0, 8).map(x => { if(!x || typeof x!=="object") return null; const g = {}; for(const k of G){ const e = cleanG(x.g && x.g[k]); if(e) g[k] = e; } return Object.keys(g).length ? {n:str(x.n, 30) || "Standard", g, gem:num(x.gem), tot:Number.isInteger(x.tot) ? x.tot : null} : null; }).filter(Boolean);
+      const m = c.m && typeof c.m==="object" ? {raw:num(c.m.raw), g9:num(c.m["9"]), g10:num(c.m["10"]), n9:num(c.m.n9), n10:num(c.m.n10)} : null;
+      if(v.length || (m && (m.g9!=null || m.g10!=null))) out[id] = {v, m:(m && (m.g9!=null || m.g10!=null)) ? m : null};
+    }
+    S.graded = {updated:/^\d{4}-\d{2}-\d{2}$/.test(d?.updated||"") ? d.updated : null, cards:out};
+    timingCache.clear(); if(sheetKind==="detail") rerenderDetail();
+  }).catch(() => { S.graded = {updated:null, cards:{}}; });
+  return gradedP;
+}
+function gradedScarcity(id){
+  const vs = S.graded?.cards[id]?.v || []; const v = vs.find(x => ["Unlimited","Holo","Standard"].includes(x.n)) || vs[0]; const p10 = v?.g["10"]?.p;
+  if(!v || v.gem==null || p10==null || !v.tot || v.tot < 200) return null;
+  return v.gem < 0.05 && p10 < 300 ? `Scarce in PSA 10: only ${p10.toLocaleString()} exist (${(v.gem*100).toFixed(1)}% of graded ${v.n} copies)` : null;
+}
+function gradedHTML(c){
+  const g = S.graded?.cards[c.id]; if(!g) return "";
+  const gm = v => v==null ? "—" : v >= 10000 ? "$" + (v >= 1e6 ? (v/1e6).toFixed(1)+"M" : Math.round(v/1000)+"K") : v >= 100 ? "$" + Math.round(v).toLocaleString() : money(v);
+  const fmtD = d => d ? new Date(d+"T12:00:00").toLocaleDateString(undefined, {month:"short", year:"numeric"}) : "";
+  let body = "";
+  for(const v of g.v.slice(0, 3)){
+    const cells = ["7","8","9","10"].filter(k => v.g[k]).map(k => { const e = v.g[k];
+      return `<div class="gbox ${k==="10"?"main":""}"><span>PSA ${k}</span><b>${gm(e.v)}</b><em>${e.p!=null ? "Pop "+e.p.toLocaleString() : ""}${e.d ? " · "+esc(fmtD(e.d)) : ""}${e.s ? " · avg" : ""}</em></div>`; }).join("");
+    body += `<div class="gvar"><div class="gvn">${esc(v.n)}${v.gem!=null ? `<span>${(v.gem*100).toFixed(1)}% get a 10</span>` : ""}</div><div class="gboxes">${cells}</div></div>`;
+  }
+  if(g.m){
+    const raw = priceOf(c.id) ?? g.m.raw, base = g.m.raw ?? raw, mult = base && g.m.g10 ? g.m.g10 / base : null;
+    body += `<div class="gvar"><div class="gvn">eBay sold medians${mult ? `<span>PSA 10 ≈ ${mult.toFixed(1)}× raw</span>` : ""}</div><div class="gboxes">
+      ${g.m.g9!=null ? `<div class="gbox"><span>PSA 9</span><b>${money(g.m.g9)}</b><em>${g.m.n9 ? g.m.n9.toLocaleString()+" sales" : ""}</em></div>` : ""}
+      ${g.m.g10!=null ? `<div class="gbox main"><span>PSA 10</span><b>${money(g.m.g10)}</b><em>${g.m.n10 ? g.m.n10.toLocaleString()+" sales" : ""}</em></div>` : ""}</div></div>`;
+    if(mult && raw >= 50 && mult >= 2.5) body += `<p class="ghint">💡 Grading could pay if your copy is flawless: PSA 10s sell for about ${mult.toFixed(1)}× raw. PSA charges roughly $25–80 a card, and most copies don't get a 10.</p>`;
+  }
+  return `<div class="sec"><div class="sec-t"><h3>Graded prices</h3><span style="font-size:11.5px;color:var(--ink-3);font-weight:700">${g.v.length ? "PSA CardFacts" : "Sept 2026"}</span></div>
+    <div class="graded">${body}</div>
+    <div class="help" style="margin-top:8px">${g.v.length ? "Last PSA sale per grade (or PSA's average when the last sale looks mislabeled) and how many exist (pop), from <a href=\"https://www.psacard.com/cardfacts\" target=\"_blank\" rel=\"noopener noreferrer\">PSA CardFacts</a>, refreshed monthly. " : ""}${g.m ? "Median eBay sold prices from the <a href=\"https://github.com/rrh1441/pokemon-card-sold-price-reference\" target=\"_blank\" rel=\"noopener noreferrer\">Sold-Price Reference by Grade</a> (CC BY 4.0). " : ""}Graded prices vary a lot by copy, so check sold comps before you buy.</div></div>`;
 }
 const RATING = {great:["Great time to buy","great"], fair:["Fair price","fair"], wait:["Better to wait","wait"],
   good:["Good time to sell","good"], fairsell:["Fair time to sell","fair"], hold:["Better to hold","wait"], na:["Not enough price history yet","na"]};
@@ -1867,14 +1968,15 @@ function timingHTML(c){
       tgt = `<div class="tgtrow"><div class="field mini"><span class="lbl">My max price $</span><input id="tgtIn" inputmode="decimal" maxlength="8" value="${e.target!=null?e.target:""}" placeholder="${tm.lo!=null?Math.round(tm.lo + (tm.hi-tm.lo)*0.25):"optional"}"></div>${st}</div>`;
     } else {
       const st = e.sellAt==null ? "" : p==null ? "" : p >= e.sellAt ? `<span class="thit">🎯 At your sell price</span>` : `<span class="tmiss">${money(e.sellAt - p)} below your sell price</span>`;
-      tgt = `<div class="tgtrow"><div class="field mini"><span class="lbl">Sell at $</span><input id="sellIn" inputmode="decimal" maxlength="8" value="${e.sellAt!=null?e.sellAt:""}" placeholder="${tm.aim?Math.round(tm.aim):"optional"}"></div>${st}</div>`;
+      tgt = `<div class="tgtrow"><div class="field mini"><span class="lbl">Sell at $</span><input id="sellIn" inputmode="decimal" maxlength="8" value="${e.sellAt!=null?e.sellAt:""}" placeholder="${tm.aim?Math.round(tm.aim):"optional"}"></div><div class="field mini fee"><span class="lbl">My fees %</span><input id="feeIn" inputmode="decimal" maxlength="4" value="${S.fee||""}" placeholder="0"></div>${st}</div>`;
     }
   }
   return `<div class="sec"><div class="sec-t"><h3>${owned ? "Should I sell?" : "Should I buy now?"}</h3>${tm.liq ? `<span class="liq ${tm.liq}" title="${esc(LIQ[tm.liq][1])}">${LIQ[tm.liq][0]}</span>` : ""}</div>
     <div class="timing ${cls}">
-      <div class="tm-head"><span class="tm-pill ${cls}">${label}</span>${tm.score!=null ? `<span class="tm-meter"><i style="left:${Math.max(4,Math.min(96,tm.score))}%"></i></span>` : ""}</div>
-      ${tm.reasons.length ? `<ul class="tm-why">${tm.reasons.map(r => `<li class="g${r.g>0?"p":r.g<0?"n":"z"}"><b>${ico(r.g)}</b>${esc(r.t)}</li>`).join("")}</ul>` : `<p class="tm-na">ChaseDeck needs about 6 weeks of price history for this card before it can rate the timing.</p>`}
-      ${owned && tm.aim && tm.rating!=="hold" ? `<p class="tm-aim">Aim to sell around <b>${money(tm.aim)}</b>${e.paid!=null ? ` (you paid ${money(e.paid)})` : ""}.</p>` : ""}
+      <div class="tm-head"><span class="tm-pill ${cls}">${label}</span>${tm.stage ? `<span class="tm-stage">${esc(tm.stage.n)}</span>` : ""}${tm.score!=null ? `<span class="tm-meter"><i style="left:${Math.max(4,Math.min(96,tm.score))}%"></i></span>` : ""}</div>
+      ${tm.reasons.length ? `<ul class="tm-why">${tm.reasons.map(r => `<li class="g${r.g>0?"p":r.g<0?"n":"z"}"><b>${ico(r.g)}</b><span>${esc(r.t)}</span>${r.pts ? `<em>${r.pts>0?"+":"−"}${Math.abs(r.pts)}</em>` : ""}</li>`).join("")}</ul>` : `<p class="tm-na">ChaseDeck needs about 6 weeks of price history for this card before it can rate the timing.</p>`}
+      ${owned && tm.aim && tm.rating!=="hold" ? `<p class="tm-aim">Aim to sell around <b>${money(tm.aim)}</b>${S.fee ? `, about <b>${money(tm.aim*(1-S.fee/100))}</b> after your ${S.fee}% fees` : ""}${e.paid!=null ? ` (you paid ${money(e.paid)})` : ""}.</p>` : ""}
+      ${tm.score!=null ? `<p class="tm-foot">Score ${tm.score} out of 100, starting from 50. ${owned ? "65+ is a good time to sell, under 40 means hold." : "62+ is a great time to buy, under 42 means wait."} Rules tested on ChaseDeck's price history since 2024.</p>` : ""}
       ${tgt}
     </div></div>`;
 }
@@ -1971,6 +2073,7 @@ function detailHTML(c){
       </div>
       ${timingHTML(c)}
       ${chartHTML(c)}
+      ${gradedHTML(c)}
       ${insightHTML(c)}
 
       ${e ? `
@@ -2012,6 +2115,7 @@ function wireNote(){
   const num2 = v => { const n = parseFloat(String(v).replace(/[^0-9.]/g,"")); return isFinite(n) && n>0 ? Math.min(n,1e7) : null; };
   const ti = $("#tgtIn"); if(ti) ti.onchange = () => { const e=S.chase[detailId]; if(!e) return; e.target = num2(ti.value); saveChase(); rerenderDetail(); updateTargetBadge(); };
   const si = $("#sellIn"); if(si) si.onchange = () => { const e=S.chase[detailId]; if(!e) return; e.sellAt = num2(si.value); saveChase(); rerenderDetail(); updateTargetBadge(); };
+  const fi = $("#feeIn"); if(fi) fi.onchange = () => { const f = num2(fi.value); S.fee = f!=null && f>=0 && f<=50 ? f : 0; LS.set("fee", S.fee); rerenderDetail(); };
   const pi = $("#paidIn"); if(pi) pi.onchange = () => { const e=S.chase[detailId]; if(!e) return; const v = parseFloat(pi.value.replace(/[^0-9.]/g,"")); e.paid = isFinite(v) && v>=0 ? Math.min(v,1e7) : null; saveChase(); rerenderDetail(); };
 }
 function detailClick(t){
@@ -2213,7 +2317,7 @@ async function boot(){
     $("#retryBtn").addEventListener("click", () => location.reload());
     setActs(false); return;
   }
-  loadPicks();
+  loadPicks(); loadGraded();
   setTimeout(checkTargets, 2500);
   const first = !LS.get("seen", false);
   await buildPool();

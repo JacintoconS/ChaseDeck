@@ -1,328 +1,346 @@
 {
- "updated": "2026-11-22",
- "note": "Modern cards have cooled since July as reprints caught up with demand, while out-of-print alt arts and vintage keep climbing. This week's picks lean toward out-of-print climbers and modern cards that look like they've found a floor.",
- "picks": [
-  {
-   "id": "sm3-150",
-   "call": "buy",
-   "confidence": "high",
-   "reason": "Out-of-print rainbow Charizard that has climbed steadily all year (+32% in 90 days, +63% in a year) with no sharp spikes. Slow, steady demand is the healthiest kind.",
-   "price": 877.96,
-   "date": "2026-11-22",
-   "sources": [
+  "updated": "2026-11-22",
+  "note": "Modern cards have cooled since July as reprints caught up with demand, while out-of-print alt arts and vintage keep climbing. This week's picks lean toward out-of-print climbers and modern cards that look like they've found a floor.",
+  "picks": [
     {
-     "name": "ChaseDeck price history"
-    }
-   ]
-  },
-  {
-   "id": "sm9-165",
-   "call": "buy",
-   "confidence": "medium",
-   "reason": "Sun & Moon tag team alt arts keep setting new highs while modern cards cool off. Up 126% in a year. It jumped 29% this month, so buying on a quiet week beats chasing a spike.",
-   "price": 2445.57,
-   "date": "2026-11-22",
-   "sources": [
-    {
-     "name": "TCGplayer: cards climbing (Sep 2026)",
-     "url": "https://seller.tcgplayer.com/blog/price-trends-pok%C3%A9mon-cards-climbing-in-price-09-01-2026"
+      "id": "sm3-150",
+      "call": "buy",
+      "confidence": "high",
+      "reason": "Out-of-print rainbow Charizard that has climbed steadily all year (+32% in 90 days, +63% in a year) with no sharp spikes. Slow, steady demand is the healthiest kind.",
+      "price": 877.96,
+      "date": "2026-11-22",
+      "sources": [
+        {
+          "name": "ChaseDeck price history"
+        }
+      ]
     },
     {
-     "name": "ChaseDeck price history"
-    }
-   ]
-  },
-  {
-   "id": "base1-4",
-   "call": "buy",
-   "confidence": "medium",
-   "reason": "The 30th Celebration reprint put the original Base Set Charizard back in the spotlight, and it has kept climbing (+17% in 90 days). Vintage trades less often, so prices move in steps.",
-   "price": 1001.05,
-   "date": "2026-11-22",
-   "sources": [
-    {
-     "name": "ComicBook: reprints lifting originals",
-     "url": "https://comicbook.com/collectibles/news/pikachu-zekrom-tripled-over-night-and-this-is-only-the-beginning/"
+      "id": "sm9-165",
+      "call": "buy",
+      "confidence": "medium",
+      "reason": "Sun & Moon tag team alt arts keep setting new highs while modern cards cool off. Up 126% in a year. It jumped 29% this month, so buying on a quiet week beats chasing a spike.",
+      "price": 2445.57,
+      "date": "2026-11-22",
+      "sources": [
+        {
+          "name": "TCGplayer: cards climbing (Sep 2026)",
+          "url": "https://seller.tcgplayer.com/blog/price-trends-pok%C3%A9mon-cards-climbing-in-price-09-01-2026"
+        },
+        {
+          "name": "ChaseDeck price history"
+        }
+      ]
     },
     {
-     "name": "ChaseDeck price history"
-    }
-   ]
-  },
-  {
-   "id": "swsh7-183",
-   "call": "buy",
-   "confidence": "medium",
-   "reason": "Evolving Skies is long out of print and its Eeveelution alt arts keep climbing (+22% this month). An affordable way into the most collected set of the era.",
-   "price": 41.26,
-   "date": "2026-11-22",
-   "sources": [
-    {
-     "name": "ChaseDeck price history"
-    }
-   ]
-  },
-  {
-   "id": "swsh7-172",
-   "call": "buy",
-   "confidence": "medium",
-   "reason": "Same story as Sylveon V: out-of-print Eeveelution alt art, up 38% in 90 days. Up 31% this month, so it's moving fast; set a price and be patient.",
-   "price": 33.79,
-   "date": "2026-11-22",
-   "sources": [
-    {
-     "name": "ChaseDeck price history"
-    }
-   ]
-  },
-  {
-   "id": "swsh7-166",
-   "call": "buy",
-   "confidence": "medium",
-   "reason": "Cheapest of the climbing Evolving Skies Eeveelution alt arts, up 72% in a year and still rising.",
-   "price": 25.99,
-   "date": "2026-11-22",
-   "sources": [
-    {
-     "name": "ChaseDeck price history"
-    }
-   ]
-  },
-  {
-   "id": "swsh8-250",
-   "call": "buy",
-   "confidence": "medium",
-   "reason": "Fusion Strike alt arts have been firm while modern prices fell. Mew V is up 20% this month and 51% in a year.",
-   "price": 41.39,
-   "date": "2026-11-22",
-   "sources": [
-    {
-     "name": "ChaseDeck price history"
-    }
-   ]
-  },
-  {
-   "id": "sm6-120",
-   "call": "buy",
-   "confidence": "low",
-   "reason": "Steady, quiet climber (+19% in a year). Greninja demand is reliable and this Sun & Moon print is out of print.",
-   "price": 64.6,
-   "date": "2026-11-22",
-   "sources": [
-    {
-     "name": "ChaseDeck price history"
-    }
-   ]
-  },
-  {
-   "id": "sv8pt5-156",
-   "call": "dip",
-   "confidence": "medium",
-   "reason": "Down 29% from its summer level after the September Prismatic Evolutions reprints, but flat for two weeks. Eeveelution SIRs have historically recovered once reprint waves end.",
-   "price": 375.94,
-   "date": "2026-11-22",
-   "sources": [
-    {
-     "name": "TCGplayer: cards dropping (Oct 2026)",
-     "url": "https://seller.tcgplayer.com/blog/price-trends-pok%C3%A9mon-cards-dropping-in-price-10-13-2026"
+      "id": "base1-4",
+      "call": "buy",
+      "confidence": "medium",
+      "reason": "The 30th Celebration reprint put the original Base Set Charizard back in the spotlight, and it has kept climbing (+17% in 90 days). Vintage trades less often, so prices move in steps.",
+      "price": 1001.05,
+      "date": "2026-11-22",
+      "sources": [
+        {
+          "name": "ComicBook: reprints lifting originals",
+          "url": "https://comicbook.com/collectibles/news/pikachu-zekrom-tripled-over-night-and-this-is-only-the-beginning/"
+        },
+        {
+          "name": "ChaseDeck price history"
+        }
+      ]
     },
     {
-     "name": "ChaseDeck price history"
-    }
-   ]
-  },
-  {
-   "id": "sv8pt5-161",
-   "call": "dip",
-   "confidence": "low",
-   "reason": "The set's top chase is down about 30% from its peak after reprints and is still drifting slightly lower. Worth watching for a floor rather than rushing.",
-   "price": 1130.37,
-   "date": "2026-11-22",
-   "sources": [
-    {
-     "name": "TCGplayer: cards dropping (Oct 2026)",
-     "url": "https://seller.tcgplayer.com/blog/price-trends-pok%C3%A9mon-cards-dropping-in-price-10-13-2026"
+      "id": "swsh7-183",
+      "call": "buy",
+      "confidence": "medium",
+      "reason": "Evolving Skies is long out of print and its Eeveelution alt arts keep climbing (+22% this month). An affordable way into the most collected set of the era.",
+      "price": 41.26,
+      "date": "2026-11-22",
+      "sources": [
+        {
+          "name": "ChaseDeck price history"
+        }
+      ]
     },
     {
-     "name": "ChaseDeck price history"
-    }
-   ]
-  },
-  {
-   "id": "sv3pt5-200",
-   "call": "dip",
-   "confidence": "medium",
-   "reason": "151's Blastoise SIR is about a quarter below its summer high and ticked up this week. 151 cards have strong nostalgia demand.",
-   "price": 106.33,
-   "date": "2026-11-22",
-   "sources": [
-    {
-     "name": "ChaseDeck price history"
-    }
-   ]
-  },
-  {
-   "id": "sv6-188",
-   "call": "dip",
-   "confidence": "medium",
-   "reason": "Down 22% from its high but up 5% this month, an early sign the drop is over. Eevee cards are perennial favorites.",
-   "price": 72.78,
-   "date": "2026-11-22",
-   "sources": [
-    {
-     "name": "ChaseDeck price history"
-    }
-   ]
-  },
-  {
-   "id": "swsh12pt5gg-GG70",
-   "call": "dip",
-   "confidence": "medium",
-   "reason": "Crown Zenith is out of print and its Galarian Gallery cards rose earlier this year, then gave some back (−29% in 90 days). Looks like a pullback, not a collapse.",
-   "price": 150.1,
-   "date": "2026-11-22",
-   "sources": [
-    {
-     "name": "TCGplayer: cards climbing (Mar 2026)",
-     "url": "https://seller.tcgplayer.com/blog/price-trends-pok%C3%A9mon-cards-climbing-in-price-03-31-2026"
+      "id": "swsh7-172",
+      "call": "buy",
+      "confidence": "medium",
+      "reason": "Same story as Sylveon V: out-of-print Eeveelution alt art, up 38% in 90 days. Up 31% this month, so it's moving fast; set a price and be patient.",
+      "price": 33.79,
+      "date": "2026-11-22",
+      "sources": [
+        {
+          "name": "ChaseDeck price history"
+        }
+      ]
     },
     {
-     "name": "ChaseDeck price history"
-    }
-   ]
-  },
-  {
-   "id": "sv3-223",
-   "call": "dip",
-   "confidence": "low",
-   "reason": "Down 40% in six months and leveling off. Charizard demand rarely stays down, but Obsidian Flames had a big print run.",
-   "price": 82.64,
-   "date": "2026-11-22",
-   "sources": [
-    {
-     "name": "ChaseDeck price history"
-    }
-   ]
-  },
-  {
-   "id": "me4-116",
-   "call": "dip",
-   "confidence": "low",
-   "reason": "Down about 75% from launch as Chaos Rising was opened, and now flattening. The set is still in print, so the bottom may take a while.",
-   "price": 103.34,
-   "date": "2026-11-22",
-   "sources": [
-    {
-     "name": "ChaseDeck price history"
-    }
-   ]
-  },
-  {
-   "id": "me1-179",
-   "call": "dip",
-   "confidence": "low",
-   "reason": "Down 32% in six months. Mega Lucario Z headlines February's Flowing Fists set, which could bring fresh attention to Lucario cards.",
-   "price": 157.59,
-   "date": "2026-11-22",
-   "sources": [
-    {
-     "name": "ICv2: Flowing Fists announced",
-     "url": "https://icv2.com/articles/news/view/63927/the-pokemon-company-announced-mega-evolution-flowing-fists"
+      "id": "swsh7-166",
+      "call": "buy",
+      "confidence": "medium",
+      "reason": "Cheapest of the climbing Evolving Skies Eeveelution alt arts, up 72% in a year and still rising.",
+      "price": 25.99,
+      "date": "2026-11-22",
+      "sources": [
+        {
+          "name": "ChaseDeck price history"
+        }
+      ]
     },
     {
-     "name": "ChaseDeck price history"
-    }
-   ]
-  },
-  {
-   "id": "me2pt5-284",
-   "call": "sell",
-   "confidence": "medium",
-   "reason": "Down 61% from its peak and still falling (−29% this month) as Ascended Heroes reprints keep landing. If you own it, consider selling; if you want it, wait.",
-   "price": 527.89,
-   "date": "2026-11-22",
-   "sources": [
-    {
-     "name": "TCGplayer: cards dropping (Oct 2026)",
-     "url": "https://seller.tcgplayer.com/blog/price-trends-pok%C3%A9mon-cards-dropping-in-price-10-13-2026"
+      "id": "swsh8-250",
+      "call": "buy",
+      "confidence": "medium",
+      "reason": "Fusion Strike alt arts have been firm while modern prices fell. Mew V is up 20% this month and 51% in a year.",
+      "price": 41.39,
+      "date": "2026-11-22",
+      "sources": [
+        {
+          "name": "ChaseDeck price history"
+        }
+      ]
     },
     {
-     "name": "Wargamer: Ascended Heroes prices falling",
-     "url": "https://www.wargamer.com/pokemon-trading-card-game/gengar-tree-pikachu-dropping"
+      "id": "sm6-120",
+      "call": "buy",
+      "confidence": "low",
+      "reason": "Steady, quiet climber (+19% in a year). Greninja demand is reliable and this Sun & Moon print is out of print.",
+      "price": 64.6,
+      "date": "2026-11-22",
+      "sources": [
+        {
+          "name": "ChaseDeck price history"
+        }
+      ]
     },
     {
-     "name": "ChaseDeck price history"
-    }
-   ]
-  },
-  {
-   "id": "me2pt5-277",
-   "call": "sell",
-   "confidence": "medium",
-   "reason": "Same reprint pressure as Mega Gengar: down 33% this month with no sign of a floor yet.",
-   "price": 192.56,
-   "date": "2026-11-22",
-   "sources": [
-    {
-     "name": "Wargamer: Ascended Heroes prices falling",
-     "url": "https://www.wargamer.com/pokemon-trading-card-game/gengar-tree-pikachu-dropping"
+      "id": "sv8pt5-156",
+      "call": "dip",
+      "confidence": "medium",
+      "reason": "Down 29% from its summer level after the September Prismatic Evolutions reprints, but flat for two weeks. Eeveelution SIRs have historically recovered once reprint waves end.",
+      "price": 375.94,
+      "date": "2026-11-22",
+      "sources": [
+        {
+          "name": "TCGplayer: cards dropping (Oct 2026)",
+          "url": "https://seller.tcgplayer.com/blog/price-trends-pok%C3%A9mon-cards-dropping-in-price-10-13-2026"
+        },
+        {
+          "name": "ChaseDeck price history"
+        }
+      ]
     },
     {
-     "name": "ChaseDeck price history"
-    }
-   ]
-  },
-  {
-   "id": "me55-150",
-   "call": "hold",
-   "confidence": "medium",
-   "reason": "30th Celebration's generous pull rates pushed prices down fast, and Japan is reprinting the set in January 2027. Prices are still finding a floor, so don't rush to buy.",
-   "price": 39.52,
-   "date": "2026-11-22",
-   "sources": [
-    {
-     "name": "Kotaku: 30th Celebration prices",
-     "url": "https://kotaku.com/pokemon-tcg-30th-celebration-highest-price-cards-rbg-mew-lugia-charizard-2000736912"
+      "id": "sv8pt5-161",
+      "call": "dip",
+      "confidence": "low",
+      "reason": "The set's top chase is down about 30% from its peak after reprints and is still drifting slightly lower. Worth watching for a floor rather than rushing.",
+      "price": 1130.37,
+      "date": "2026-11-22",
+      "sources": [
+        {
+          "name": "TCGplayer: cards dropping (Oct 2026)",
+          "url": "https://seller.tcgplayer.com/blog/price-trends-pok%C3%A9mon-cards-dropping-in-price-10-13-2026"
+        },
+        {
+          "name": "ChaseDeck price history"
+        }
+      ]
     },
     {
-     "name": "Pokezentrum: 30th Celebration reprint (Japan)",
-     "url": "https://pokezentrum.de/pokemon-karten-news/pokemon-30th-celebration-reprint-offiziell-angekuendigt/"
+      "id": "sv3pt5-200",
+      "call": "dip",
+      "confidence": "medium",
+      "reason": "151's Blastoise SIR is about a quarter below its summer high and ticked up this week. 151 cards have strong nostalgia demand.",
+      "price": 106.33,
+      "date": "2026-11-22",
+      "sources": [
+        {
+          "name": "ChaseDeck price history"
+        }
+      ]
     },
     {
-     "name": "ChaseDeck price history"
-    }
-   ]
-  },
-  {
-   "id": "sm9-170",
-   "call": "overheated",
-   "confidence": "medium",
-   "reason": "Up 80% in six months, but it just fell 18% in a week. That can be the start of a cool-off; risky to buy right now.",
-   "price": 3857.8,
-   "date": "2026-11-22",
-   "sources": [
-    {
-     "name": "ChaseDeck price history"
-    }
-   ]
-  },
-  {
-   "id": "me6-138",
-   "call": "overheated",
-   "confidence": "low",
-   "reason": "Delta Reign came out November 6. New-set prices usually fall in the weeks after release as more boxes get opened, so early prices are fragile.",
-   "price": 295.56,
-   "date": "2026-11-22",
-   "sources": [
-    {
-     "name": "NerdSnack: market movers",
-     "url": "https://nerdsnack.com/?p=12995"
+      "id": "sv6-188",
+      "call": "dip",
+      "confidence": "medium",
+      "reason": "Down 22% from its high but up 5% this month, an early sign the drop is over. Eevee cards are perennial favorites.",
+      "price": 72.78,
+      "date": "2026-11-22",
+      "sources": [
+        {
+          "name": "ChaseDeck price history"
+        }
+      ]
     },
     {
-     "name": "ChaseDeck price history"
+      "id": "swsh12pt5gg-GG70",
+      "call": "dip",
+      "confidence": "medium",
+      "reason": "Crown Zenith is out of print and its Galarian Gallery cards rose earlier this year, then gave some back (−29% in 90 days). Looks like a pullback, not a collapse.",
+      "price": 150.1,
+      "date": "2026-11-22",
+      "sources": [
+        {
+          "name": "TCGplayer: cards climbing (Mar 2026)",
+          "url": "https://seller.tcgplayer.com/blog/price-trends-pok%C3%A9mon-cards-climbing-in-price-03-31-2026"
+        },
+        {
+          "name": "ChaseDeck price history"
+        }
+      ]
+    },
+    {
+      "id": "sv3-223",
+      "call": "dip",
+      "confidence": "low",
+      "reason": "Down 40% in six months and leveling off. Charizard demand rarely stays down, but Obsidian Flames had a big print run.",
+      "price": 82.64,
+      "date": "2026-11-22",
+      "sources": [
+        {
+          "name": "ChaseDeck price history"
+        }
+      ]
+    },
+    {
+      "id": "me4-116",
+      "call": "dip",
+      "confidence": "low",
+      "reason": "Down about 75% from launch as Chaos Rising was opened, and now flattening. The set is still in print, so the bottom may take a while.",
+      "price": 103.34,
+      "date": "2026-11-22",
+      "sources": [
+        {
+          "name": "ChaseDeck price history"
+        }
+      ]
+    },
+    {
+      "id": "me1-179",
+      "call": "dip",
+      "confidence": "low",
+      "reason": "Down 32% in six months. Mega Lucario Z headlines February's Flowing Fists set, which could bring fresh attention to Lucario cards.",
+      "price": 157.59,
+      "date": "2026-11-22",
+      "sources": [
+        {
+          "name": "ICv2: Flowing Fists announced",
+          "url": "https://icv2.com/articles/news/view/63927/the-pokemon-company-announced-mega-evolution-flowing-fists"
+        },
+        {
+          "name": "ChaseDeck price history"
+        }
+      ]
+    },
+    {
+      "id": "me2pt5-284",
+      "call": "sell",
+      "confidence": "medium",
+      "reason": "Down 61% from its peak and still falling (−29% this month) as Ascended Heroes reprints keep landing. If you own it, consider selling; if you want it, wait.",
+      "price": 527.89,
+      "date": "2026-11-22",
+      "sources": [
+        {
+          "name": "TCGplayer: cards dropping (Oct 2026)",
+          "url": "https://seller.tcgplayer.com/blog/price-trends-pok%C3%A9mon-cards-dropping-in-price-10-13-2026"
+        },
+        {
+          "name": "Wargamer: Ascended Heroes prices falling",
+          "url": "https://www.wargamer.com/pokemon-trading-card-game/gengar-tree-pikachu-dropping"
+        },
+        {
+          "name": "ChaseDeck price history"
+        }
+      ]
+    },
+    {
+      "id": "me2pt5-277",
+      "call": "sell",
+      "confidence": "medium",
+      "reason": "Same reprint pressure as Mega Gengar: down 33% this month with no sign of a floor yet.",
+      "price": 192.56,
+      "date": "2026-11-22",
+      "sources": [
+        {
+          "name": "Wargamer: Ascended Heroes prices falling",
+          "url": "https://www.wargamer.com/pokemon-trading-card-game/gengar-tree-pikachu-dropping"
+        },
+        {
+          "name": "ChaseDeck price history"
+        }
+      ]
+    },
+    {
+      "id": "me55-150",
+      "call": "hold",
+      "confidence": "medium",
+      "reason": "30th Celebration's generous pull rates pushed prices down fast, and Japan is reprinting the set in January 2027. Prices are still finding a floor, so don't rush to buy.",
+      "price": 39.52,
+      "date": "2026-11-22",
+      "sources": [
+        {
+          "name": "Kotaku: 30th Celebration prices",
+          "url": "https://kotaku.com/pokemon-tcg-30th-celebration-highest-price-cards-rbg-mew-lugia-charizard-2000736912"
+        },
+        {
+          "name": "Pokezentrum: 30th Celebration reprint (Japan)",
+          "url": "https://pokezentrum.de/pokemon-karten-news/pokemon-30th-celebration-reprint-offiziell-angekuendigt/"
+        },
+        {
+          "name": "ChaseDeck price history"
+        }
+      ]
+    },
+    {
+      "id": "sm9-170",
+      "call": "overheated",
+      "confidence": "medium",
+      "reason": "Up 80% in six months, but it just fell 18% in a week. That can be the start of a cool-off; risky to buy right now.",
+      "price": 3857.8,
+      "date": "2026-11-22",
+      "sources": [
+        {
+          "name": "ChaseDeck price history"
+        }
+      ]
+    },
+    {
+      "id": "me6-138",
+      "call": "overheated",
+      "confidence": "low",
+      "reason": "Delta Reign came out November 6. New-set prices usually fall in the weeks after release as more boxes get opened, so early prices are fragile.",
+      "price": 295.56,
+      "date": "2026-11-22",
+      "sources": [
+        {
+          "name": "NerdSnack: market movers",
+          "url": "https://nerdsnack.com/?p=12995"
+        },
+        {
+          "name": "ChaseDeck price history"
+        }
+      ]
     }
-   ]
-  }
- ],
- "history": []
+  ],
+  "history": [],
+  "reprintWatch": [
+    {
+      "set": "sv8pt5",
+      "note": "Prismatic Evolutions keeps getting new print waves, which has pushed singles down"
+    },
+    {
+      "set": "me2pt5",
+      "note": "Ascended Heroes reprints and bigger print runs are pressuring singles (Nov 2026)"
+    },
+    {
+      "set": "me55",
+      "note": "30th Celebration has high pull rates plus a Japanese reprint due Jan 2027"
+    },
+    {
+      "set": "me55c",
+      "note": "30th Celebration has high pull rates plus a Japanese reprint due Jan 2027"
+    }
+  ]
 }
