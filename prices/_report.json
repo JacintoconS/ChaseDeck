@@ -309,9 +309,14 @@
    "how": "code",
    "cards": "14/14"
   },
+  "sm1": {
+   "group": "SM Base Set",
+   "how": "name",
+   "cards": "26/26"
+  },
   "sm2": {
    "group": "SM - Guardians Rising",
-   "how": "name",
+   "how": "contains",
    "cards": "39/40",
    "missing": [
     "Metagross-GX #157a"
@@ -319,7 +324,7 @@
   },
   "sm3": {
    "group": "SM - Burning Shadows",
-   "how": "name",
+   "how": "contains",
    "cards": "41/41"
   },
   "sm35": {
@@ -332,12 +337,12 @@
   },
   "sm4": {
    "group": "SM - Crimson Invasion",
-   "how": "name",
+   "how": "contains",
    "cards": "24/24"
   },
   "sm5": {
    "group": "SM - Ultra Prism",
-   "how": "name",
+   "how": "contains",
    "cards": "35/36",
    "missing": [
     "Lusamine #153a"
@@ -345,7 +350,7 @@
   },
   "sm6": {
    "group": "SM - Forbidden Light",
-   "how": "name",
+   "how": "contains",
    "cards": "28/28"
   },
   "sm7": {
@@ -363,12 +368,12 @@
   },
   "sm8": {
    "group": "SM - Lost Thunder",
-   "how": "name",
+   "how": "contains",
    "cards": "42/42"
   },
   "sm9": {
    "group": "SM - Team Up",
-   "how": "name",
+   "how": "contains",
    "cards": "38/38"
   },
   "det1": {
@@ -378,7 +383,7 @@
   },
   "sm10": {
    "group": "SM - Unbroken Bonds",
-   "how": "name",
+   "how": "contains",
    "cards": "44/45",
    "missing": [
     "Dedenne-GX #195a"
@@ -386,7 +391,7 @@
   },
   "sm11": {
    "group": "SM - Unified Minds",
-   "how": "name",
+   "how": "contains",
    "cards": "45/46",
    "missing": [
     "Jirachi-GX #79a"
@@ -404,25 +409,20 @@
   },
   "sm12": {
    "group": "SM - Cosmic Eclipse",
-   "how": "name",
+   "how": "contains",
    "cards": "62/63",
    "missing": [
     "Togepi & Cleffa & Igglybuff-GX #143a"
    ]
   },
-  "swsh1": {
-   "group": "SWSH01: Sword & Shield Base Set",
-   "how": "name",
-   "cards": "30/30"
-  },
   "swsh2": {
    "group": "SWSH02: Rebel Clash",
-   "how": "name",
+   "how": "contains",
    "cards": "35/35"
   },
   "swsh3": {
    "group": "SWSH03: Darkness Ablaze",
-   "how": "name",
+   "how": "contains",
    "cards": "25/25"
   },
   "swsh35": {
@@ -432,7 +432,7 @@
   },
   "swsh4": {
    "group": "SWSH04: Vivid Voltage",
-   "how": "name",
+   "how": "contains",
    "cards": "44/44"
   },
   "swsh45": {
@@ -447,17 +447,17 @@
   },
   "swsh5": {
    "group": "SWSH05: Battle Styles",
-   "how": "name",
+   "how": "contains",
    "cards": "42/42"
   },
   "swsh6": {
    "group": "SWSH06: Chilling Reign",
-   "how": "name",
+   "how": "contains",
    "cards": "74/74"
   },
   "swsh7": {
    "group": "SWSH07: Evolving Skies",
-   "how": "name",
+   "how": "contains",
    "cards": "72/72"
   },
   "cel25": {
@@ -467,27 +467,27 @@
   },
   "swsh8": {
    "group": "SWSH08: Fusion Strike",
-   "how": "name",
+   "how": "contains",
    "cards": "40/40"
   },
   "swsh9": {
    "group": "SWSH09: Brilliant Stars",
-   "how": "name",
+   "how": "contains",
    "cards": "35/35"
   },
   "swsh9tg": {
    "group": "SWSH09: Brilliant Stars Trainer Gallery",
-   "how": "name",
+   "how": "contains",
    "cards": "19/19"
   },
   "swsh10": {
    "group": "SWSH10: Astral Radiance",
-   "how": "name",
+   "how": "contains",
    "cards": "57/57"
   },
   "swsh10tg": {
    "group": "SWSH10: Astral Radiance Trainer Gallery",
-   "how": "name",
+   "how": "contains",
    "cards": "19/19"
   },
   "pgo": {
@@ -497,22 +497,22 @@
   },
   "swsh11": {
    "group": "SWSH11: Lost Origin",
-   "how": "name",
+   "how": "contains",
    "cards": "46/46"
   },
   "swsh11tg": {
    "group": "SWSH11: Lost Origin Trainer Gallery",
-   "how": "name",
+   "how": "contains",
    "cards": "19/19"
   },
   "swsh12": {
    "group": "SWSH12: Silver Tempest",
-   "how": "name",
+   "how": "contains",
    "cards": "46/46"
   },
   "swsh12tg": {
    "group": "SWSH12: Silver Tempest Trainer Gallery",
-   "how": "name",
+   "how": "contains",
    "cards": "19/19"
   },
   "swsh12pt5": {
@@ -522,7 +522,7 @@
   },
   "swsh12pt5gg": {
    "group": "SWSH: Crown Zenith: Galarian Gallery",
-   "how": "name",
+   "how": "contains",
    "cards": "48/48"
   },
   "sv1": {
@@ -653,14 +653,14 @@
  },
  "unmatched": [
   {
-   "set": "sm1",
-   "name": "Sun & Moon",
-   "code": "SUM"
+   "set": "swsh1",
+   "name": "Sword & Shield",
+   "code": "SSH"
   }
  ],
  "summary": {
   "tracked_cards": 3781,
-  "mapped_cards": 3735,
+  "mapped_cards": 3731,
   "sets": 121,
   "sets_matched": 120
  }
