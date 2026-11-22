@@ -157,7 +157,7 @@ def match_groups(sets, groups):
         if len(cands) != 1:
             how = "name"
             names = {target, target + "set", target + "baseset", *ERA_ALIASES.get(target, ())}
-            cands = [g for g in groups if same_sub(g) and norm_name(g.get("name")) in names | {group_core(g.get("name"))} and group_core(g.get("name")) in names]
+            cands = [g for g in groups if same_sub(g) and group_core(g.get("name")) in names]
         # 3) name contained in the group name
         if len(cands) != 1:
             how = "contains"
