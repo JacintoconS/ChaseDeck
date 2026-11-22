@@ -125,6 +125,10 @@ def tracked_cards(sets):
 
 
 # ---------- tcgcsv mapping ----------
+ERA_ALIASES = {"sunandmoon": ("smbaseset",), "xy": ("xybaseset",), "blackandwhite": ("blackandwhitebaseset", "bwbaseset"),
+               "scarletandviolet": ("scarletandvioletbaseset", "svbaseset"), "swordandshield": ("swordandshieldbaseset",)}
+
+
 def names_agree(ours, group_name):
     t, g = norm_name(ours), group_core(group_name)
     return bool(t) and (t == g or t in g or g in t or g in (t + "set", t + "baseset"))
@@ -149,10 +153,11 @@ def match_groups(sets, groups):
         if len(cands) > 1:
             exact = [g for g in cands if group_core(g.get("name")) in (target, target + "set", target + "baseset")]
             cands = exact if len(exact) == 1 else cands[:0]
-        # 2) exact name (or "<name> Base Set")
+        # 2) exact name (or "<name> Base Set", or an era's short form like "SM Base Set")
         if len(cands) != 1:
             how = "name"
-            cands = [g for g in groups if same_sub(g) and group_core(g.get("name")) in (target, target + "set", target + "baseset")]
+            names = {target, target + "set", target + "baseset", *ERA_ALIASES.get(target, ())}
+            cands = [g for g in groups if same_sub(g) and norm_name(g.get("name")) in names | {group_core(g.get("name"))} and group_core(g.get("name")) in names]
         # 3) name contained in the group name
         if len(cands) != 1:
             how = "contains"
