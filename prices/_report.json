@@ -1,0 +1,651 @@
+{
+ "matched": {
+  "base1": {
+   "group": "Base Set",
+   "how": "code",
+   "cards": "15/16"
+  },
+  "base2": {
+   "group": "Jungle",
+   "how": "code",
+   "cards": "16/16"
+  },
+  "base3": {
+   "group": "Fossil",
+   "how": "code",
+   "cards": "15/15"
+  },
+  "base4": {
+   "group": "Base Set 2",
+   "how": "name",
+   "cards": "20/20"
+  },
+  "base5": {
+   "group": "Team Rocket",
+   "how": "code",
+   "cards": "18/18"
+  },
+  "gym1": {
+   "group": "Gym Heroes",
+   "how": "code",
+   "cards": "19/19"
+  },
+  "gym2": {
+   "group": "Gym Challenge",
+   "how": "code",
+   "cards": "20/20"
+  },
+  "neo1": {
+   "group": "Neo Genesis",
+   "how": "code",
+   "cards": "19/19"
+  },
+  "neo2": {
+   "group": "Neo Discovery",
+   "how": "code",
+   "cards": "17/17"
+  },
+  "neo3": {
+   "group": "Neo Revelation",
+   "how": "code",
+   "cards": "16/16"
+  },
+  "neo4": {
+   "group": "Neo Destiny",
+   "how": "code",
+   "cards": "24/24"
+  },
+  "base6": {
+   "group": "Legendary Collection",
+   "how": "code",
+   "cards": "19/19"
+  },
+  "ecard1": {
+   "group": "Expedition",
+   "how": "code",
+   "cards": "32/32"
+  },
+  "ecard2": {
+   "group": "Aquapolis",
+   "how": "code",
+   "cards": "26/35"
+  },
+  "ecard3": {
+   "group": "Skyridge",
+   "how": "code",
+   "cards": "29/38"
+  },
+  "ex1": {
+   "group": "EX Ruby and Sapphire",
+   "how": "code",
+   "cards": "22/22"
+  },
+  "ex2": {
+   "group": "EX Sandstorm",
+   "how": "code",
+   "cards": "21/21"
+  },
+  "ex3": {
+   "group": "EX Dragon",
+   "how": "code",
+   "cards": "24/24"
+  },
+  "ex4": {
+   "group": "EX Team Magma vs Team Aqua",
+   "how": "code",
+   "cards": "21/21"
+  },
+  "ex5": {
+   "group": "EX Hidden Legends",
+   "how": "code",
+   "cards": "25/25"
+  },
+  "ex6": {
+   "group": "EX FireRed & LeafGreen",
+   "how": "code",
+   "cards": "30/30"
+  },
+  "ex7": {
+   "group": "EX Team Rocket Returns",
+   "how": "contains",
+   "cards": "30/30"
+  },
+  "ex8": {
+   "group": "EX Deoxys",
+   "how": "code",
+   "cards": "28/28"
+  },
+  "ex9": {
+   "group": "EX Emerald",
+   "how": "code",
+   "cards": "29/29"
+  },
+  "ex10": {
+   "group": "EX Unseen Forces",
+   "how": "code",
+   "cards": "36/36"
+  },
+  "ex11": {
+   "group": "EX Delta Species",
+   "how": "code",
+   "cards": "25/25"
+  },
+  "ex12": {
+   "group": "EX Legend Maker",
+   "how": "code",
+   "cards": "25/25"
+  },
+  "ex13": {
+   "group": "EX Holon Phantoms",
+   "how": "code",
+   "cards": "30/30"
+  },
+  "ex14": {
+   "group": "EX Crystal Guardians",
+   "how": "code",
+   "cards": "25/25"
+  },
+  "ex15": {
+   "group": "EX Dragon Frontiers",
+   "how": "code",
+   "cards": "24/24"
+  },
+  "ex16": {
+   "group": "EX Power Keepers",
+   "how": "code",
+   "cards": "30/30"
+  },
+  "bw1": {
+   "group": "Black and White",
+   "how": "name",
+   "cards": "3/3"
+  },
+  "bw2": {
+   "group": "Emerging Powers",
+   "how": "code",
+   "cards": "2/2"
+  },
+  "bw3": {
+   "group": "Noble Victories",
+   "how": "code",
+   "cards": "6/6"
+  },
+  "bw4": {
+   "group": "Next Destinies",
+   "how": "code",
+   "cards": "10/10"
+  },
+  "bw5": {
+   "group": "Dark Explorers",
+   "how": "code",
+   "cards": "9/9"
+  },
+  "bw6": {
+   "group": "Dragons Exalted",
+   "how": "code",
+   "cards": "10/10"
+  },
+  "bw7": {
+   "group": "Boundaries Crossed",
+   "how": "code",
+   "cards": "13/13"
+  },
+  "bw8": {
+   "group": "Plasma Storm",
+   "how": "code",
+   "cards": "8/8"
+  },
+  "bw9": {
+   "group": "Plasma Freeze",
+   "how": "code",
+   "cards": "14/14"
+  },
+  "bw10": {
+   "group": "Plasma Blast",
+   "how": "code",
+   "cards": "10/10"
+  },
+  "bw11": {
+   "group": "Legendary Treasures",
+   "how": "code",
+   "cards": "2/7"
+  },
+  "xy1": {
+   "group": "XY Base Set",
+   "how": "code",
+   "cards": "6/6"
+  },
+  "xy2": {
+   "group": "XY - Flashfire",
+   "how": "code",
+   "cards": "10/11"
+  },
+  "xy3": {
+   "group": "XY - Furious Fists",
+   "how": "code",
+   "cards": "9/10"
+  },
+  "xy4": {
+   "group": "XY - Phantom Forces",
+   "how": "code",
+   "cards": "10/12"
+  },
+  "xy5": {
+   "group": "XY - Primal Clash",
+   "how": "code",
+   "cards": "20/20"
+  },
+  "dc1": {
+   "group": "Double Crisis",
+   "how": "code",
+   "cards": "2/2"
+  },
+  "xy6": {
+   "group": "XY - Roaring Skies",
+   "how": "code",
+   "cards": "13/14"
+  },
+  "xy7": {
+   "group": "XY - Ancient Origins",
+   "how": "code",
+   "cards": "17/18"
+  },
+  "xy8": {
+   "group": "XY - BREAKthrough",
+   "how": "code",
+   "cards": "12/12"
+  },
+  "xy9": {
+   "group": "XY - BREAKpoint",
+   "how": "name",
+   "cards": "10/11"
+  },
+  "g1": {
+   "group": "Generations",
+   "how": "code",
+   "cards": "0/7"
+  },
+  "xy10": {
+   "group": "XY - Fates Collide",
+   "how": "code",
+   "cards": "10/14"
+  },
+  "xy11": {
+   "group": "XY - Steam Siege",
+   "how": "code",
+   "cards": "10/10"
+  },
+  "xy12": {
+   "group": "XY - Evolutions",
+   "how": "code",
+   "cards": "14/14"
+  },
+  "sm2": {
+   "group": "SM - Guardians Rising",
+   "how": "name",
+   "cards": "39/40"
+  },
+  "sm3": {
+   "group": "SM - Burning Shadows",
+   "how": "name",
+   "cards": "41/41"
+  },
+  "sm35": {
+   "group": "Shining Legends",
+   "how": "name",
+   "cards": "8/9"
+  },
+  "sm4": {
+   "group": "SM - Crimson Invasion",
+   "how": "name",
+   "cards": "24/24"
+  },
+  "sm5": {
+   "group": "SM - Ultra Prism",
+   "how": "name",
+   "cards": "35/36"
+  },
+  "sm6": {
+   "group": "SM - Forbidden Light",
+   "how": "name",
+   "cards": "28/28"
+  },
+  "sm7": {
+   "group": "SM - Celestial Storm",
+   "how": "code",
+   "cards": "32/33"
+  },
+  "sm75": {
+   "group": "Dragon Majesty",
+   "how": "code",
+   "cards": "14/14"
+  },
+  "sm8": {
+   "group": "SM - Lost Thunder",
+   "how": "name",
+   "cards": "42/42"
+  },
+  "sm9": {
+   "group": "SM - Team Up",
+   "how": "name",
+   "cards": "38/38"
+  },
+  "det1": {
+   "group": "Detective Pikachu",
+   "how": "name",
+   "cards": "4/4"
+  },
+  "sm10": {
+   "group": "SM - Unbroken Bonds",
+   "how": "name",
+   "cards": "44/45"
+  },
+  "sm11": {
+   "group": "SM - Unified Minds",
+   "how": "name",
+   "cards": "45/46"
+  },
+  "sm115": {
+   "group": "Hidden Fates",
+   "how": "code",
+   "cards": "4/4"
+  },
+  "sma": {
+   "group": "Hidden Fates: Shiny Vault",
+   "how": "name",
+   "cards": "94/94"
+  },
+  "sm12": {
+   "group": "SM - Cosmic Eclipse",
+   "how": "name",
+   "cards": "62/63"
+  },
+  "swsh2": {
+   "group": "SWSH02: Rebel Clash",
+   "how": "name",
+   "cards": "35/35"
+  },
+  "swsh3": {
+   "group": "SWSH03: Darkness Ablaze",
+   "how": "name",
+   "cards": "25/25"
+  },
+  "swsh35": {
+   "group": "Champion's Path",
+   "how": "name",
+   "cards": "12/12"
+  },
+  "swsh4": {
+   "group": "SWSH04: Vivid Voltage",
+   "how": "name",
+   "cards": "44/44"
+  },
+  "swsh45": {
+   "group": "Shining Fates",
+   "how": "code",
+   "cards": "13/13"
+  },
+  "swsh45sv": {
+   "group": "Shining Fates: Shiny Vault",
+   "how": "name",
+   "cards": "106/106"
+  },
+  "swsh5": {
+   "group": "EX Battle Stadium",
+   "how": "code",
+   "cards": "0/42"
+  },
+  "swsh6": {
+   "group": "SWSH06: Chilling Reign",
+   "how": "name",
+   "cards": "74/74"
+  },
+  "swsh7": {
+   "group": "SWSH07: Evolving Skies",
+   "how": "name",
+   "cards": "72/72"
+  },
+  "cel25": {
+   "group": "Celebrations",
+   "how": "name",
+   "cards": "1/1"
+  },
+  "swsh8": {
+   "group": "SWSH08: Fusion Strike",
+   "how": "name",
+   "cards": "40/40"
+  },
+  "swsh9": {
+   "group": "SWSH09: Brilliant Stars",
+   "how": "name",
+   "cards": "35/35"
+  },
+  "swsh9tg": {
+   "group": "SWSH09: Brilliant Stars Trainer Gallery",
+   "how": "name",
+   "cards": "19/19"
+  },
+  "swsh10": {
+   "group": "SWSH10: Astral Radiance",
+   "how": "name",
+   "cards": "57/57"
+  },
+  "swsh10tg": {
+   "group": "SWSH10: Astral Radiance Trainer Gallery",
+   "how": "name",
+   "cards": "19/19"
+  },
+  "pgo": {
+   "group": "Pokemon GO",
+   "how": "code",
+   "cards": "18/18"
+  },
+  "swsh11": {
+   "group": "SWSH11: Lost Origin",
+   "how": "name",
+   "cards": "46/46"
+  },
+  "swsh11tg": {
+   "group": "SWSH11: Lost Origin Trainer Gallery",
+   "how": "name",
+   "cards": "19/19"
+  },
+  "swsh12": {
+   "group": "SWSH12: Silver Tempest",
+   "how": "name",
+   "cards": "46/46"
+  },
+  "swsh12tg": {
+   "group": "SWSH12: Silver Tempest Trainer Gallery",
+   "how": "name",
+   "cards": "19/19"
+  },
+  "swsh12pt5": {
+   "group": "SWSH: Crown Zenith",
+   "how": "code",
+   "cards": "14/14"
+  },
+  "swsh12pt5gg": {
+   "group": "SWSH: Crown Zenith: Galarian Gallery",
+   "how": "name",
+   "cards": "48/48"
+  },
+  "sv1": {
+   "group": "SV01: Scarlet & Violet Base Set",
+   "how": "code",
+   "cards": "60/60"
+  },
+  "sv2": {
+   "group": "SV02: Paldea Evolved",
+   "how": "code",
+   "cards": "86/86"
+  },
+  "sv3": {
+   "group": "SV03: Obsidian Flames",
+   "how": "code",
+   "cards": "33/33"
+  },
+  "sv3pt5": {
+   "group": "SV: Scarlet & Violet 151",
+   "how": "code",
+   "cards": "42/42"
+  },
+  "sv4": {
+   "group": "SV04: Paradox Rift",
+   "how": "code",
+   "cards": "84/84"
+  },
+  "sv4pt5": {
+   "group": "SV: Paldean Fates",
+   "how": "code",
+   "cards": "154/154"
+  },
+  "sv5": {
+   "group": "SV05: Temporal Forces",
+   "how": "code",
+   "cards": "56/56"
+  },
+  "sv6": {
+   "group": "SV06: Twilight Masquerade",
+   "how": "code",
+   "cards": "59/59"
+  },
+  "sv6pt5": {
+   "group": "SV: Shrouded Fable",
+   "how": "code",
+   "cards": "35/35"
+  },
+  "sv7": {
+   "group": "SV07: Stellar Crown",
+   "how": "code",
+   "cards": "33/33"
+  },
+  "sv8": {
+   "group": "SV08: Surging Sparks",
+   "how": "code",
+   "cards": "61/61"
+  },
+  "sv8pt5": {
+   "group": "SV: Prismatic Evolutions",
+   "how": "code",
+   "cards": "49/49"
+  },
+  "sv9": {
+   "group": "SV09: Journey Together",
+   "how": "code",
+   "cards": "31/31"
+  },
+  "sv10": {
+   "group": "SV10: Destined Rivals",
+   "how": "code",
+   "cards": "62/62"
+  },
+  "zsv10pt5": {
+   "group": "SV: Black Bolt",
+   "how": "code",
+   "cards": "84/84"
+  },
+  "rsv10pt5": {
+   "group": "SV: White Flare",
+   "how": "code",
+   "cards": "84/84"
+  },
+  "me1": {
+   "group": "ME01: Mega Evolution",
+   "how": "code",
+   "cards": "56/56"
+  },
+  "me2": {
+   "group": "ME02: Phantasmal Flames",
+   "how": "code",
+   "cards": "36/36"
+  },
+  "me2pt5": {
+   "group": "ME: Ascended Heroes",
+   "how": "code",
+   "cards": "78/78"
+  },
+  "me3": {
+   "group": "ME03: Perfect Order",
+   "how": "code",
+   "cards": "36/36"
+  },
+  "me4": {
+   "group": "ME04: Chaos Rising",
+   "how": "code",
+   "cards": "36/36"
+  },
+  "me5": {
+   "group": "ME05: Pitch Black",
+   "how": "code",
+   "cards": "36/36"
+  },
+  "me55": {
+   "group": "ME: 30th Celebration",
+   "how": "code",
+   "cards": "28/28"
+  },
+  "me55c": {
+   "group": "ME: 30th Celebration Classic Collection",
+   "how": "code",
+   "cards": "1/1"
+  },
+  "me6": {
+   "group": "ME06: Delta Reign",
+   "how": "code",
+   "cards": "38/38"
+  }
+ },
+ "unmatched": [
+  {
+   "set": "sm1",
+   "name": "Sun & Moon",
+   "code": "SUM"
+  },
+  {
+   "set": "swsh1",
+   "name": "Sword & Shield",
+   "code": "SSH"
+  }
+ ],
+ "summary": {
+  "tracked_cards": 3781,
+  "mapped_cards": 3634,
+  "sets": 121,
+  "sets_matched": 119
+ },
+ "backfill": {
+  "archives": 274,
+  "missing": [
+   "2025-05-15",
+   "2025-05-22",
+   "2025-05-29",
+   "2025-06-05",
+   "2025-06-12",
+   "2025-06-19",
+   "2025-06-26",
+   "2026-04-16",
+   "2026-04-23",
+   "2026-04-30",
+   "2026-05-07",
+   "2026-05-14",
+   "2026-05-21",
+   "2026-07-10",
+   "2026-07-11",
+   "2026-07-12",
+   "2026-07-13",
+   "2026-07-14",
+   "2026-07-15",
+   "2026-08-29",
+   "2026-08-30",
+   "2026-08-31",
+   "2026-09-01",
+   "2026-09-02",
+   "2026-10-17",
+   "2026-10-20"
+  ],
+  "cards_with_history": 3634,
+  "from": "2024-02-08",
+  "to": "2026-11-21"
+ }
+}
