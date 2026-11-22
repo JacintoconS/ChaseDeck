@@ -3,7 +3,7 @@
   "base1": {
    "group": "Base Set",
    "how": "code",
-   "cards": "15/16"
+   "cards": "16/16"
   },
   "base2": {
    "group": "Jungle",
@@ -68,12 +68,12 @@
   "ecard2": {
    "group": "Aquapolis",
    "how": "code",
-   "cards": "26/35"
+   "cards": "35/35"
   },
   "ecard3": {
    "group": "Skyridge",
    "how": "code",
-   "cards": "29/38"
+   "cards": "38/38"
   },
   "ex1": {
    "group": "EX Ruby and Sapphire",
@@ -157,7 +157,7 @@
   },
   "bw1": {
    "group": "Black and White",
-   "how": "name",
+   "how": "code",
    "cards": "3/3"
   },
   "bw2": {
@@ -208,7 +208,7 @@
   "bw11": {
    "group": "Legendary Treasures",
    "how": "code",
-   "cards": "2/7"
+   "cards": "7/7"
   },
   "xy1": {
    "group": "XY Base Set",
@@ -218,17 +218,27 @@
   "xy2": {
    "group": "XY - Flashfire",
    "how": "code",
-   "cards": "10/11"
+   "cards": "10/11",
+   "missing": [
+    "Blacksmith #88a"
+   ]
   },
   "xy3": {
    "group": "XY - Furious Fists",
    "how": "code",
-   "cards": "9/10"
+   "cards": "9/10",
+   "missing": [
+    "M Lucario-EX #55a"
+   ]
   },
   "xy4": {
    "group": "XY - Phantom Forces",
    "how": "code",
-   "cards": "10/12"
+   "cards": "10/12",
+   "missing": [
+    "M Manectric-EX #24a",
+    "Aegislash-EX #65a"
+   ]
   },
   "xy5": {
    "group": "XY - Primal Clash",
@@ -243,12 +253,18 @@
   "xy6": {
    "group": "XY - Roaring Skies",
    "how": "code",
-   "cards": "13/14"
+   "cards": "13/14",
+   "missing": [
+    "Shaymin-EX #77a"
+   ]
   },
   "xy7": {
    "group": "XY - Ancient Origins",
    "how": "code",
-   "cards": "17/18"
+   "cards": "17/18",
+   "missing": [
+    "Hex Maniac #75a"
+   ]
   },
   "xy8": {
    "group": "XY - BREAKthrough",
@@ -257,18 +273,31 @@
   },
   "xy9": {
    "group": "XY - BREAKpoint",
-   "how": "name",
-   "cards": "10/11"
+   "how": "code",
+   "cards": "10/11",
+   "missing": [
+    "Delinquent #98b"
+   ]
   },
   "g1": {
    "group": "Generations",
    "how": "code",
-   "cards": "0/7"
+   "cards": "5/7",
+   "missing": [
+    "Jolteon-EX #28a",
+    "Team Flare Grunt #73a"
+   ]
   },
   "xy10": {
    "group": "XY - Fates Collide",
    "how": "code",
-   "cards": "10/14"
+   "cards": "10/14",
+   "missing": [
+    "Regirock-EX #43a",
+    "Zygarde-EX #54a",
+    "N #105a",
+    "Shauna #111a"
+   ]
   },
   "xy11": {
    "group": "XY - Steam Siege",
@@ -283,7 +312,10 @@
   "sm2": {
    "group": "SM - Guardians Rising",
    "how": "name",
-   "cards": "39/40"
+   "cards": "39/40",
+   "missing": [
+    "Metagross-GX #157a"
+   ]
   },
   "sm3": {
    "group": "SM - Burning Shadows",
@@ -293,7 +325,10 @@
   "sm35": {
    "group": "Shining Legends",
    "how": "name",
-   "cards": "8/9"
+   "cards": "8/9",
+   "missing": [
+    "Zoroark-GX #77a"
+   ]
   },
   "sm4": {
    "group": "SM - Crimson Invasion",
@@ -303,7 +338,10 @@
   "sm5": {
    "group": "SM - Ultra Prism",
    "how": "name",
-   "cards": "35/36"
+   "cards": "35/36",
+   "missing": [
+    "Lusamine #153a"
+   ]
   },
   "sm6": {
    "group": "SM - Forbidden Light",
@@ -313,7 +351,10 @@
   "sm7": {
    "group": "SM - Celestial Storm",
    "how": "code",
-   "cards": "32/33"
+   "cards": "32/33",
+   "missing": [
+    "Rayquaza-GX #177a"
+   ]
   },
   "sm75": {
    "group": "Dragon Majesty",
@@ -338,12 +379,18 @@
   "sm10": {
    "group": "SM - Unbroken Bonds",
    "how": "name",
-   "cards": "44/45"
+   "cards": "44/45",
+   "missing": [
+    "Dedenne-GX #195a"
+   ]
   },
   "sm11": {
    "group": "SM - Unified Minds",
    "how": "name",
-   "cards": "45/46"
+   "cards": "45/46",
+   "missing": [
+    "Jirachi-GX #79a"
+   ]
   },
   "sm115": {
    "group": "Hidden Fates",
@@ -358,7 +405,15 @@
   "sm12": {
    "group": "SM - Cosmic Eclipse",
    "how": "name",
-   "cards": "62/63"
+   "cards": "62/63",
+   "missing": [
+    "Togepi & Cleffa & Igglybuff-GX #143a"
+   ]
+  },
+  "swsh1": {
+   "group": "SWSH01: Sword & Shield Base Set",
+   "how": "name",
+   "cards": "30/30"
   },
   "swsh2": {
    "group": "SWSH02: Rebel Clash",
@@ -391,9 +446,9 @@
    "cards": "106/106"
   },
   "swsh5": {
-   "group": "EX Battle Stadium",
-   "how": "code",
-   "cards": "0/42"
+   "group": "SWSH05: Battle Styles",
+   "how": "name",
+   "cards": "42/42"
   },
   "swsh6": {
    "group": "SWSH06: Chilling Reign",
@@ -601,51 +656,12 @@
    "set": "sm1",
    "name": "Sun & Moon",
    "code": "SUM"
-  },
-  {
-   "set": "swsh1",
-   "name": "Sword & Shield",
-   "code": "SSH"
   }
  ],
  "summary": {
   "tracked_cards": 3781,
-  "mapped_cards": 3634,
+  "mapped_cards": 3735,
   "sets": 121,
-  "sets_matched": 119
- },
- "backfill": {
-  "archives": 274,
-  "missing": [
-   "2025-05-15",
-   "2025-05-22",
-   "2025-05-29",
-   "2025-06-05",
-   "2025-06-12",
-   "2025-06-19",
-   "2025-06-26",
-   "2026-04-16",
-   "2026-04-23",
-   "2026-04-30",
-   "2026-05-07",
-   "2026-05-14",
-   "2026-05-21",
-   "2026-07-10",
-   "2026-07-11",
-   "2026-07-12",
-   "2026-07-13",
-   "2026-07-14",
-   "2026-07-15",
-   "2026-08-29",
-   "2026-08-30",
-   "2026-08-31",
-   "2026-09-01",
-   "2026-09-02",
-   "2026-10-17",
-   "2026-10-20"
-  ],
-  "cards_with_history": 3634,
-  "from": "2024-02-08",
-  "to": "2026-11-21"
+  "sets_matched": 120
  }
 }
