@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-RoCo/jOprBCPhDIM6UI/WvD98sATWfFZ4hNWJuQgWOA='; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' https://images.pokemontcg.io https://images.scrydex.com data: blob:; connect-src 'self' https://raw.githubusercontent.com https://api.tcgdex.net https://api.pokemontcg.io; manifest-src 'self'; base-uri 'none'; form-action 'none'; object-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-NScxWQli4Af7U1PE76G3uWMxmgT8uUvn7MzXXAjnZG0='; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' https://images.pokemontcg.io https://images.scrydex.com data: blob:; connect-src 'self' https://raw.githubusercontent.com https://api.tcgdex.net https://api.pokemontcg.io; manifest-src 'self'; base-uri 'none'; form-action 'none'; object-src 'none'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1">
 <meta name="theme-color" content="#0a0913">
@@ -1093,7 +1093,7 @@ function attachDrag(el, card){
   el.addEventListener("pointerleave", e => { if(e.pointerType==="mouse" && !down){ tcg.classList.remove("tilting"); tcg.style.setProperty("--rx","0deg"); tcg.style.setProperty("--ry","0deg"); } });
   el.addEventListener("pointerdown", e => {
     if(busy || (e.button && e.button>0)) return;
-    down=true; moved=false; sx=e.clientX; sy=e.clientY; dx=dy=0; t0=lastT=performance.now(); lastX=e.clientX; vx=0;
+    hideFolderBar(); down=true; moved=false; sx=e.clientX; sy=e.clientY; dx=dy=0; t0=lastT=performance.now(); lastX=e.clientX; vx=0;
     el.setPointerCapture(e.pointerId); el.classList.add("dragging"); el.style.transition="none";
   });
   el.addEventListener("pointermove", e => {
@@ -1128,7 +1128,7 @@ function attachDrag(el, card){
   el.addEventListener("pointerup", end); el.addEventListener("pointercancel", end);
 }
 function fling(el, kind, sx, sy){
-  if(busy) return; busy = true;
+  if(busy) return; busy = true; hideFolderBar();
   const card = S.pool[S.idx];
   const st = el.querySelector(kind==="pass"?".stamp.nope":kind==="super"?".stamp.super":".stamp.like");
   if(st){ st.style.transition="opacity .15s"; st.style.opacity=1; }
@@ -1335,7 +1335,9 @@ function showFolderBar(id){
     bar.innerHTML = `<span class="fb-t">Add to folder?</span><div class="fb-chips">${manual.map(f => `<button class="fchip sm ${e.folders.includes(f.id)?"on":""}" style="--fc:${f.color}" data-fb="${f.id}">${f.emoji} ${esc(f.name)}</button>`).join("")}</div>`; };
   draw(); bar.classList.add("on");
   bar.onclick = ev => { const b = ev.target.closest("[data-fb]"); if(!b) return; const e = S.chase[fbarCard]; if(!e) return;
-    const i = e.folders.indexOf(b.dataset.fb); i>=0 ? e.folders.splice(i,1) : e.folders.push(b.dataset.fb); saveChase(); draw(); arm(); };
+    const i = e.folders.indexOf(b.dataset.fb); i>=0 ? e.folders.splice(i,1) : e.folders.push(b.dataset.fb); saveChase(); draw();
+    const f = folderById(b.dataset.fb); if(i < 0 && f) toast(ICON.check, `Saved to ${f.emoji} ${f.name}`);
+    clearTimeout(fbarTimer); fbarTimer = setTimeout(hideFolderBar, 500); };
   const arm = () => { clearTimeout(fbarTimer); fbarTimer = setTimeout(hideFolderBar, 4500); }; arm();
 }
 function hideFolderBar(){ clearTimeout(fbarTimer); $("#fbar").classList.remove("on"); }
