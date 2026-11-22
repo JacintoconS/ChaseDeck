@@ -655,7 +655,11 @@
   {
    "set": "swsh1",
    "name": "Sword & Shield",
-   "code": "SSH"
+   "code": "SSH",
+   "candidates": [
+    "SWSH01: Sword & Shield Base Set [SWSH01]",
+    "SWSH: Sword & Shield Promo Cards [SWSD]"
+   ]
   }
  ],
  "summary": {
