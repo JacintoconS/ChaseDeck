@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-96ItASLUKp/Gnt1k1YD+eNjmXGedeOmtuQamvzf+tvM='; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' https://images.pokemontcg.io https://images.scrydex.com data: blob:; connect-src 'self' https://raw.githubusercontent.com https://api.tcgdex.net https://api.pokemontcg.io; manifest-src 'self'; base-uri 'none'; form-action 'none'; object-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-CM7L5Et/Y/Xe9YnleyP5zCFR9CXzr9QCa4LDGwC/koc='; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' https://images.pokemontcg.io https://images.scrydex.com data: blob:; connect-src 'self' https://raw.githubusercontent.com https://api.tcgdex.net https://api.pokemontcg.io; manifest-src 'self'; base-uri 'none'; form-action 'none'; object-src 'none'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1">
 <meta name="theme-color" content="#0a0913">
@@ -371,6 +371,19 @@ img{user-select:none;-webkit-user-drag:none}
 .field.mini .lbl{font-size:12px;font-weight:800;color:var(--ink-3);white-space:nowrap}
 .hint{font-size:11.5px;color:var(--ink-3);font-weight:700}
 
+.chart{border-radius:16px;padding:12px 12px 10px;background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.025));border:1px solid var(--line)}
+.chart svg{display:block;width:100%;height:auto;overflow:visible}
+.chart .gl{stroke:rgba(255,255,255,.08);stroke-dasharray:3 4}
+.chart .gt{fill:var(--ink-3);font:700 9.5px var(--body)}
+.chart .ct{fill:#0d0a1c;font:800 10px var(--body);text-anchor:middle}
+.chart .cline{stroke-dasharray:1;stroke-dashoffset:1;animation:draw 1s cubic-bezier(.4,0,.2,1) .15s forwards}
+.chart .carea{opacity:0;animation:fadeIn .6s ease .7s forwards}
+.chart .ctag{opacity:0;animation:fadeIn .4s ease 1s forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+@keyframes fadeIn{to{opacity:1}}
+.chart .csub{font-size:11px;color:var(--ink-3);font-weight:600;margin-top:6px}
+.chg{font-size:12.5px;font-weight:800}
+
 /* Help */
 .help-hero{text-align:center;padding:4px 0 6px}
 .help-hero p{margin:8px auto 0;color:var(--ink-2);font-size:14px;line-height:1.5;max-width:330px;font-weight:500}
@@ -577,6 +590,24 @@ S.decisions = cleanDecisions(LS.get("decisions", {}));
 if(!["hunting","got","all"].includes(S.listFilter)) S.listFilter="hunting";
 if(!["priority","priceDesc","priceAsc","newest","set","name"].includes(S.listSort)) S.listSort="priority";
 if(typeof S.apiKey!=="string" || !/^[A-Za-z0-9-]{0,64}$/.test(S.apiKey)) S.apiKey="";
+/* own price history: {cardId: [[dayNumber, usd], ...]} recorded whenever a price is seen */
+const today = () => Math.floor(Date.now() / 86400000);
+S.hist = (() => { const raw = LS.get("hist", {}), out = {}; if(raw && typeof raw==="object") for(const [k,v] of Object.entries(raw).slice(0,8000)){ if(!/^[A-Za-z0-9._-]{1,40}$/.test(k) || !Array.isArray(v)) continue; const pts = v.filter(x => Array.isArray(x) && Number.isInteger(x[0]) && x[0]>19000 && x[0]<40000 && num(x[1])!=null).slice(-180); if(pts.length) out[k] = pts; } return out; })();
+let histTimer = null;
+function recordPrice(id, usd){
+  if(num(usd)==null) return;
+  const d = today(), arr = S.hist[id] || (S.hist[id] = []);
+  const last = arr[arr.length-1];
+  if(last && last[0] === d) last[1] = usd; else { arr.push([d, usd]); if(arr.length > 180) arr.splice(0, arr.length-180); }
+  clearTimeout(histTimer); histTimer = setTimeout(saveHist, 1500);
+}
+function saveHist(){
+  // keep chase-list cards forever, others for 120 days, and cap the total size
+  const cut = today() - 120; const keep = {};
+  const ids = Object.keys(S.hist).sort((a,b) => (S.hist[b].at(-1)?.[0]||0) - (S.hist[a].at(-1)?.[0]||0));
+  for(const id of ids.slice(0,6000)){ const pts = S.hist[id]; if(S.chase[id] || (pts.at(-1)?.[0]||0) >= cut) keep[id] = pts; }
+  S.hist = keep; LS.set("hist", keep);
+}
 const saveChase = () => LS.set("chase", S.chase);
 const saveDecisions = () => LS.set("decisions", S.decisions);
 const savePrices = () => { const now=Date.now(); const keep={}; let n=0; for(const [k,v] of Object.entries(S.prices)){ if(S.chase[k] || now-v.t < PRICE_TTL*4){ keep[k]=v; n++; } } S.prices=keep; LS.set("prices", keep); };
@@ -775,7 +806,7 @@ async function fetchPrices(ids){
       if(!dexId){ backup.push(id); return; }
       const d = await fetchJSON(TCGDEX+"cards/"+encodeURIComponent(dexId)); ok++;
       const p = pickDexPrice(d && d.pricing);
-      if(p){ S.prices[id] = p; refreshPrices(); } else backup.push(id);
+      if(p){ S.prices[id] = p; recordPrice(id, p.p); refreshPrices(); } else backup.push(id);
     }catch(e){ failed++; backup.push(id); }
   });
   let backupOk = false;
@@ -785,7 +816,7 @@ async function fetchPrices(ids){
     try{
       const j = await fetchJSON(API + "?" + new URLSearchParams({q, select:"id,tcgplayer", pageSize:"250"}), {headers: S.apiKey ? {"X-Api-Key":S.apiKey} : {}});
       backupOk = true;
-      for(const c of (Array.isArray(j.data)?j.data:[])){ if(!c || !chunk.includes(c.id)) continue; const p = pickPrice(c.tcgplayer); if(p && p.p!=null) S.prices[c.id] = p; }
+      for(const c of (Array.isArray(j.data)?j.data:[])){ if(!c || !chunk.includes(c.id)) continue; const p = pickPrice(c.tcgplayer); if(p && p.p!=null){ S.prices[c.id] = p; recordPrice(c.id, p.p); } }
     }catch(e){ break; }
   }
   // cards both sources answered for but have no price: remember that so we don't keep asking
@@ -1392,6 +1423,47 @@ function openDetail(id){
   const t = sheet.querySelector(".detail-hero .tcg"); if(t) wireTilt(t);
 }
 function changeTxt(from, to){ if(from==null || to==null || !from) return ""; const d = (to-from)/from*100; return `${d>=0?"+":"−"}${Math.abs(d).toFixed(0)}%`; }
+function chartHTML(c){
+  const own = S.hist[c.id] || [], pr = S.prices[c.id];
+  let pts, cur, title, sub, startLbl;
+  const now = today();
+  if(own.length >= 2){
+    pts = own.map(([d, v]) => [d - now, v]); cur = "$";
+    title = "Price history"; sub = `TCGplayer · ${own.length} days recorded by ChaseDeck`;
+    startLbl = new Date(own[0][0]*86400000).toLocaleDateString(undefined,{month:"short",day:"numeric"});
+  } else if(pr && pr.cm){
+    pts = [[-30, pr.cm.a30], [-7, pr.cm.a7]]; if(pr.cm.a1!=null) pts.push([-1, pr.cm.a1]);
+    cur = "€"; title = "Price trend"; sub = "Cardmarket (EU) averages · your own history starts today"; startLbl = "30 days ago";
+  } else return "";
+  const W = 320, H = 132, L = 6, Rr = 46, T = 16, B = 24;
+  const xs = pts.map(p => p[0]), ys = pts.map(p => p[1]);
+  const x0 = Math.min(...xs), x1 = Math.max(0, ...xs);
+  let y0 = Math.min(...ys), y1 = Math.max(...ys); const pad = Math.max((y1-y0)*0.18, y1*0.04, 0.5); y0 = Math.max(0, y0-pad); y1 += pad;
+  const X = d => L + (x1===x0 ? (W-L-Rr)/2 : (d-x0)/(x1-x0)*(W-L-Rr));
+  const Y = v => T + (1 - (v-y0)/(y1-y0)) * (H-T-B);
+  const coords = pts.map(([d,v]) => [X(d), Y(v)]);
+  const line = coords.map(([x,y],i) => (i?"L":"M")+x.toFixed(1)+" "+y.toFixed(1)).join(" ");
+  const area = line + ` L${coords.at(-1)[0].toFixed(1)} ${H-B} L${coords[0][0].toFixed(1)} ${H-B} Z`;
+  const first = ys[0], last = ys.at(-1), chg = first ? (last-first)/first : 0;
+  const up = chg >= 0, col = Math.abs(chg) < 0.02 ? "#c4b2ff" : up ? "#3ef2b0" : "#ff6b88";
+  const fmt = v => cur + (v >= 100 ? Math.round(v).toLocaleString() : v.toFixed(2));
+  const grid = [y1 - (y1-y0)*0.15, y0 + (y1-y0)*0.15].map(v => `<line x1="${L}" x2="${W-Rr+4}" y1="${Y(v).toFixed(1)}" y2="${Y(v).toFixed(1)}" class="gl"/><text x="${W-Rr+10}" y="${(Y(v)+4).toFixed(1)}" class="gt">${fmt(v)}</text>`).join("");
+  const dots = coords.map(([x,y],i) => `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${i===coords.length-1?4.5:2.6}" fill="${i===coords.length-1?col:"#0f0c1f"}" stroke="${col}" stroke-width="2"/>`).join("");
+  const lx = coords.at(-1)[0], ly = coords.at(-1)[1];
+  return `<div class="sec"><div class="sec-t"><h3>${title}</h3><span class="chg" style="color:${col}">${Math.abs(chg) < 0.005 ? "Flat" : (up?"▲ ":"▼ ")+Math.abs(chg*100).toFixed(1)+"%"}</span></div>
+    <div class="chart">
+      <svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(title)} chart">
+        <defs><linearGradient id="cfill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${col}" stop-opacity=".35"/><stop offset="1" stop-color="${col}" stop-opacity="0"/></linearGradient></defs>
+        ${grid}
+        <path d="${area}" fill="url(#cfill)" class="carea"/>
+        <path d="${line}" fill="none" stroke="${col}" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round" pathLength="1" class="cline"/>
+        ${dots}
+        <g class="ctag"><rect x="${Math.min(lx-26, W-Rr-50).toFixed(1)}" y="${Math.max(ly-27, 0).toFixed(1)}" width="52" height="19" rx="9.5" fill="${col}"/><text x="${(Math.min(lx-26, W-Rr-50)+26).toFixed(1)}" y="${(Math.max(ly-27,0)+13.5).toFixed(1)}" class="ct">${fmt(last)}</text></g>
+        <text x="${L}" y="${H-6}" class="gt">${esc(startLbl)}</text><text x="${W-Rr}" y="${H-6}" class="gt" text-anchor="end">Today</text>
+      </svg>
+      <div class="csub">${esc(sub)}</div>
+    </div></div>`;
+}
 function insightHTML(c){
   const pk = pickOf(c.id), sg = signalOf(c.id), pr = S.prices[c.id];
   let h = "";
@@ -1431,6 +1503,7 @@ function detailHTML(c){
         <div class="prices">${variants.length ? variants.map(([v,m],i) => `<div class="pbox ${i===0?"main":""}"><span>${esc(vName(v))}</span><b>${money(m)}</b></div>`).join("") :
           `<div class="pbox main"><span>Raw market</span><b data-price-for="${esc(c.id)}">${money(priceOf(c.id))}</b><em>${S.apiState==="down"?"price service offline":S.prices[c.id]?"no TCGplayer listing":"loading…"}</em></div>`}</div>
       </div>
+      ${chartHTML(c)}
       ${insightHTML(c)}
 
       ${e ? `
