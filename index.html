@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-NScxWQli4Af7U1PE76G3uWMxmgT8uUvn7MzXXAjnZG0='; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' https://images.pokemontcg.io https://images.scrydex.com data: blob:; connect-src 'self' https://raw.githubusercontent.com https://api.tcgdex.net https://api.pokemontcg.io; manifest-src 'self'; base-uri 'none'; form-action 'none'; object-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-ExmzIw0OcqHXV+u1ctlI/UmE3iYsJr3xOePSWruxZps='; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' https://images.pokemontcg.io https://images.scrydex.com data: blob:; connect-src 'self' https://raw.githubusercontent.com https://api.tcgdex.net https://api.pokemontcg.io; manifest-src 'self'; base-uri 'none'; form-action 'none'; object-src 'none'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1">
 <meta name="theme-color" content="#0a0913">
@@ -441,6 +441,43 @@ img{user-select:none;-webkit-user-drag:none}
 .paidrow .field{flex:1}
 .gainpill{font-size:12.5px;font-weight:800;padding:8px 10px;border-radius:11px;background:rgba(255,255,255,.06);white-space:nowrap}
 
+/* Timing */
+.timing{border-radius:16px;padding:13px 14px;background:var(--glass);border:1px solid var(--line)}
+.timing.great,.timing.good{background:linear-gradient(135deg,rgba(62,242,176,.12),rgba(255,255,255,.03));border-color:rgba(62,242,176,.35)}
+.timing.wait{background:linear-gradient(135deg,rgba(255,77,109,.1),rgba(255,255,255,.03));border-color:rgba(255,77,109,.3)}
+.timing.fair{background:linear-gradient(135deg,rgba(255,210,122,.1),rgba(255,255,255,.03));border-color:rgba(255,210,122,.3)}
+.tm-head{display:flex;align-items:center;gap:12px}
+.tm-pill{height:30px;padding:0 12px;border-radius:99px;font-weight:800;font-size:13.5px;display:inline-flex;align-items:center;white-space:nowrap}
+.tm-pill.great,.tm-pill.good{background:#3ef2b0;color:#03261a}
+.tm-pill.fair{background:#ffd27a;color:#3a2600}
+.tm-pill.wait{background:#ff6b88;color:#2e0610}
+.tm-pill.na{background:rgba(255,255,255,.1);color:var(--ink-2)}
+.tm-meter{flex:1;height:8px;border-radius:8px;position:relative;background:linear-gradient(90deg,#ff6b88,#ffd27a 50%,#3ef2b0)}
+.tm-meter i{position:absolute;top:50%;width:16px;height:16px;margin:-8px 0 0 -8px;border-radius:50%;background:#fff;box-shadow:0 2px 8px rgba(0,0,0,.5),0 0 0 3px rgba(10,9,19,.6)}
+.tm-why{list-style:none;margin:12px 0 0;padding:0;display:flex;flex-direction:column;gap:7px}
+.tm-why li{display:flex;gap:9px;font-size:13px;line-height:1.45;color:var(--ink-2);font-weight:500}
+.tm-why li b{width:18px;height:18px;border-radius:50%;flex-shrink:0;display:grid;place-items:center;font-size:10.5px;margin-top:1px}
+.tm-why li.gp b{background:rgba(62,242,176,.2);color:#8cf5c7}
+.tm-why li.gn b{background:rgba(255,77,109,.2);color:#ff9fb1}
+.tm-why li.gz b{background:rgba(255,255,255,.1);color:var(--ink-3)}
+.tm-na{margin:10px 0 0;font-size:13px;color:var(--ink-3);line-height:1.45}
+.tm-aim{margin:10px 0 0;font-size:13px;color:var(--ink-2)}
+.tm-aim b{color:var(--ink)}
+.tgtrow{display:flex;align-items:center;gap:10px;margin-top:12px}
+.tgtrow .field{flex:1}
+.thit{font-size:12.5px;font-weight:800;color:#ffd27a;white-space:nowrap}
+.tmiss{font-size:12px;font-weight:700;color:var(--ink-3);white-space:nowrap}
+.liq{font-size:11px;font-weight:800;padding:4px 8px;border-radius:8px;background:rgba(255,255,255,.08);color:var(--ink-2)}
+.liq.often{color:#8cf5c7}.liq.rarely{color:#ffb38a}
+.tlrow{margin-top:4px}
+.tl{display:inline-flex;height:20px;padding:0 8px;border-radius:99px;font-size:10.5px;font-weight:800;align-items:center}
+.tl.great,.tl.good{background:rgba(62,242,176,.16);color:#8cf5c7}
+.tl.wait{background:rgba(255,77,109,.14);color:#ff9fb1}
+.tl.hit{background:rgba(255,190,90,.2);color:#ffd27a}
+.badge.tmb{background:rgba(3,38,26,.85);color:#8cf5c7;border-color:rgba(62,242,176,.5)}
+.tgtb{position:absolute;top:-2px;right:2px;height:18px;padding:0 5px;border-radius:9px;background:#ffb547;color:#2e1400;font-size:10px;font-weight:800;display:grid;place-items:center;white-space:nowrap;box-shadow:0 0 0 2px var(--bg)}
+.tgtb[hidden]{display:none!important}
+
 /* Help */
 .help-hero{text-align:center;padding:4px 0 6px}
 .help-hero p{margin:8px auto 0;color:var(--ink-2);font-size:14px;line-height:1.5;max-width:330px;font-weight:500}
@@ -532,7 +569,7 @@ kbd{font-family:inherit;font-size:10.5px;padding:1px 6px;border-radius:5px;borde
     <button class="tab" data-view="picks" id="tabPicks">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><path d="M12 3l1.9 4.6L18.5 9l-4.6 1.9L12 15.5l-1.9-4.6L5.5 9l4.6-1.4z"/><path d="M18.5 15l.8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8z"/></svg>Picks</button>
     <button class="tab" data-view="list" id="tabList">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><path d="M12 20.5s-7-4.3-8.9-8.6C1.7 8.6 3.9 5.2 7.3 5.2c1.9 0 3.3 1 4.7 2.8 1.4-1.8 2.8-2.8 4.7-2.8 3.4 0 5.6 3.4 4.2 6.7-1.9 4.3-8.9 8.6-8.9 8.6z"/></svg>List <span class="count" id="chaseCount">0</span></button>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><path d="M12 20.5s-7-4.3-8.9-8.6C1.7 8.6 3.9 5.2 7.3 5.2c1.9 0 3.3 1 4.7 2.8 1.4-1.8 2.8-2.8 4.7-2.8 3.4 0 5.6 3.4 4.2 6.7-1.9 4.3-8.9 8.6-8.9 8.6z"/></svg>List <span class="count" id="chaseCount">0</span><span class="tgtb" id="tgtBadge" hidden></span></button>
   </nav>
 </div>
 
@@ -593,7 +630,7 @@ function cleanEntry(e){
   const card = cleanCard(e && e.card); if(!card) return null;
   const prio = [1,2,3].includes(e.prio) ? e.prio : 2;
   return { card, prio, want: GRADES.includes(e.want) ? e.want : "Raw", got: e.got===true, note: str(e.note,500), added: num(e.added) ?? Date.now(),
-    folders: Array.isArray(e.folders) ? [...new Set(e.folders.filter(f => typeof f==="string" && /^[a-z0-9]{1,12}$/.test(f)))].slice(0,30) : [], paid: num(e.paid) };
+    folders: Array.isArray(e.folders) ? [...new Set(e.folders.filter(f => typeof f==="string" && /^[a-z0-9]{1,12}$/.test(f)))].slice(0,30) : [], paid: num(e.paid), target: num(e.target), sellAt: num(e.sellAt) };
 }
 const FOLDER_COLORS = ["#8b6cff","#3ef2b0","#ffb547","#4fd8ff","#ff6fb5","#ff4d6d"];
 const FOLDER_EMOJI = ["💎","💸","🔥","📈","⚠️","🎁","📦","⭐","❤️","🌙","⚡","🐉","👻","🌊","🍀","🏆","🎯","🧸"];
@@ -602,7 +639,8 @@ const STARTER_FOLDERS = [
   {id:"flip", name:"To flip", emoji:"💸", color:"#3ef2b0", type:"manual"},
   {id:"grails", name:"Grails", emoji:"🔥", color:"#ffb547", type:"smart", rule:{kind:"status", value:"grail"}},
   {id:"buynow", name:"Buy now", emoji:"📈", color:"#4fd8ff", type:"smart", rule:{kind:"signal", value:"buy"}},
-  {id:"sell", name:"Consider selling", emoji:"⚠️", color:"#ff6fb5", type:"smart", rule:{kind:"signal", value:"sell"}}
+  {id:"sell", name:"Consider selling", emoji:"⚠️", color:"#ff6fb5", type:"smart", rule:{kind:"signal", value:"sell"}},
+  {id:"atprice", name:"At your price", emoji:"🎯", color:"#ffb547", type:"smart", rule:{kind:"target"}}
 ];
 function cleanRule(r){
   if(!r || typeof r!=="object") return null;
@@ -612,6 +650,7 @@ function cleanRule(r){
     case "pokemon": return Number.isInteger(r.value) && r.value>=1 && r.value<=1025 ? {kind:"pokemon", value:r.value} : null;
     case "price": { const min = num(r.min) ?? 0, max = num(r.max) ?? 0; return (min || max) ? {kind:"price", min, max} : null; }
     case "status": return ["grail","graded","got","hunting"].includes(r.value) ? {kind:"status", value:r.value} : null;
+    case "target": return {kind:"target"};
   }
   return null;
 }
@@ -673,6 +712,7 @@ const S = {
 S.chase = cleanChase(LS.get("chase", {}));
 S.decisions = cleanDecisions(LS.get("decisions", {}));
 S.folders = cleanFolders(LS.get("folders", null)) || STARTER_FOLDERS.map(f => ({...f}));
+if(!LS.get("hasTargetFolder", false)){ if(!S.folders.some(f => f.rule?.kind==="target") && S.folders.length < 30) S.folders.push({...STARTER_FOLDERS.at(-1), rule:{kind:"target"}}); LS.set("folders", S.folders); LS.set("hasTargetFolder", true); }
 S.chartRange = ["1m","3m","1y","all"].includes(LS.get("chartRange","3m")) ? LS.get("chartRange","3m") : "3m";
 S.listFolder = LS.get("listFolder", "all"); if(S.listFolder!=="all" && !S.folders.some(f => f.id===S.listFolder)) S.listFolder = "all";
 const saveFolders = () => LS.set("folders", S.folders);
@@ -983,6 +1023,8 @@ function badgesHTML(id){
   const sg = signalOf(id), pk = pickOf(id); let h = "";
   if(pk) h += `<span class="badge pick ${CALLS[pk.call].cls}">✦ Claude: ${CALLS[pk.call].label}</span>`;
   if(sg) h += `<span class="badge sig ${sg.k}">${sg.icon} ${sg.label} ${sg.short}</span>`;
+  const tm = timingOf(id, !!S.chase[id]?.got);
+  if(tm?.rating==="great") h += `<span class="badge tmb">✓ Great time to buy</span>`;
   return h;
 }
 function refreshSignals(){ document.querySelectorAll("[data-sig-for]").forEach(el => { el.innerHTML = badgesHTML(el.dataset.sigFor); }); }
@@ -1190,6 +1232,19 @@ function celebrate(el, kind){
   const f = $("#flash"); f.classList.remove("go"); void f.offsetWidth; f.classList.add("go");
   if(navigator.vibrate) try{ navigator.vibrate(12); }catch{}
 }
+function updateTargetBadge(){
+  const n = Object.values(S.chase).filter(targetHit).length, el = $("#tgtBadge");
+  if(el){ el.hidden = !n; el.textContent = "🎯" + n; }
+  return n;
+}
+async function checkTargets(){
+  const withT = Object.values(S.chase).filter(e => e.target!=null || e.sellAt!=null);
+  if(!withT.length) return;
+  await Promise.all([...new Set(withT.map(e => e.card.setId))].map(loadShared));
+  await fetchPrices(withT.map(e => e.card.id));
+  const n = updateTargetBadge();
+  if(n) toast("🎯", `${n} card${n===1?" is":"s are"} at your price`, "View", () => { hideToast(); S.listFolder = S.folders.find(f => f.rule?.kind==="target")?.id || "all"; LS.set("listFolder", S.listFolder); S.listFilter = "all"; setView("list"); });
+}
 function bumpCount(){ const c=$("#chaseCount"); c.textContent = Object.keys(S.chase).length; c.classList.remove("bump"); void c.offsetWidth; c.classList.add("bump"); }
 
 /* ---------- toast ---------- */
@@ -1209,7 +1264,7 @@ function setView(v){
   $("#viewSwipe").hidden = v!=="swipe"; $("#viewList").hidden = v!=="list"; $("#viewPicks").hidden = v!=="picks";
   $("#tabSwipe").classList.toggle("on", v==="swipe"); $("#tabList").classList.toggle("on", v==="list"); $("#tabPicks").classList.toggle("on", v==="picks");
   $("#brandSub").textContent = v==="swipe" ? "Swipe your grails" : v==="picks" ? "What to target now" : "Your hunt, organized";
-  if(v==="list"){ renderList(); fetchPrices(Object.keys(S.chase)).then(() => S.view==="list" && renderList(true)); [...new Set(Object.values(S.chase).map(e => e.card.setId))].forEach(id => loadShared(id).then(() => S.view==="list" && renderList(true))); }
+  if(v==="list"){ updateTargetBadge(); renderList(); fetchPrices(Object.keys(S.chase)).then(() => S.view==="list" && renderList(true)); [...new Set(Object.values(S.chase).map(e => e.card.setId))].forEach(id => loadShared(id).then(() => S.view==="list" && renderList(true))); }
   if(v==="picks"){ renderPicks(); preparePicks(); }
 }
 
@@ -1306,11 +1361,16 @@ function inFolder(e, f){
   if(f.type==="manual") return e.folders.includes(f.id);
   const r = f.rule, c = e.card;
   switch(r.kind){
-    case "signal": { const sg = signalOf(c.id); if(!sg) return false; return r.value==="buy" ? (!e.got && (sg.k==="up" || sg.k==="dip")) : (e.got && (sg.k==="hot" || sg.k==="up")); }
+    case "signal": {
+      const sg = signalOf(c.id), tm = timingOf(c.id, e.got);
+      if(r.value==="buy") return !e.got && ((sg && (sg.k==="up" || sg.k==="dip")) || tm?.rating==="great");
+      return e.got && ((sg && (sg.k==="hot" || sg.k==="up")) || tm?.rating==="good");
+    }
     case "set": return c.setId === r.value;
     case "pokemon": return new RegExp("(^|[^A-Za-z])" + escRe(DEX[r.value-1]) + "($|[^A-Za-z])", "i").test(c.name);
     case "price": { const p = priceOf(c.id); return p!=null && p >= (r.min||0) && (!r.max || p <= r.max); }
     case "status": return r.value==="grail" ? (e.prio===3 && !e.got) : r.value==="graded" ? e.want!=="Raw" : r.value==="got" ? e.got : !e.got;
+    case "target": return targetHit(e);
   }
   return false;
 }
@@ -1318,10 +1378,11 @@ const folderById = id => S.folders.find(f => f.id===id) || null;
 function ruleText(f){
   if(f.type!=="smart") return "Cards you add yourself";
   const r = f.rule;
-  return r.kind==="signal" ? (r.value==="buy" ? "Cards you're hunting that show 📈 or 💎" : "Cards you own that are climbing or spiking")
+  return r.kind==="signal" ? (r.value==="buy" ? "Cards you're hunting that show 📈 or 💎, or rate as a great time to buy" : "Cards you own that are climbing, spiking or in a good sell window")
     : r.kind==="set" ? `Every card from ${S.setMap[r.value]?.name || r.value}`
     : r.kind==="pokemon" ? `Every ${DEX[r.value-1]} card`
     : r.kind==="price" ? (r.min && r.max ? `Cards $${r.min}–$${r.max}` : r.min ? `Cards $${r.min}+` : `Cards under $${r.max}`)
+    : r.kind==="target" ? "Cards at or below your max price, and owned cards at your sell price"
     : ({grail:"Cards marked 🔥 Grail", graded:"Cards you want graded", got:"Cards you own", hunting:"Cards you're still hunting"})[r.value];
 }
 function folderEntries(fid){ const f = fid==="all" ? null : folderById(fid); return Object.values(S.chase).filter(e => inFolder(e, f)); }
@@ -1354,7 +1415,7 @@ function openFolderEditor(id){
 }
 function renderFolderEditor(){
   const b = $("#fdBody"); if(!b) return; const keep = b.scrollTop, d = fdraft, r = d.rule || {};
-  const kinds = [["signal","Market signal"],["set","Set"],["pokemon","Pokémon"],["price","Price"],["status","Status"]];
+  const kinds = [["signal","Market signal"],["target","At my price"],["set","Set"],["pokemon","Pokémon"],["price","Price"],["status","Status"]];
   let ruleUI = "";
   if(d.type==="smart"){
     if(r.kind==="signal") ruleUI = `<div class="seg">${[["buy","📈 Good buys"],["sell","⚠️ Consider selling"]].map(([k,l]) => `<button data-rv="${k}" class="${r.value===k?"on":""}">${l}</button>`).join("")}</div>`;
@@ -1390,7 +1451,7 @@ function folderEditorClick(t){
   if(t.dataset.emo){ d.emoji = t.dataset.emo; }
   else if(t.dataset.col){ d.color = t.dataset.col; }
   else if(t.dataset.ftype){ d.type = t.dataset.ftype; if(d.type==="smart" && !d.rule) d.rule = {kind:"signal", value:"buy"}; }
-  else if(t.dataset.rk){ d.rule = {kind:t.dataset.rk}; if(t.dataset.rk==="signal") d.rule.value="buy"; if(t.dataset.rk==="status") d.rule.value="grail"; delete d._monQ; }
+  else if(t.dataset.rk){ d.rule = {kind:t.dataset.rk}; if(t.dataset.rk==="target" && !d.name) d.name = "At your price"; if(t.dataset.rk==="signal") d.rule.value="buy"; if(t.dataset.rk==="status") d.rule.value="grail"; delete d._monQ; }
   else if(t.dataset.rv){ d.rule.value = t.dataset.rv; }
   else if(t.dataset.fmon){ d.rule = {kind:"pokemon", value:+t.dataset.fmon}; d._monQ = DEX[+t.dataset.fmon-1]; if(!d.name) d.name = DEX[+t.dataset.fmon-1]; }
   else if(a==="fdDelete"){
@@ -1517,6 +1578,9 @@ function renderList(soft){
 }
 function tileHTML(e, i, soft){
   const c = e.card, p = priceOf(c.id);
+  const tm = timingOf(c.id, e.got), hit = targetHit(e);
+  const tl = hit ? `<span class="tl hit">🎯 ${e.got ? "Sell price" : "Your price"}</span>`
+    : tm && ["great","good","wait","hold"].includes(tm.rating) && !(e.got && tm.rating==="hold") ? `<span class="tl ${RATING[tm.rating][1]}">${e.got ? (tm.rating==="good" ? "Sell window" : "") : tm.rating==="great" ? "Great buy" : "Wait"}</span>` : "";
   const dots = e.folders.map(id => folderById(id)).filter(Boolean).slice(0,4).map(f => `<i style="background:${f.color}" title="${esc(f.name)}"></i>`).join("");
   return `<button class="tile ${e.got?"got":""} ${sel.on?"selecting":""} ${sel.ids.has(c.id)?"picked":""}" data-open="${esc(c.id)}" style="${soft?"animation:none":`animation-delay:${Math.min(i,12)*35}ms`}">
     <div class="thumb"><img src="${esc(c.img)}" alt="${esc(c.name)}" loading="lazy">
@@ -1525,7 +1589,7 @@ function tileHTML(e, i, soft){
       <div class="got-badge"><span>${ICON.check}</span></div>
       ${dots ? `<div class="fdots">${dots}</div>` : ""}
       <div class="selmark">${ICON.check}</div></div>
-    <div class="meta"><div class="n">${esc(c.name)}</div><div class="s"><span>${esc(c.setName)} #${esc(c.number)}</span><b data-price-for="${esc(c.id)}">${money(p)}</b></div></div>
+    <div class="meta"><div class="n">${esc(c.name)}</div>${tl && !tl.includes("></span>") ? `<div class="tlrow">${tl}</div>` : ""}<div class="s"><span>${esc(c.setName)} #${esc(c.number)}</span><b data-price-for="${esc(c.id)}">${money(p)}</b></div></div>
   </button>`;
 }
 
@@ -1730,6 +1794,90 @@ function openDetail(id){
   const t = sheet.querySelector(".detail-hero .tcg"); if(t) wireTilt(t);
   wireNote();
 }
+/* ---------- buy / sell timing (Claude's rules, from ChaseDeck price history) ---------- */
+function targetHit(e){
+  const p = priceOf(e.card.id); if(p==null) return false;
+  return (!e.got && e.target!=null && p <= e.target) || (e.got && e.sellAt!=null && p >= e.sellAt);
+}
+const timingCache = new Map();
+function timingOf(id, owned){
+  const h = histFor(id), last = h.at(-1);
+  const price = last && today() - last[0] <= 3 ? last[1] : (priceOf(id) ?? last?.[1]);
+  const key = id + "|" + (owned?1:0) + "|" + h.length + "|" + price;
+  if(timingCache.has(key)) return timingCache.get(key);
+  const out = computeTiming(id, owned, h, price); timingCache.set(key, out); return out;
+}
+function computeTiming(id, owned, h, price){
+  if(price==null) return null;
+  const card = findCard(id), now = h.length ? h.at(-1)[0] : today();
+  const yr = h.filter(p => p[0] > now - 365);
+  const last30 = h.filter(p => p[0] > now - 30);
+  const ratio = last30.length >= 10 ? new Set(last30.map(p => p[1])).size / last30.length : null;
+  const liq = ratio==null ? null : ratio > 0.6 ? "often" : ratio > 0.3 ? "sometimes" : "rarely";
+  const relDays = card?.release ? Math.floor((Date.now() - Date.parse(card.release.replace(/\//g,"-"))) / 864e5) : null;
+  if(yr.length < 8 || now - yr[0][0] < 45) return {rating:"na", reasons:[], liq, relDays, price};
+  const lo = Math.min(...yr.map(p => p[1])), hi = Math.max(...yr.map(p => p[1]));
+  const pos = hi > lo ? (price - lo) / (hi - lo) : 0.5;
+  const at = d => { const c = h.filter(p => p[0] <= now - d); return c.length ? c.at(-1)[1] : null; };
+  const ch = b => b ? (price - b) / b : 0, pc = x => Math.round(Math.abs(x) * 100) + "%";
+  const d7 = ch(at(7)), d30 = ch(at(30));
+  const range = `${money(lo)}–${money(hi)}`;
+  const falling = d30 < -0.12 && d7 < -0.03, settling = d30 < -0.08 && d7 >= -0.01, spiking = d30 > 0.35 || d7 > 0.2, climbing = d30 > 0.03;
+  const isNew = relDays!=null && relDays < 90, inPrint = relDays!=null && relDays < 540, oop = relDays!=null && relDays > 730;
+  const R = []; let sc = 50;
+  if(!owned){
+    sc += (0.5 - pos) * 50;
+    R.push(pos < 0.3 ? {g:1, t:`Near the low end of its 1-year range (${range})`} : pos > 0.8 ? {g:-1, t:`Near its 1-year high (range ${range})`} : {g:0, t:`Middle of its 1-year range (${range})`});
+    if(spiking){ sc -= 20; R.push({g:-1, t:`Spiking (+${pc(Math.max(d30,d7))} recently). Spikes often cool off`}); }
+    else if(falling){ sc -= 20; R.push({g:-1, t:`Still falling (−${pc(d30)} this month). Waiting may get a better price`}); }
+    else if(settling){ sc += 10; R.push({g:1, t:`Dropped ${pc(d30)} this month but has stopped falling`}); }
+    else if(climbing){ sc += 5; R.push({g:1, t:`Climbing steadily (+${pc(d30)} this month)`}); }
+    else R.push({g:0, t:"Price has been steady this month"});
+    if(isNew){ sc -= 15; R.push({g:-1, t:"New set: prices usually fall for a few months after release"}); }
+    else if(inPrint){ sc -= 5; R.push({g:-1, t:"Set is likely still being printed, so supply keeps growing"}); }
+    else if(oop){ sc += 5; R.push({g:1, t:"Out of print: no new supply is coming"}); }
+    if(liq==="rarely") R.push({g:0, t:"Sells rarely, so its price moves in jumps"});
+    const rating = sc >= 62 ? "great" : sc >= 42 ? "fair" : "wait";
+    return {rating, reasons:R, liq, relDays, price, lo, hi, pos, score:Math.round(sc)};
+  }
+  sc += (pos - 0.5) * 50;
+  R.push(pos > 0.8 ? {g:1, t:`Near its 1-year high (range ${range})`} : pos < 0.3 ? {g:-1, t:`Near its 1-year low (range ${range}). Selling now locks in a low price`} : {g:0, t:`Middle of its 1-year range (${range})`});
+  if(spiking){ sc += 15; R.push({g:1, t:`Spiking (+${pc(Math.max(d30,d7))} recently): a good moment to sell into`}); }
+  else if(falling){ R.push({g:0, t:`Falling (−${pc(d30)} this month). If you're not holding long term, selling sooner limits the drop`}); }
+  else if(climbing){ sc -= 5; R.push({g:-1, t:`Still climbing (+${pc(d30)} this month). Holding may pay more`}); }
+  if(inPrint && !isNew){ sc += 5; R.push({g:1, t:"Still in print: reprints can push the price lower later"}); }
+  else if(oop){ sc -= 5; R.push({g:-1, t:"Out of print: long-term holders have often been rewarded"}); }
+  if(liq==="rarely") R.push({g:0, t:"Sells rarely, so finding a buyer may take time"});
+  const rating = sc >= 65 ? "good" : sc >= 40 ? "fairsell" : "hold";
+  const aim = Math.max(price, hi * 0.95);
+  return {rating, reasons:R, liq, relDays, price, lo, hi, pos, aim, score:Math.round(sc)};
+}
+const RATING = {great:["Great time to buy","great"], fair:["Fair price","fair"], wait:["Better to wait","wait"],
+  good:["Good time to sell","good"], fairsell:["Fair time to sell","fair"], hold:["Better to hold","wait"], na:["Not enough price history yet","na"]};
+const LIQ = {often:["Sells often","Easy to buy or resell"], sometimes:["Sells sometimes","Takes a little patience to buy or resell"], rarely:["Sells rarely","Can take a while to find a buyer"]};
+function timingHTML(c){
+  const e = S.chase[c.id], owned = !!e?.got, tm = timingOf(c.id, owned); if(!tm) return "";
+  const [label, cls] = RATING[tm.rating];
+  const ico = g => g > 0 ? "✓" : g < 0 ? "✕" : "•";
+  let tgt = "";
+  if(e){
+    const p = priceOf(c.id);
+    if(!owned){
+      const st = e.target==null ? "" : p==null ? "" : p <= e.target ? `<span class="thit">🎯 At your price</span>` : `<span class="tmiss">${money(p - e.target)} above your max</span>`;
+      tgt = `<div class="tgtrow"><div class="field mini"><span class="lbl">My max price $</span><input id="tgtIn" inputmode="decimal" maxlength="8" value="${e.target!=null?e.target:""}" placeholder="${tm.lo!=null?Math.round(tm.lo + (tm.hi-tm.lo)*0.25):"optional"}"></div>${st}</div>`;
+    } else {
+      const st = e.sellAt==null ? "" : p==null ? "" : p >= e.sellAt ? `<span class="thit">🎯 At your sell price</span>` : `<span class="tmiss">${money(e.sellAt - p)} below your sell price</span>`;
+      tgt = `<div class="tgtrow"><div class="field mini"><span class="lbl">Sell at $</span><input id="sellIn" inputmode="decimal" maxlength="8" value="${e.sellAt!=null?e.sellAt:""}" placeholder="${tm.aim?Math.round(tm.aim):"optional"}"></div>${st}</div>`;
+    }
+  }
+  return `<div class="sec"><div class="sec-t"><h3>${owned ? "Should I sell?" : "Should I buy now?"}</h3>${tm.liq ? `<span class="liq ${tm.liq}" title="${esc(LIQ[tm.liq][1])}">${LIQ[tm.liq][0]}</span>` : ""}</div>
+    <div class="timing ${cls}">
+      <div class="tm-head"><span class="tm-pill ${cls}">${label}</span>${tm.score!=null ? `<span class="tm-meter"><i style="left:${Math.max(4,Math.min(96,tm.score))}%"></i></span>` : ""}</div>
+      ${tm.reasons.length ? `<ul class="tm-why">${tm.reasons.map(r => `<li class="g${r.g>0?"p":r.g<0?"n":"z"}"><b>${ico(r.g)}</b>${esc(r.t)}</li>`).join("")}</ul>` : `<p class="tm-na">ChaseDeck needs about 6 weeks of price history for this card before it can rate the timing.</p>`}
+      ${owned && tm.aim && tm.rating!=="hold" ? `<p class="tm-aim">Aim to sell around <b>${money(tm.aim)}</b>${e.paid!=null ? ` (you paid ${money(e.paid)})` : ""}.</p>` : ""}
+      ${tgt}
+    </div></div>`;
+}
 function changeTxt(from, to){ if(from==null || to==null || !from) return ""; const d = (to-from)/from*100; return `${d>=0?"+":"−"}${Math.abs(d).toFixed(0)}%`; }
 function chartHTML(c){
   const full = histFor(c.id), pr = S.prices[c.id];
@@ -1821,6 +1969,7 @@ function detailHTML(c){
         <div class="prices">${variants.length ? variants.map(([v,m],i) => `<div class="pbox ${i===0?"main":""}"><span>${esc(vName(v))}</span><b>${money(m)}</b></div>`).join("") :
           `<div class="pbox main"><span>Raw market</span><b data-price-for="${esc(c.id)}">${money(priceOf(c.id))}</b><em>${S.apiState==="down"?"price service offline":S.prices[c.id]?"no TCGplayer listing":"loading…"}</em></div>`}</div>
       </div>
+      ${timingHTML(c)}
       ${chartHTML(c)}
       ${insightHTML(c)}
 
@@ -1860,6 +2009,9 @@ function rerenderDetail(){
 }
 function wireNote(){
   const n = $("#noteIn"); if(n) n.oninput = () => { const e=S.chase[detailId]; if(e){ e.note=n.value; saveChase(); } };
+  const num2 = v => { const n = parseFloat(String(v).replace(/[^0-9.]/g,"")); return isFinite(n) && n>0 ? Math.min(n,1e7) : null; };
+  const ti = $("#tgtIn"); if(ti) ti.onchange = () => { const e=S.chase[detailId]; if(!e) return; e.target = num2(ti.value); saveChase(); rerenderDetail(); updateTargetBadge(); };
+  const si = $("#sellIn"); if(si) si.onchange = () => { const e=S.chase[detailId]; if(!e) return; e.sellAt = num2(si.value); saveChase(); rerenderDetail(); updateTargetBadge(); };
   const pi = $("#paidIn"); if(pi) pi.onchange = () => { const e=S.chase[detailId]; if(!e) return; const v = parseFloat(pi.value.replace(/[^0-9.]/g,"")); e.paid = isFinite(v) && v>=0 ? Math.min(v,1e7) : null; saveChase(); rerenderDetail(); };
 }
 function detailClick(t){
@@ -1920,7 +2072,7 @@ function openHelp(first){
       <div class="steps">
         ${st(1,"Build your deck",`Tap the <b>sliders</b> button (top right). Set a <b>minimum price</b> (default $5+), pick <b>favorite Pokémon</b> or generations, and choose sets and rarity. Tap <b>Deal cards</b>.`)}
         ${st(2,"Swipe",`Drag a card or use the buttons. Made a mistake? The <b>undo arrow</b> brings back the last card.`)}
-        ${st(3,"Read the badges",`<b>📈 Heating up</b>, <b>💎 Possible dip</b>, <b>⚠️ Overheated</b> and <b>📉 Sliding</b> come from each card's recent price trend. <b>✦ Claude</b> badges mark this week's researched picks. Tap a card for the reasons, prices and buy links.`)}
+        ${st(3,"Read the badges",`<b>📈 Heating up</b>, <b>💎 Possible dip</b>, <b>⚠️ Overheated</b> and <b>📉 Sliding</b> come from each card's recent price trend. <b>✦ Claude</b> badges mark this week's researched picks. Tap any card for <b>Should I buy now?</b> (Great / Fair / Wait, with the reasons), price history and buy links. Set <b>My max price</b> and the <b>🎯 At your price</b> folder fills itself when a card hits it.`)}
         ${st(4,"Check Claude's picks",`The <b>Picks</b> tab lists cards worth targeting this week, with the reasoning, the price when each was called, and how past picks have done. Tap <b>Swipe these picks</b> to go through them.`)}
         ${st(5,"Organize with folders",`The <b>List</b> tab has folders like <b>PC</b> and <b>To flip</b>, plus automatic ones (<b>Grails</b>, <b>Buy now</b>, <b>Consider selling</b>). After a right swipe, tap a folder to file the card. Tap a card to set priority, Raw or graded, <b>Got it</b> and what you paid. Use <b>＋ New</b> to make your own, or the ✓ button to select several cards at once.`)}
         ${st(6,"Share and back up",`Use the <b>share button</b> on your list to copy it as text or CSV. Your list is saved on this device only, so copy a <b>backup code</b> now and then.`)}
@@ -2062,6 +2214,7 @@ async function boot(){
     setActs(false); return;
   }
   loadPicks();
+  setTimeout(checkTargets, 2500);
   const first = !LS.get("seen", false);
   await buildPool();
   if(first){ LS.set("seen", true); setTimeout(() => openHelp(true), 500); }
