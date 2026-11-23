@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-h3TKs68XJKTpHbdG/qyuz6z8SS+cfWCclkvpV6nh1fc='; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' https://images.pokemontcg.io https://images.scrydex.com data: blob:; connect-src 'self' https://raw.githubusercontent.com https://api.tcgdex.net https://api.pokemontcg.io; manifest-src 'self'; base-uri 'none'; form-action 'none'; object-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-uox3LdzkHyezaK28ovTa6XnjkEX1WaeeulfBs3HV5dk='; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' https://images.pokemontcg.io https://images.scrydex.com data: blob:; connect-src 'self' https://raw.githubusercontent.com https://api.tcgdex.net https://api.pokemontcg.io; manifest-src 'self'; base-uri 'none'; form-action 'none'; object-src 'none'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1">
 <meta name="theme-color" content="#0a0913">
@@ -491,6 +491,7 @@ img{user-select:none;-webkit-user-drag:none}
 .tl.great,.tl.good{background:rgba(62,242,176,.16);color:#8cf5c7}
 .tl.wait{background:rgba(255,77,109,.14);color:#ff9fb1}
 .tl.hit{background:rgba(255,190,90,.2);color:#ffd27a}
+.badge.back{background:rgba(20,24,48,.88);color:#c4d2ff;border-color:rgba(140,170,255,.5)}
 .badge.tmb{background:rgba(3,38,26,.85);color:#8cf5c7;border-color:rgba(62,242,176,.5)}
 .tgtb{position:absolute;top:-2px;right:2px;height:18px;padding:0 5px;border-radius:9px;background:#ffb547;color:#2e1400;font-size:10px;font-weight:800;display:grid;place-items:center;white-space:nowrap;box-shadow:0 0 0 2px var(--bg)}
 .tgtb[hidden]{display:none!important}
@@ -712,7 +713,7 @@ const GEN_OF = n => GEN_RANGES.findIndex(([a,b]) => n>=a && n<=b) + 1;
 const S = {
   sets: [], setMap: {}, cardCache: {},
   pool: [], idx: 0, loading: false, loadP: 0,
-  filters: Object.assign({sets:null, preset:"chase", q:"", order:"shuffle", hideSwiped:true, rarities:[], minPrice:5, maxPrice:0, mons:[], gens:[], kinds:[]}, LS.get("filters", {})),
+  filters: Object.assign({sets:null, preset:"chase", q:"", order:"shuffle", hideSwiped:true, returnDays:90, rarities:[], minPrice:5, maxPrice:0, mons:[], gens:[], kinds:[]}, LS.get("filters", {})),
   cands: [], buildId: 0, pricing: {on:false, done:0, total:0}, deckMode: "browse",
   picks: null, picksCards: {},
   decisions: {},
@@ -736,7 +737,7 @@ S.listFolder = LS.get("listFolder", "all"); if(S.listFolder!=="all" && !S.folder
 const saveFolders = () => LS.set("folders", S.folders);
 { const f=S.filters; if(!PRESETS[f.preset]) f.preset="chase"; if(!["shuffle","newest","oldest"].includes(f.order)) f.order="shuffle";
   f.q = str(f.q,60); f.rarities = Array.isArray(f.rarities) ? f.rarities.filter(r=>typeof r==="string").slice(0,60) : [];
-  f.sets = Array.isArray(f.sets) ? f.sets.filter(x=>typeof x==="string" && /^[A-Za-z0-9._-]{1,30}$/.test(x)) : null; f.hideSwiped = f.hideSwiped!==false;
+  f.sets = Array.isArray(f.sets) ? f.sets.filter(x=>typeof x==="string" && /^[A-Za-z0-9._-]{1,30}$/.test(x)) : null; f.hideSwiped = f.hideSwiped!==false; f.returnDays = [0,30,60,90].includes(f.returnDays) ? f.returnDays : 90;
   f.minPrice = num(f.minPrice) ?? 0; f.maxPrice = num(f.maxPrice) ?? 0;
   f.mons = Array.isArray(f.mons) ? [...new Set(f.mons.filter(n => Number.isInteger(n) && n>=1 && n<=DEX.length))].slice(0,1025) : [];
   f.gens = Array.isArray(f.gens) ? f.gens.filter(n => Number.isInteger(n) && n>=1 && n<=9) : [];
@@ -764,6 +765,11 @@ function saveHist(){
 }
 const saveChase = () => LS.set("chase", S.chase);
 const saveDecisions = () => LS.set("decisions", S.decisions);
+/* passed cards: when you passed and at what price, so they can come back when something changes */
+S.passInfo = (() => { const raw = LS.get("passInfo", {}), out = {}; if(raw && typeof raw==="object") for(const [k,v] of Object.entries(raw).slice(0,50000)) if(/^[A-Za-z0-9._-]{1,40}$/.test(k) && Array.isArray(v) && Number.isInteger(v[0]) && v[0]>19000 && v[0]<40000) out[k] = [v[0], num(v[1])]; return out; })();
+{ let ch = false; for(const [k,v] of Object.entries(S.decisions)) if(v==="pass" && !S.passInfo[k]){ S.passInfo[k] = [today(), null]; ch = true; } if(ch) LS.set("passInfo", S.passInfo); }
+const savePassInfo = () => LS.set("passInfo", S.passInfo);
+S.back = new Map();
 const savePrices = () => { const now=Date.now(); const keep={}; let n=0; for(const [k,v] of Object.entries(S.prices)){ if(S.chase[k] || now-v.t < PRICE_TTL*4){ keep[k]=v; n++; } } S.prices=keep; LS.set("prices", keep); };
 
 /* ---------- utils ---------- */
@@ -829,6 +835,16 @@ function monMatch(c, f){
   if(!c.dex.length) return false;
   return c.dex.some(n => f.mons.includes(n) || f.gens.includes(GEN_OF(n)));
 }
+function returnReason(id){
+  const info = S.passInfo[id], days = S.filters.returnDays; if(!info || !days) return null;
+  const was = info[1], h = histFor(id), last = h.at(-1);
+  const now = last && today() - last[0] <= 7 ? last[1] : priceOf(id);
+  if(was && now && now <= was * 0.8) return `↩ Down ${Math.round((1 - now/was) * 100)}% since you passed`;
+  const pk = pickOf(id); if(pk && (pk.call==="buy" || pk.call==="dip") && pk.date && Date.parse(pk.date)/864e5 > info[0]) return `↩ Claude: ${CALLS[pk.call].label}`;
+  if(timingOf(id, false)?.rating==="great") return "↩ Now a great time to buy";
+  const ago = today() - info[0]; if(ago >= days) return `↩ Passed ${ago >= 60 ? Math.round(ago/30)+" months" : ago+" days"} ago`;
+  return null;
+}
 async function buildPool(){
   S.deckMode = "browse";
   const f = S.filters; const myBuild = ++S.buildId;
@@ -844,10 +860,22 @@ async function buildPool(){
   if(f.kinds.length) pool = pool.filter(c => f.kinds.includes(c.supertype));
   pool = pool.filter(c => monMatch(c, f));
   if(q) pool = pool.filter(c => c.name.toLowerCase().includes(q) || c.artist.toLowerCase().includes(q));
-  if(f.hideSwiped) pool = pool.filter(c => !S.decisions[c.id]);
-  if(f.order === "shuffle") shuffle(pool);
-  else if(f.order === "newest") pool.sort((a,b) => b.release.localeCompare(a.release) || a.n-b.n);
-  else pool.sort((a,b) => a.release.localeCompare(b.release) || a.n-b.n);
+  const sortPool = arr => { if(f.order === "shuffle") shuffle(arr); else if(f.order === "newest") arr.sort((a,b) => b.release.localeCompare(a.release) || a.n-b.n); else arr.sort((a,b) => a.release.localeCompare(b.release) || a.n-b.n); return arr; };
+  S.back = new Map();
+  if(f.hideSwiped){
+    const passed = pool.filter(c => S.decisions[c.id]==="pass" && !S.chase[c.id]);
+    pool = pool.filter(c => !S.decisions[c.id]);
+    if(passed.length && f.returnDays){
+      await Promise.race([Promise.all([...new Set(passed.map(c => c.setId))].map(loadShared)), sleep(4000)]);
+      if(myBuild !== S.buildId) return;
+      const back = passed.filter(c => { const r = returnReason(c.id); if(r) S.back.set(c.id, r); return !!r; });
+      sortPool(pool); sortPool(back);
+      // mix returning cards in: at most 1 in every 5
+      const mixed = []; let bi = 0;
+      pool.forEach((c, i) => { mixed.push(c); if(i % 4 === 3 && bi < back.length) mixed.push(back[bi++]); });
+      pool = mixed.concat(back.slice(bi));
+    } else sortPool(pool);
+  } else sortPool(pool);
   S.cands = pool; S.idx = 0; S.history = [];
   if(errors.length && !out.length) toast(ICON.warn, "Couldn't reach the card catalog. Check your connection.");
   if(priceFilterOn() && pool.length){
@@ -1039,6 +1067,7 @@ const CALLS = {buy:{icon:"📈", label:"Buy", cls:"up"}, dip:{icon:"💎", label
 function pickOf(id){ return S.picks?.picks.find(p => p.id === id) || null; }
 function badgesHTML(id){
   const sg = signalOf(id), pk = pickOf(id); let h = "";
+  if(S.back.has(id) && S.decisions[id]==="pass") h += `<span class="badge back">${esc(S.back.get(id))}</span>`;
   if(pk) h += `<span class="badge pick ${CALLS[pk.call].cls}">✦ Claude: ${CALLS[pk.call].label}</span>`;
   if(sg) h += `<span class="badge sig ${sg.k}">${sg.icon} ${sg.label} ${sg.short}</span>`;
   const tm = timingOf(id, !!S.chase[id]?.got);
@@ -1207,6 +1236,8 @@ function fling(el, kind, sx, sy){
 function decide(card, kind){
   if(!card) return;
   S.decisions[card.id] = kind; saveDecisions();
+  if(kind==="pass"){ S.passInfo[card.id] = [today(), priceOf(card.id)]; } else delete S.passInfo[card.id];
+  savePassInfo(); S.back.delete(card.id);
   let added = false;
   if(kind !== "pass"){
     if(!S.chase[card.id]){
@@ -1223,7 +1254,7 @@ function decide(card, kind){
 function snapshot(c){ const p=S.prices[c.id]; return {id:c.id,name:c.name,number:c.number,rarity:c.rarity,artist:c.artist,img:c.img,imgL:c.imgL,setId:c.setId,setName:c.setName,series:c.series,release:c.release,setTotal:c.setTotal,price:p?.p??null,tcgUrl:p?.url||null}; }
 function undo(){
   const h = S.history.pop(); if(!h) return;
-  delete S.decisions[h.id]; saveDecisions();
+  delete S.decisions[h.id]; saveDecisions(); if(h.kind==="pass"){ delete S.passInfo[h.id]; savePassInfo(); }
   if(h.added){ delete S.chase[h.id]; saveChase(); bumpCount(); }
   S.idx = Math.max(0, S.idx-1);
   hideToast(); renderDeck();
@@ -1711,6 +1742,10 @@ function renderFilterBody(){
     </div>
     <div class="sec">
       <div class="toggle-row" data-act="hide"><div><div class="t">Hide cards I've already swiped</div><div class="d">${Object.keys(S.decisions).length} swiped so far</div></div><div class="switch ${draft.hideSwiped?"on":""}"></div></div>
+      ${draft.hideSwiped ? `<div class="sec-t" style="margin-top:16px"><h3>Bring passed cards back</h3></div>
+      <div class="seg" id="retSeg">${[[30,"30 days"],[60,"60 days"],[90,"90 days"],[0,"Never"]].map(([k,l]) => `<button data-ret="${k}" class="${draft.returnDays===k?"on":""}">${l}</button>`).join("")}</div>
+      <div class="help">${draft.returnDays ? `Cards you passed come back sooner if the price drops 20%+, they become a great time to buy, or Claude picks them. Otherwise they return after ${draft.returnDays} days, mixed in at most 1 in 5.` : "Cards you pass stay hidden for good."}</div>
+      <button class="btn ghost block" style="margin-top:12px" data-act="resetPassed">Bring back all passed cards (${Object.values(S.decisions).filter(v => v==="pass").length})</button>` : ""}
     </div>
     <div class="sec">
       <div class="sec-t"><h3>Prices</h3></div>
@@ -1758,6 +1793,7 @@ sheet.addEventListener("click", e => {
     else if(t.dataset.kind!=null){ draft.kinds = t.dataset.kind ? [t.dataset.kind] : []; }
     else if(t.dataset.preset){ draft.preset = t.dataset.preset; draft.rarities = []; }
     else if(t.dataset.order){ draft.order = t.dataset.order; }
+    else if(t.dataset.ret!=null){ draft.returnDays = +t.dataset.ret; }
     else if(t.dataset.rar){ const r=t.dataset.rar, i=draft.rarities.indexOf(r); i>=0 ? draft.rarities.splice(i,1) : draft.rarities.push(r); }
     else if(t.dataset.act){
       const a = t.dataset.act;
@@ -1770,7 +1806,8 @@ sheet.addEventListener("click", e => {
       if(a==="allSets") draft.sets = S.sets.map(s=>s.id);
       if(a==="noSets") draft.sets = [];
       if(a==="hide") draft.hideSwiped = !draft.hideSwiped;
-      if(a==="resetSwipes"){ if(t.dataset.armed){ S.decisions = {}; saveDecisions(); toast(ICON.check, "Swipe history cleared"); } else { t.dataset.armed="1"; t.textContent="Tap again to confirm"; sheetDirty=false; return; } }
+      if(a==="resetPassed"){ if(t.dataset.armed){ for(const [k,v] of Object.entries(S.decisions)) if(v==="pass") delete S.decisions[k]; S.passInfo = {}; saveDecisions(); savePassInfo(); sheetDirty = true; toast(ICON.check, "Passed cards are back in the deck"); } else { t.dataset.armed="1"; t.textContent="Tap again to confirm"; sheetDirty=false; return; } }
+      if(a==="resetSwipes"){ if(t.dataset.armed){ S.decisions = {}; S.passInfo = {}; saveDecisions(); savePassInfo(); toast(ICON.check, "Swipe history cleared"); } else { t.dataset.armed="1"; t.textContent="Tap again to confirm"; sheetDirty=false; return; } }
     }
     renderFilterBody(); return;
   }
@@ -2230,7 +2267,7 @@ function exportClick(t){
   if(k==="csv"){ $("#exBox").value = exportCSV(); copy(exportCSV(), "CSV"); }
   if(k==="dl"){ const blob = new Blob([exportCSV()],{type:"text/csv"}); const a=document.createElement("a"); a.href=URL.createObjectURL(blob); a.download=`chase-list-${new Date().toISOString().slice(0,10)}.csv`; document.body.appendChild(a); a.click(); setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove();},500); toast(ICON.check,"CSV downloaded"); }
   if(k==="share"){ const text = exportText(); if(navigator.share){ navigator.share({title:"My Pokémon chase list", text}).catch(()=>{}); } else copy(text,"List"); }
-  if(k==="backup"){ const code = "CHASEDECK1:" + btoa(unescape(encodeURIComponent(JSON.stringify({chase:S.chase, decisions:S.decisions, folders:S.folders})))); $("#exBox").value = code; copy(code, "Backup code"); }
+  if(k==="backup"){ const code = "CHASEDECK1:" + btoa(unescape(encodeURIComponent(JSON.stringify({chase:S.chase, decisions:S.decisions, passInfo:S.passInfo, folders:S.folders})))); $("#exBox").value = code; copy(code, "Backup code"); }
   if(k==="restore"){
     const box = $("#restoreBox");
     if(box.style.display==="none"){ box.style.display="block"; box.focus(); t.textContent="Restore now"; return; }
@@ -2240,7 +2277,7 @@ function exportClick(t){
       const d = JSON.parse(decodeURIComponent(escape(atob(raw.replace(/\s/g,"")))));
       const incoming = cleanChase(d && d.chase); const n = Object.keys(incoming).length;
       if(!n) throw 0;
-      S.chase = Object.assign({}, S.chase, incoming); S.decisions = Object.assign({}, S.decisions, cleanDecisions(d.decisions)); saveChase(); saveDecisions(); bumpCount();
+      S.chase = Object.assign({}, S.chase, incoming); S.decisions = Object.assign({}, S.decisions, cleanDecisions(d.decisions)); if(d.passInfo && typeof d.passInfo==="object") for(const [k,v] of Object.entries(d.passInfo).slice(0,50000)) if(/^[A-Za-z0-9._-]{1,40}$/.test(k) && Array.isArray(v) && Number.isInteger(v[0]) && v[0]>19000 && v[0]<40000 && !S.passInfo[k]) S.passInfo[k] = [v[0], num(v[1])]; savePassInfo(); saveChase(); saveDecisions(); bumpCount();
       const inF = cleanFolders(d.folders) || []; for(const f of inF){ if(!S.folders.some(x => x.id===f.id) && S.folders.length < 30) S.folders.push(f); } saveFolders();
       toast(ICON.check, `Restored ${n} card${n===1?"":"s"}`); closeSheet(); setView("list");
     }catch{ toast(ICON.warn, "That backup code didn't work"); }
